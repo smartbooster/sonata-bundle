@@ -1,0 +1,40 @@
+{
+  "name": "smartbooster/sonata-bundle",
+  "type": "symfony-bundle",
+  "description": "SMART BOOSTER Sonata setup",
+  "keywords": [],
+  "homepage": "https://github.com/smartbooster/sonata-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nicolas Bastien",
+      "email": "nicolas.bastien@smartbooster.io",
+      "homepage": "https://smartbooster.io"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "sonata-project/admin-bundle": "^3.10",
+    "sonata-project/doctrine-orm-admin-bundle": "^3.1",
+    "sonata-project/intl-bundle": "^2.3"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.0",
+    "phpunit/phpunit": "6.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sonata\\CoreBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Sonata\\CoreBundle\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}
