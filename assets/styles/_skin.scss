@@ -1,0 +1,60 @@
+.skin-smartbooster {
+  //Navbar
+  .main-header {
+    .navbar {
+      @include navbar-variant($skin-main-color, #fff);
+      .sidebar-toggle {
+        color: #fff;
+        &:hover {
+          background-color: darken($skin-main-color, 5%);
+        }
+      }
+      @media (max-width: $screen-header-collapse) {
+        .dropdown-menu {
+          li {
+            &.divider {
+              background-color: rgba(255, 255, 255, 0.1);
+            }
+            a {
+              color: #fff;
+              &:hover {
+                background: darken($skin-main-color, 5%);
+              }
+            }
+          }
+        }
+      }
+
+      .breadcrumb>.active {
+        color: #fff;
+      }
+    }
+    //Logo
+    .logo {
+      background: #FFF;
+      img {
+        max-width: 100%;
+      }
+    }
+
+    li.user-header {
+      background-color: $skin-main-color !important;
+    }
+  }
+
+  //Content Header
+  .content-header {
+    background: transparent;
+  }
+
+  //Create the sidebar skin
+  @include skin-dark-sidebar($skin-main-color);
+
+  .btn-primary {
+    background-color: $skin-main-color;
+    border-color: darken($skin-main-color, 5%);
+    &:hover, &:active, &.hover {
+      background-color: darken($skin-main-color, 5%);
+    }
+  }
+}
