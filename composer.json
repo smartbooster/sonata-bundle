@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Sonata\\SonataBundle\\": "src/"
+      "Smart\\SonataBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Sonata\\SonataBundle\\Tests\\": "tests/"
+      "Smart\\SonataBundle\\Tests\\": "tests/"
     }
   },
   "extra": {

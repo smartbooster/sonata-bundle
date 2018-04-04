@@ -1,0 +1,11 @@
+{% macro flashes(type, flashes, trans_domain) %}
+    {% if flashes|length %}
+        {% set trans_domain = trans_domain is not empty ? trans_domain : 'messages' %}
+        <div class="alert alert-{{ type }}">
+            {% for flash in flashes %}
+                {% set message = flash.message is defined ? flash.message : flash %}
+                {{ message|trans({}, trans_domain) }}{% if not loop.last %}<br />{% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}

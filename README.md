@@ -28,7 +28,7 @@ composer require smartbooster/sonata-bundle
 ### Include styles
 
     # Copy and customize your colors
-    cp smartbooster/sonata-bundle/assets/styles/_variables.scss assets/admin/styles
+    cp smartbooster/sonata-bundle/assets/styles/_variables.scss assets/admin/styles/_variables.scss
 
     # Incluse smart sonata styles in your file (ex: assets/admin/styles/main.scss)
     @import "variables";

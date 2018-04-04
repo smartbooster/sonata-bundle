@@ -1,0 +1,26 @@
+/* Fix Sonata login height */
+html.login, html.login body {
+  height: 100%;
+  background: $skin-main-color;
+  .wrapper {
+    //background: url('../../../admin/images/background/background-login.jpg') no-repeat center fixed;
+    //background-size: cover;
+
+    .login-box, .register-box {
+      width: 375px;
+      margin: 15% auto;
+    }
+
+    .login-logo a {
+      color: #FFF;
+    }
+
+    .logo img {
+      max-width: none;
+    }
+
+    .btn-primary {
+      text-transform: uppercase;
+    }
+  }
+}
