@@ -25,6 +25,15 @@ composer require smartbooster/sonata-bundle
     yarn add bootstrap-sass --dev
 ```
 
+### Include styles
+
+    # Copy and customize your colors
+    cp smartbooster/sonata-bundle/assets/styles/_variables.scss assets/admin/styles
+
+    # Incluse smart sonata styles in your file (ex: assets/admin/styles/main.scss)
+    @import "variables";
+    @import 'smartbooster/sonata-bundle/assets/styles/main';
+
 ## What's inside !
 
 - default styles for sonata admin
