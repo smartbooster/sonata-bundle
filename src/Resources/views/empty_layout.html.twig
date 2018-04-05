@@ -1,0 +1,14 @@
+{% extends "@SonataAdmin/empty_layout.html.twig" %}
+
+{% block html_attributes %}class="login"{% endblock %}
+
+{# Add favicon #}
+{% block meta_tags %}
+    {{ parent() }}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/admin/main.css') }}">
+{% endblock %}
