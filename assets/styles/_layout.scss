@@ -1,0 +1,23 @@
+
+//------------------------------------
+// SIDEMENU
+//------------------------------------
+/* display all menu item */
+.sidebar-menu .treeview-menu {
+  display: block !important;
+}
+
+.user-panel {
+  display: block;
+  position: inherit;
+}
+
+//------------------------------------
+// LISTING
+//------------------------------------
+/* Fix column width */
+th.sonata-ba-list-field-header-batch,
+th.sonata-ba-list-field-header+th.sonata-ba-list-field-header-integer,
+tr.sonata-ba-list-field-header th:first-child {
+  width: 50px;
+}

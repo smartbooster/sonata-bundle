@@ -1,0 +1,24 @@
+{% trans_default_domain 'admin' %}
+
+<li role="presentation" class="user-header">
+    <p>{{ app.user }}</p>
+    <p>{{ app.user.email }}</p>
+</li>
+<li role="presentation" class="user-footer">
+    <div class="pull-left">
+        {#<a role="menuitem" class="btn btn-default btn-flat" href="{{ path('admin_security_profile') }}">#}
+            {#<i class="fa fa-user"></i> {{ 'profile'|trans }}#}
+        {#</a>#}
+    </div>
+    <div class="pull-right">
+        {% if app.user and is_granted('ROLE_PREVIOUS_ADMIN') %}
+            <a role="menuitem" class="btn btn-default btn-flat" href="{{ path('sonata_admin_dashboard', {'_switch_user': '_exit'}) }}">
+                <i class="fa fa-unlink"></i> {{ 'action.end_impersonate'|trans }}
+            </a>
+        {% else %}
+            <a role="menuitem" class="btn btn-default btn-flat" href="{{ logout_url('admin') }}">
+                <i class="fa fa-power-off"></i> {{ 'logout'|trans }}
+            </a>
+        {% endif %}
+    </div>
+</li>
