@@ -34,15 +34,6 @@ composer require smartbooster/sonata-bundle
     @import "variables";
     @import 'smartbooster/sonata-bundle/assets/styles/main';
 
-### Configure block
-
-``` yaml
-    # sonata.yml
-    sonata_admin:
-        templates:
-            user_block: "@SmartSonata/block/user.html.twig"
-```
-
 ## What's inside !
 
 - default styles for sonata admin
