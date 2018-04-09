@@ -84,4 +84,12 @@ class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     {
         return $this->getConfigurationPool()->getContainer()->get($id);
     }
+
+    /**
+     * @return bool
+     */
+    protected function isNew()
+    {
+        return !$this->getSubject() || null === $this->getSubject()->getId();
+    }
 }
