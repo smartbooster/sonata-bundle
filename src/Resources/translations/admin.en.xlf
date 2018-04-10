@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- Lists Action -->
+            <trans-unit id="list.label__action">
+                <source>list.label__action</source>
+                <target>Actions</target>
+            </trans-unit>
+            <trans-unit id="list.action_delete">
+                <source>list.action_delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="list.action_edit">
+                <source>list.action_edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="list.action_view">
+                <source>list.action_view</source>
+                <target>Show</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

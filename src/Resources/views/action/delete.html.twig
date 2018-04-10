@@ -1,0 +1,5 @@
+{% if admin.hasRoute('delete') and admin.id(object) and admin.isGranted('DELETE', object) %}
+    <a href="{{ admin.generateObjectUrl('delete', object) }}" class="btn btn-xs btn-default" title="{{ 'list.action_delete'|trans({}, 'admin') }}">
+        <i class="glyphicon glyphicon-remove"></i>
+    </a>
+{% endif %}

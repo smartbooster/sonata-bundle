@@ -1,0 +1,5 @@
+{% if admin.hasRoute('show') and admin.id(object) and admin.isGranted('VIEW', object) %}
+    <a href="{{ admin.generateObjectUrl('show', object) }}" class="btn btn-xs btn-default" title="{{ 'list.action_view'|trans({}, 'admin') }}">
+        <i class="glyphicon glyphicon-eye-open"></i>
+    </a>
+{% endif %}
