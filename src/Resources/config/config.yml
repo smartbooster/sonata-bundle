@@ -1,4 +1,0 @@
-
-sonata_admin:
-    templates:
-        user_block: "@SmartSonata/block/user.html.twig"
