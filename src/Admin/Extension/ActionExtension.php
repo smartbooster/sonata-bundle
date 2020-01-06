@@ -25,7 +25,8 @@ class ActionExtension extends AbstractAdminExtension
     }
 
     /**
-     * {@inheritdoc}
+     * @param ListMapper $list
+     * @return void
      */
     public function configureListFields(ListMapper $list)
     {
@@ -48,6 +49,7 @@ class ActionExtension extends AbstractAdminExtension
 
     /**
      * @param FieldDescriptionInterface $field
+     * @return void
      */
     private function alterActionField(FieldDescriptionInterface $field)
     {
@@ -66,6 +68,7 @@ class ActionExtension extends AbstractAdminExtension
 
     /**
      * @param ListMapper $list
+     * @return void
      */
     private function createActionField(ListMapper $list)
     {

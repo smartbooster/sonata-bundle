@@ -23,7 +23,7 @@ class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     /**
      * Remove default batch as customer never really want default behavior
-     * @return array
+     * @return array<string>
      */
     public function getBatchActions()
     {
@@ -36,7 +36,7 @@ class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     /**
      * Remove default export as customer never really want default behavior
-     * @return array
+     * @return array<string>|null
      */
     public function getExportFormats()
     {
@@ -45,7 +45,7 @@ class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     /**
      * Renove default mosaic as customer never really want default behavior
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function getListModes()
     {
