@@ -4,7 +4,7 @@
         <div class="alert alert-{{ type }}">
             {% for flash in flashes %}
                 {% set message = flash.message is defined ? flash.message : flash %}
-                {{ message|trans({}, trans_domain) }}{% if not loop.last %}<br />{% endif %}
+                {{ message|trans({}, trans_domain)|raw }}{% if not loop.last %}<br />{% endif %}
             {% endfor %}
         </div>
     {% endif %}
