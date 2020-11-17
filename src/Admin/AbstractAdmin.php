@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
  */
-class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
+abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 {
     const ACTION_CREATE = 'CREATE';
     const ACTION_VIEW   = 'VIEW';
@@ -40,7 +40,7 @@ class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
      */
     public function getExportFormats()
     {
-        return null;
+        return [];
     }
 
     /**
