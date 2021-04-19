@@ -5,3 +5,12 @@ sonata_intl:
     timezone:
         locales:
             fr:    Europe/Paris
+
+# Set alice_data_fixtures no_purge mode and disable other drivers than orm
+fidry_alice_data_fixtures:
+    default_purge_mode: no_purge
+    db_drivers:
+        doctrine_orm: true
+        doctrine_mongodb_odm: false
+        doctrine_phpcr_odm: false
+        eloquent_orm: false
