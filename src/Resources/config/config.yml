@@ -1,0 +1,7 @@
+# Global Timezone Config
+# https://stackoverflow.com/a/26469662
+# https://symfony.com/doc/current/bundles/SonataAdminBundle/reference/field_types.html
+sonata_intl:
+    timezone:
+        locales:
+            fr:    Europe/Paris

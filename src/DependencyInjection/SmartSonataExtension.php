@@ -2,6 +2,7 @@
 
 namespace Smart\SonataBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -25,5 +26,19 @@ class SmartSonataExtension extends Extension
             new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('admin_extension.xml');
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @throws \Exception
+     * @return void
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../Resources/config')
+        );
+        $loader->load('config.yml');
     }
 }
