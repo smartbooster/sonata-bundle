@@ -23,7 +23,6 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     /**
      * Remove default batch as customer never really want default behavior
-     * @return array<string>
      */
     public function getBatchActions()
     {
