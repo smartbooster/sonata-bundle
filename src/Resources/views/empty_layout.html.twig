@@ -12,3 +12,7 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('build/admin/main.css') }}">
 {% endblock %}
+
+{% block javascripts %}
+    {# disable javascript on empty_layout to prevent loading jquery #}
+{% endblock %}
