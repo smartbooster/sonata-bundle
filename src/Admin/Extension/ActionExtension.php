@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
 /**
- * @author Mathieu Ducrot <mathieu.ducrot@pia-production.fr>
+ * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
 class ActionExtension extends AbstractAdminExtension
 {
