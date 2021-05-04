@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@pia-production.fr>
@@ -36,10 +37,10 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
      */
     public function prepend(ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader(
-            $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
-        );
-        $loader->load('config.yml');
+        $config = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/config.yml'));
+
+        foreach ($config as $name => $extension) {
+            $container->prependExtensionConfig($name, $extension);
+        }
     }
 }
