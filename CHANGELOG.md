@@ -7,6 +7,10 @@ CHANGELOG for 1.x
 
 - [[#16](https://github.com/smartbooster/sonata-bundle/issues/16)] Enhance Security by not using Javascript on empty_layout
 
+### Fixed
+
+- [[#18](https://github.com/smartbooster/sonata-bundle/issues/18)] Fix default bundle config loading by using prependExtensionConfig
+
 ## v1.1.3 - (2021-04-20)
 
 ### Added 
