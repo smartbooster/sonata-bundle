@@ -9,8 +9,11 @@ on:
 jobs:
   build_test:
     runs-on: ubuntu-latest
-    name: Build and test on lastest php-fpm:builder
-    container: smartbooster/php-fpm:builder
+    name: Build and test on php-fpm:${{ matrix.php }}-builder
+    container: smartbooster/php-fpm:${{ matrix.php }}-builder
+    strategy:
+      matrix:
+        php: [ 7.3, 7.4 ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -32,20 +35,6 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install
-        run: composer install --prefer-dist
-
-      - name: Qualimetry
-        run: make qa
-
-  build_test_7_3:
-    runs-on: ubuntu-latest
-    name: Build and test on php-fpm:7.3-builder
-    container: smartbooster/php-fpm:7.3-builder
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
 
       - name: Install
         run: composer install --prefer-dist
