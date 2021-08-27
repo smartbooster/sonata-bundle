@@ -19,6 +19,52 @@
                 <source>list.action_view</source>
                 <target>Voir</target>
             </trans-unit>
+            <trans-unit id="list.action_import">
+                <source>list.action_import</source>
+                <target>Importer</target>
+            </trans-unit>
+
+            <!-- Action -->
+            <trans-unit id="action.cancel">
+                <source>action.cancel</source>
+                <target>Annuler</target>
+            </trans-unit>
+            <trans-unit id="action.import_preview">
+                <source>action.import_preview</source>
+                <target>Aperçu de l'import</target>
+            </trans-unit>
+            <trans-unit id="action.import">
+                <source>action.import</source>
+                <target>Importer</target>
+            </trans-unit>
+
+            <!-- Import -->
+            <trans-unit id="import.title">
+                <source>import.title</source>
+                <target>Import</target>
+            </trans-unit>
+            <trans-unit id="field.label_import_file">
+                <source>field.label_import_file</source>
+                <target>Importer un fichier csv</target>
+            </trans-unit>
+            <trans-unit id="field.label_import_textarea">
+                <source>field.label_import_textarea</source>
+                <target>Champ libre des données à importer</target>
+            </trans-unit>
+            <trans-unit id="field.help_import">
+                <source>field.help_import</source>
+                <target><![CDATA[
+                    <p class="text-muted">
+                        <b>Format du CSV / Champ libre</b>
+                        <ul class="text-muted">
+                            <li>Le fichier ne doit pas faire plus de 20 Mo</li>
+                            <li>Doit contenir au maximum %nb_max_row% lignes</li>
+                            <li>Un seul des 2 champs doit être renseigné</li>
+                            <li>Les lignes vides et doublonnées seront ignorées</li>
+                        </ul>
+                    </p>
+                ]]></target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

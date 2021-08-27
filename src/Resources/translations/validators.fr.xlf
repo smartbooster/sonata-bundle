@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- ImportType -->
+            <trans-unit id="import_type.no_data_error">
+                <source>import_type.no_data_error</source>
+                <target>Aucune donnée renseignée.</target>
+            </trans-unit>
+            <trans-unit id="import_type.not_unique_data_source_error">
+                <source>import_type.not_unique_data_source_error</source>
+                <target>Il ne peut y avoir qu'une seule source de données. Veuillez choisir entre le fichier et la zone de texte champ libre.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

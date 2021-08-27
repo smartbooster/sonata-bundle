@@ -17,5 +17,7 @@
             <argument type="string">view</argument>
             <tag name="sonata.admin.extension" global="true" />
         </service>
+        <service id="admin.extension.import" class="Smart\SonataBundle\Admin\Extension\ImportExtension">
+        </service>
     </services>
 </container>

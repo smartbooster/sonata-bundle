@@ -1,0 +1,27 @@
+{%- block submit_widget -%}
+    {%- set type = type|default('submit') -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- elseif label is same as(false) -%}
+            {% set translation_domain = false %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button class="btn {% if name == 'cancel_import' %}btn-default{% else %}btn-primary{% endif %}" type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+        <i class="fa
+            {% if name == 'import_preview' %}
+                fa-search
+            {% elseif name == 'import' %}
+                fa-upload
+            {% else %}
+                fa-reply
+            {% endif %}
+        "></i>
+        {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
+    </button>
+{%- endblock submit_widget -%}
