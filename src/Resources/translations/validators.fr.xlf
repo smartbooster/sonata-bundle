@@ -11,6 +11,15 @@
                 <source>import_type.not_unique_data_source_error</source>
                 <target>Il ne peut y avoir qu'une seule source de données. Veuillez choisir entre le fichier et la zone de texte champ libre.</target>
             </trans-unit>
+            <!-- ArrayUtils -->
+            <trans-unit id="array_utils.multi_array_nb_max_rows_error">
+                <source>array_utils.multi_array_nb_max_rows_error</source>
+                <target>Le nombre maximum de %nbMaxRows% lignes a été dépassé (%nbRows% lignes détectées lors du traitement).</target>
+            </trans-unit>
+            <trans-unit id="array_utils.multi_array_header_consistency_error">
+                <source>array_utils.multi_array_header_consistency_error</source>
+                <target>Le nombre de colonnes attendues par ligne ne correspond pas. Veuillez vérifier le délimiteur ainsi que les données pour les lignes suivantes : {keys}</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

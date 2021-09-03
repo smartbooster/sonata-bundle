@@ -10,7 +10,9 @@ trait ImportableAdminTrait
     public function getImportOptions(): array
     {
         return [
-            'nb_max_row' => 2000
+            'nb_max_row' => 2000,
+            'delimiter' => ',',
+            'fix_header_consistency' => false,
         ];
     }
 }

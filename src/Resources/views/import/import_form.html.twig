@@ -28,34 +28,34 @@
                             {{ form_row(form.file) }}
 
                             {{ form_label(form.textarea) }}
-                            {{ form_widget(form.textarea, {"attr": {"rows": 18} }) }}
+                            {{ form_widget(form.textarea, {"attr": {"rows": 16} }) }}
                             {{ form_errors(form.textarea) }}
 
                             {{ form_errors(form) }}
                             {{ 'field.help_import'|trans({
-                                '%nb_max_row%': admin.importOptions.nb_max_row
+                                '%nb_max_row%': admin.importOptions.nb_max_row,
+                                '%header%': admin.importHeaderLabels|join(', ')
                             })|raw }}
                         </div>
-{#                        @todo preview #}
-{#                        {% if show_import_preview %}#}
-{#                            {% include import_preview_template %}#}
-{#                        {% endif %}#}
+                        {% if show_import_preview %}
+                            {% include '@SmartSonata/import/_import_preview.html.twig' %}
+                        {% endif %}
+                        <div>
+                            {% if show_import_preview %}
+                                <span>{{ form_widget(form.import) }}</span>
+                                <span>{{ form_widget(form.cancel_import) }}</span>
+                            {% else %}
+                                <span>{{ form_widget(form.import_preview) }}</span>
+                                <a class="btn btn-default" href="{{ admin.generateUrl('list') }}">
+                                    <i class="fa fa-reply" aria-hidden="true"></i> {{ 'action.cancel'|trans({}, 'admin') }}
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="sonata-ba-form-actions well well-small form-actions">
-            {% if show_import_preview %}
-                <span>{{ form_widget(form.import) }}</span>
-                <span>{{ form_widget(form.cancel_import) }}</span>
-            {% else %}
-                <span>{{ form_widget(form.import_preview) }}</span>
-                <a class="btn btn-default" href="{{ admin.generateUrl('list') }}">
-                    <i class="fa fa-reply" aria-hidden="true"></i> {{ 'action.cancel'|trans({}, 'admin') }}
-                </a>
-            {% endif %}
-        </div>
-        {{ form_widget(form._token) }}
-        {{ form_widget(form.raw_data) }}
+    {{ form_widget(form._token) }}
+    {{ form_widget(form.raw_data) }}
     {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}
