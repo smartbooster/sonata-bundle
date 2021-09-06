@@ -72,7 +72,7 @@
             </trans-unit>
             <trans-unit id="import.label_success">
                 <source>import.label_success</source>
-                <target>Import réussit : %nb_create% créations et %nb_update% mises à jour (%nb_skip% lignes vides ou doublonnés ignorées).</target>
+                <target>Import réussit : nb_created créations et nb_updated mises à jour (nb_skipped lignes vides ou doublonnés ignorées).</target>
             </trans-unit>
             <trans-unit id="import.title_preview">
                 <source>import.title_preview</source>
