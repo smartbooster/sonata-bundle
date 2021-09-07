@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- ImportType -->
+            <trans-unit id="import_type.no_data_error">
+                <source>import_type.no_data_error</source>
+                <target>No data entered.</target>
+            </trans-unit>
+            <trans-unit id="import_type.not_unique_data_source_error">
+                <source>import_type.not_unique_data_source_error</source>
+                <target>There can only be one data source. Please choose between the csv upload or the textarea.</target>
+            </trans-unit>
+            <!-- ArrayUtils -->
+            <trans-unit id="array_utils.multi_array_nb_max_rows_error">
+                <source>array_utils.multi_array_nb_max_rows_error</source>
+                <target>The maximum number of %nbMaxRows% rows has been exceeded (%nbRows% rows detected during processing).</target>
+            </trans-unit>
+            <trans-unit id="array_utils.multi_array_header_consistency_error">
+                <source>array_utils.multi_array_header_consistency_error</source>
+                <target>The number of expected columns per row does not match. Please check the delimiter as well as the data for the following rows: {keys}</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

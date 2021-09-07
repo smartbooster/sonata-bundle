@@ -1,6 +1,10 @@
 sonata_admin:
     templates:
         layout: '@SmartSonata/standard_layout.html.twig'
+    extensions:
+        admin.extension.import:
+            implements:
+                - Smart\EtlBundle\Entity\ImportableInterface
 
 # Global Timezone Config
 # https://stackoverflow.com/a/26469662

@@ -1,0 +1,61 @@
+{% extends "@SmartSonata/standard_layout.html.twig" %}
+{% trans_default_domain 'admin' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-home"></i></a></li>
+    <li><a href="{{ admin.generateUrl('list') }}">{{ ('breadcrumb.link_' ~ admin.classnameLabel|lower ~ '_list')|trans }}</a></li>
+    <li class="active"><span>{{ 'import.title'|trans }}</span></li>
+{% endblock %}
+
+{%- block actions -%}
+    {% include '@SonataAdmin/Button/create_button.html.twig' %}
+    {% include '@SonataAdmin/Button/list_button.html.twig' %}
+{%- endblock -%}
+
+{% block form %}
+    {% form_theme form with [
+        '@SmartSonata/form_theming/textarea_widget.html.twig',
+        '@SmartSonata/form_theming/import_submit_widget.html.twig',
+        '@SmartSonata/form_theming/form_errors.html.twig'
+    ] %}
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header"><h4 class="box-title">{{ 'import.title'|trans }}</h4></div>
+                    <div class="box-body">
+                        <div class="{% if show_import_preview %}hidden{% endif %}">
+                            {{ form_row(form.file) }}
+
+                            {{ form_label(form.textarea) }}
+                            {{ form_widget(form.textarea, {"attr": {"rows": 16} }) }}
+                            {{ form_errors(form.textarea) }}
+
+                            {{ form_errors(form) }}
+                            {{ 'field.help_import'|trans({
+                                '%nb_max_row%': admin.importOptions.nb_max_row,
+                                '%header%': admin.importHeaderLabels|join(', ')
+                            })|raw }}
+                        </div>
+                        {% if show_import_preview %}
+                            {% include '@SmartSonata/import/_import_preview.html.twig' %}
+                        {% endif %}
+                        <div>
+                            {% if show_import_preview %}
+                                <span>{{ form_widget(form.import) }}</span>
+                                <span>{{ form_widget(form.cancel_import) }}</span>
+                            {% else %}
+                                <span>{{ form_widget(form.import_preview) }}</span>
+                                <a class="btn btn-default" href="{{ admin.generateUrl('list') }}">
+                                    <i class="fa fa-reply" aria-hidden="true"></i> {{ 'action.cancel'|trans({}, 'admin') }}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{ form_widget(form._token) }}
+    {{ form_widget(form.raw_data) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

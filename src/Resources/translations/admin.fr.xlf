@@ -19,6 +19,89 @@
                 <source>list.action_view</source>
                 <target>Voir</target>
             </trans-unit>
+            <trans-unit id="list.action_import">
+                <source>list.action_import</source>
+                <target>Importer</target>
+            </trans-unit>
+
+            <!-- Action -->
+            <trans-unit id="action.cancel">
+                <source>action.cancel</source>
+                <target>Annuler</target>
+            </trans-unit>
+            <trans-unit id="action.import_preview">
+                <source>action.import_preview</source>
+                <target>Aperçu de l'import</target>
+            </trans-unit>
+            <trans-unit id="action.import">
+                <source>action.import</source>
+                <target>Importer</target>
+            </trans-unit>
+
+            <!-- Import -->
+            <trans-unit id="import.title">
+                <source>import.title</source>
+                <target>Import</target>
+            </trans-unit>
+            <trans-unit id="field.label_import_file">
+                <source>field.label_import_file</source>
+                <target>Importer un fichier csv</target>
+            </trans-unit>
+            <trans-unit id="field.label_import_textarea">
+                <source>field.label_import_textarea</source>
+                <target>Champ libre des données à importer</target>
+            </trans-unit>
+            <trans-unit id="field.help_import">
+                <source>field.help_import</source>
+                <target><![CDATA[
+                    <p class="text-muted">
+                        <b>Format du CSV / Champ libre</b>
+                        <ul class="text-muted">
+                            <li>Valeur des colonnes pour chaque ligne : %header%</li>
+                            <li>Le fichier ne doit pas faire plus de 20 Mo</li>
+                            <li>Doit contenir au maximum %nb_max_row% lignes</li>
+                            <li>Un seul des 2 champs doit être renseigné</li>
+                            <li>Les lignes vides et doublonnées seront ignorées</li>
+                        </ul>
+                    </p>
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="import.error">
+                <source>import.error</source>
+                <target>Erreur lors du traitement d'import : </target>
+            </trans-unit>
+            <trans-unit id="import.label_success">
+                <source>import.label_success</source>
+                <target>Import réussit : nb_created créations et nb_updated mises à jour (nb_skipped lignes vides ou doublonnés ignorées).</target>
+            </trans-unit>
+            <trans-unit id="import.title_preview">
+                <source>import.title_preview</source>
+                <target><![CDATA[
+                    <b>Voici un aperçu de l'import, sur les {nb} lignes, qui va être exécuté.</b><br>
+                    Si le champ d'une ligne doit être mis à jour alors la différence sera affichée comme suit :
+                    "<span class="text-danger">Avant</span> > <span class="text-success">Après</span>" sinon (aucun changement) la couleur sera <span class="text-muted">grise</span>.
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="import.row">
+                <source>import.row</source>
+                <target>Ligne</target>
+            </trans-unit>
+            <trans-unit id="import.label_action">
+                <source>import.label_action</source>
+                <target>Action</target>
+            </trans-unit>
+            <trans-unit id="import.diff_type_new">
+                <source>import.diff_type_new</source>
+                <target>Création</target>
+            </trans-unit>
+            <trans-unit id="import.diff_type_change">
+                <source>import.diff_type_change</source>
+                <target>Mise à jour</target>
+            </trans-unit>
+            <trans-unit id="import.diff_type_unchanged">
+                <source>import.diff_type_unchanged</source>
+                <target>Aucun changement</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

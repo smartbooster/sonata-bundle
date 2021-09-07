@@ -28,6 +28,8 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
             new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('admin_extension.xml');
+        $loader->load('controller.xml');
+        $loader->load('form.xml');
     }
 
     /**

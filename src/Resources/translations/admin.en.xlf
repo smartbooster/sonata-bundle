@@ -19,6 +19,89 @@
                 <source>list.action_view</source>
                 <target>Show</target>
             </trans-unit>
+            <trans-unit id="list.action_import">
+                <source>list.action_import</source>
+                <target>Import</target>
+            </trans-unit>
+
+            <!-- Action -->
+            <trans-unit id="action.cancel">
+                <source>action.cancel</source>
+                <target>Cancel</target>
+            </trans-unit>
+            <trans-unit id="action.import_preview">
+                <source>action.import_preview</source>
+                <target>Import preview</target>
+            </trans-unit>
+            <trans-unit id="action.import">
+                <source>action.import</source>
+                <target>Import</target>
+            </trans-unit>
+
+            <!-- Import -->
+            <trans-unit id="import.title">
+                <source>import.title</source>
+                <target>Import</target>
+            </trans-unit>
+            <trans-unit id="field.label_import_file">
+                <source>field.label_import_file</source>
+                <target>Import a csv file</target>
+            </trans-unit>
+            <trans-unit id="field.label_import_textarea">
+                <source>field.label_import_textarea</source>
+                <target>Textarea to copy paste data to import</target>
+            </trans-unit>
+            <trans-unit id="field.help_import">
+                <source>field.help_import</source>
+                <target><![CDATA[
+                    <p class="text-muted">
+                        <b>Format du CSV / Champ libre</b>
+                        <ul class="text-muted">
+                            <li>Header values for each row : %header%</li>
+                            <li>The file must not be more than 20MB</li>
+                            <li>Must contain a maximum of %nb_max_row% lines</li>
+                            <li>Only one of the 2 fields must be completed</li>
+                            <li>Empty and duplicated lines will be skipped</li>
+                        </ul>
+                    </p>
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="import.error">
+                <source>import.error</source>
+                <target>Error during import processing: </target>
+            </trans-unit>
+            <trans-unit id="import.label_success">
+                <source>import.label_success</source>
+                <target>Import succeeds : nb_created creations and nb_updated updates (nb_skipped empty or duplicate rows skipped).</target>
+            </trans-unit>
+            <trans-unit id="import.title_preview">
+                <source>import.title_preview</source>
+                <target><![CDATA[
+                    <b>Here is an overview of the import, on {nb} lines, which will be executed.</b><br>
+                    If the field of a row needs to be updated then the difference will be displayed as follows:
+                    "<span class="text-danger">Before</span> > <span class="text-success">After</span>" otherwise (no change) the color will be <span class="text-muted">grey</span>.
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="import.row">
+                <source>import.row</source>
+                <target>Row</target>
+            </trans-unit>
+            <trans-unit id="import.label_action">
+                <source>import.label_action</source>
+                <target>Action</target>
+            </trans-unit>
+            <trans-unit id="import.diff_type_new">
+                <source>import.diff_type_new</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="import.diff_type_change">
+                <source>import.diff_type_change</source>
+                <target>Update</target>
+            </trans-unit>
+            <trans-unit id="import.diff_type_unchanged">
+                <source>import.diff_type_unchanged</source>
+                <target>No change</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
