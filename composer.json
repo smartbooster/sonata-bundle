@@ -23,7 +23,7 @@
     "symfony/property-access": "^4.0",
     "symfony/property-info": "^4.0",
     "symfony/finder": "^4.0",
-    "smartbooster/etl-bundle": "^1.0",
+    "smartbooster/etl-bundle": "dev-master",
     "symfony/serializer": "^4.4"
   },
   "require-dev": {
