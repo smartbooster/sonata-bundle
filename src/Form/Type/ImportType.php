@@ -37,7 +37,7 @@ class ImportType extends AbstractType
                 'constraints' => [
                     new File([
                         'mimeTypes' => ["text/plain", "text/x-csv", "text/csv"],
-                        'maxSize' => "20M",
+                        'maxSize' => "8M",
                     ]),
                 ]
             ])
