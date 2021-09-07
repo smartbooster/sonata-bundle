@@ -57,7 +57,7 @@
                     <p class="text-muted">
                         <b>Format du CSV / Champ libre</b>
                         <ul class="text-muted">
-                            <li>Valeur des colonnes pour chaque ligne : %header%</li>
+                            <li>Valeur des colonnes pour chaque ligne : %properties%</li>
                             <li>Le fichier ne doit pas faire plus de 20 Mo</li>
                             <li>Doit contenir au maximum %nb_max_row% lignes</li>
                             <li>Un seul des 2 champs doit être renseigné</li>

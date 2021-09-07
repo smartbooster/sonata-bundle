@@ -57,7 +57,7 @@
                     <p class="text-muted">
                         <b>Format du CSV / Champ libre</b>
                         <ul class="text-muted">
-                            <li>Header values for each row : %header%</li>
+                            <li>Columns values for each row : %properties%</li>
                             <li>The file must not be more than 20MB</li>
                             <li>Must contain a maximum of %nb_max_row% lines</li>
                             <li>Only one of the 2 fields must be completed</li>

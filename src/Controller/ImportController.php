@@ -54,9 +54,11 @@ class ImportController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $rawData = $form->getData()['raw_data'];
+                $importPropertiesConfig = $admin->getImportProperties();
+                $properties = array_keys($importPropertiesConfig);
                 $dataToImport = ArrayUtils::getMultiArrayFromString(
                     $rawData,
-                    $admin->getImportHeader(),
+                    $properties,
                     $admin->getImportOptions()
                 );
 
@@ -74,21 +76,50 @@ class ImportController extends AbstractController
                     $normalizer = new ObjectNormalizer();
                     $serializer = new Serializer([$normalizer]);
 
-                    $dataToImport = array_map(function ($data) use ($serializer, $entityClass) {
+                    $dataToImport = array_map(function ($data) use ($serializer, $entityClass, $importPropertiesConfig, $em) {
+                        // replacing raw data with entity for relations
+                        foreach ($data as $key => $value) {
+                            if (isset($importPropertiesConfig[$key]['relationClass'])) {
+                                // @phpstan-ignore-next-line todo améliorer les perfs sur la récupération des relations
+                                $data[$key] = $em->getRepository($importPropertiesConfig[$key]['relationClass'])->findOneBy([
+                                    $importPropertiesConfig[$key]['relationIdentifier'] => $value
+                                ]);
+                            }
+                        }
+
                         return $serializer->denormalize($data, $entityClass);
                     }, $dataToImport);
 
                     $loader = new DoctrineInsertUpdateLoader($em);
-                    $identifier = $admin->getImportHeader()[0];
+                    $identifier = $properties[0];
                     $accessor = PropertyAccess::createPropertyAccessor();
+
+                    // add current $entityClass to process
                     $loader->addEntityToProcess(
                         $entityClass,
                         function ($o) use ($identifier, $accessor) {
                             return $accessor->getValue($o, $identifier);
                         },
                         $identifier,
-                        $admin->getImportHeader()
+                        $properties
                     );
+
+                    // add other relationClass to process
+                    $processRelations = [];
+                    foreach ($importPropertiesConfig as $config) {
+                        if (isset($config['relationClass']) && !in_array($config['relationClass'], $processRelations)) {
+                            $relationIdentifier = $config['relationIdentifier'];
+                            $loader->addEntityToProcess(
+                                $config['relationClass'],
+                                function ($o) use ($relationIdentifier, $accessor) {
+                                    return $accessor->getValue($o, $relationIdentifier);
+                                },
+                                $relationIdentifier,
+                            );
+                            $processRelations[] = $config['relationClass'];
+                        }
+                    }
+
                     $loader->load($dataToImport);
 
                     $loaderLogs = $loader->getLogs()[$entityClass];

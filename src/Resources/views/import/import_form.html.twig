@@ -34,7 +34,7 @@
                             {{ form_errors(form) }}
                             {{ 'field.help_import'|trans({
                                 '%nb_max_row%': admin.importOptions.nb_max_row,
-                                '%header%': admin.importHeaderLabels|join(', ')
+                                '%properties%': admin.importProperties|column('label')|join(', ')
                             })|raw }}
                         </div>
                         {% if show_import_preview %}

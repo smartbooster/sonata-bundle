@@ -8,14 +8,18 @@ namespace Smart\SonataBundle\Admin;
 interface ImportableAdminInterface
 {
     /**
-     * @return array list all field from the entity that the end user can use during the import batch
+     * @return array Associative array with all properties from the entity that the end user can use during the import.
+     * Each property must have the valid follwing format, ex:
+     *  [
+     *      'propertyName' => [
+     *          'label' => 'Property label', # required
+     *          'relationClass' => EntityRelation::class, # optionnal but if set there must be an identifier
+     *          'relationIdentifier' => 'code',
+     *      ],
+     *      ...
+     *  ]
      */
-    public function getImportHeader(): array;
-
-    /**
-     * @return array list all header labels to display in the help form and in the import preview
-     */
-    public function getImportHeaderLabels(): array;
+    public function getImportProperties(): array;
 
     /**
      * @return array list all options to configure the import behavior. Current available options :
