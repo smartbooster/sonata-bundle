@@ -21,6 +21,42 @@
     {{ form_start(form) }}
         <div class="row">
             <div class="col-md-12">
+                {% if import_exception is not null %}
+                    <div class="box box-danger">
+                        <div class="box-header"><h4 class="box-title">{{ 'import.fix_title'|trans }}</h4></div>
+                        <div class="box-body">
+                            {% if import_exception is instanceof('Smart\\EtlBundle\\Exception\\Loader\\LoadUnvalidObjectsException') %}
+                                <ul>
+                                    {% for key, errors in import_exception.arrayValidationErrors %}
+                                        <li>
+                                            {{ 'smart_etl.loader.error_detected_on_line'|trans({
+                                                '%nb_error%': errors|length,
+                                                '%nb_line%': key + 1,
+                                            }, 'validators') }}
+                                            <ul>
+                                                {% for error in errors %}
+                                                    <li>
+                                                        {{ admin.importProperties[error.propertyPath].label }} : {{ error.message }}
+                                                        {% if error.parameters['{{ choices }}'] is defined %}
+                                                            {{ 'smart_etl.loader.available_choices'|trans({}, 'validators') }}
+                                                            {{ error.parameters['{{ choices }}'] }}
+                                                        {% endif %}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <ul>
+                                    {% for key, error in import_exception.errors %}
+                                        <li>{{ 'import.row'|trans }} {{ key + 1 }} : {{ error.previous.message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
                 <div class="box box-primary">
                     <div class="box-header"><h4 class="box-title">{{ 'import.title'|trans }}</h4></div>
                     <div class="box-body">

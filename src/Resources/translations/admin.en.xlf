@@ -43,6 +43,10 @@
                 <source>import.title</source>
                 <target>Import</target>
             </trans-unit>
+            <trans-unit id="import.fix_title">
+                <source>import.fix_title</source>
+                <target>Data issue to fix</target>
+            </trans-unit>
             <trans-unit id="field.label_import_file">
                 <source>field.label_import_file</source>
                 <target>Import a csv file</target>

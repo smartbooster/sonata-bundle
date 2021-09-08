@@ -6,8 +6,11 @@ use Smart\EtlBundle\Exception\Utils\ArrayUtils\MultiArrayHeaderConsistencyExcept
 use Smart\EtlBundle\Loader\DoctrineInsertUpdateLoader;
 use Smart\EtlBundle\Utils\StringUtils;
 use Smart\SonataBundle\Admin\ImportableAdminInterface;
+use Smart\SonataBundle\Exception\ImportDenormalizeException;
+use Smart\SonataBundle\Exception\ImportNormalizeException;
 use Smart\SonataBundle\Form\Type\ImportType;
 use Smart\EtlBundle\Utils\ArrayUtils;
+use Smart\EtlBundle\Exception\Loader\LoadUnvalidObjectsException;
 use Smart\EtlBundle\Exception\Utils\ArrayUtils\MultiArrayNbMaxRowsException;
 use Smart\EtlBundle\Generator\DiffGenerator;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -16,8 +19,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -27,11 +32,13 @@ class ImportController extends AbstractController
 {
     private AdminFetcherInterface $adminFetcher;
     private TranslatorInterface $translator;
+    private ValidatorInterface $validator;
 
-    public function __construct(AdminFetcherInterface $adminFetcher, TranslatorInterface $translator)
+    public function __construct(AdminFetcherInterface $adminFetcher, TranslatorInterface $translator, ValidatorInterface $validator)
     {
         $this->adminFetcher = $adminFetcher;
         $this->translator = $translator;
+        $this->validator = $validator;
     }
 
     protected function trans(string $id, array $parameters = [], string $domain = null): string
@@ -48,6 +55,7 @@ class ImportController extends AbstractController
         }
 
         $importPreviewData = null;
+        $importException = null;
 
         $form = $this->createForm(ImportType::class);
         $form->handleRequest($request);
@@ -76,21 +84,29 @@ class ImportController extends AbstractController
                     $normalizer = new ObjectNormalizer();
                     $serializer = new Serializer([$normalizer]);
 
-                    $dataToImport = array_map(function ($data) use ($serializer, $entityClass, $importPropertiesConfig, $em) {
-                        // replacing raw data with entity for relations
-                        foreach ($data as $key => $value) {
+                    $unexpectedValueErrors = [];
+                    foreach ($dataToImport as $rowKey => $row) {
+                        foreach ($row as $key => $value) {
                             if (isset($importPropertiesConfig[$key]['relationClass'])) {
                                 // @phpstan-ignore-next-line todo améliorer les perfs sur la récupération des relations
-                                $data[$key] = $em->getRepository($importPropertiesConfig[$key]['relationClass'])->findOneBy([
+                                $row[$key] = $em->getRepository($importPropertiesConfig[$key]['relationClass'])->findOneBy([
                                     $importPropertiesConfig[$key]['relationIdentifier'] => $value
                                 ]);
                             }
                         }
 
-                        return $serializer->denormalize($data, $entityClass);
-                    }, $dataToImport);
+                        try {
+                            // todo améliorer la détection de l'erreur des typage en passant l'extract dans l'etl + en utilisant le validator
+                            $dataToImport[$rowKey] = $serializer->denormalize($row, $entityClass);
+                        } catch (ExceptionInterface $e) {
+                            $unexpectedValueErrors[$rowKey] = $e;
+                        }
+                    }
+                    if (count($unexpectedValueErrors) > 0) {
+                        throw new ImportDenormalizeException($unexpectedValueErrors);
+                    }
 
-                    $loader = new DoctrineInsertUpdateLoader($em);
+                    $loader = new DoctrineInsertUpdateLoader($em, $this->validator);
                     $identifier = $properties[0];
                     $accessor = PropertyAccess::createPropertyAccessor();
 
@@ -128,17 +144,8 @@ class ImportController extends AbstractController
 
                     return $this->redirect($admin->generateUrl('list'));
                 } // else 'cancel_import' the form display again with the data kept in the fields
-            } catch (MultiArrayNbMaxRowsException $e) {
-                $this->addFlash('sonata_flash_error', $this->trans($e->getMessage(), [
-                    '%nbMaxRows%' => $e->nbMaxRows,
-                    '%nbRows%' => $e->nbRows,
-                ], 'validators'));
-            } catch (MultiArrayHeaderConsistencyException $e) {
-                $this->addFlash('sonata_flash_error', $this->trans($e->getMessage(), [
-                    '{keys}' => implode(", ", $e->keys),
-                ], 'validators'));
             } catch (\Exception $e) {
-                $this->addFlash('sonata_flash_error', $this->trans("import.error") . $e->getMessage());
+                $importException = $this->handleException($e);
             }
         }
 
@@ -147,6 +154,35 @@ class ImportController extends AbstractController
             'form' => $form->createView(),
             'show_import_preview' => $importPreviewData !== null,
             'import_preview_data' => $importPreviewData,
+            'import_exception' => $importException,
         ]);
+    }
+
+    protected function handleException(\Exception $e): ?\Exception
+    {
+        switch (get_class($e)) {
+            case MultiArrayNbMaxRowsException::class:
+                $message = $this->trans($e->getMessage(), [
+                    '%nbMaxRows%' => $e->nbMaxRows,
+                    '%nbRows%' => $e->nbRows,
+                ], 'validators');
+                break;
+            case MultiArrayHeaderConsistencyException::class:
+                $message = $this->trans($e->getMessage(), [
+                    '{keys}' => implode(", ", $e->keys),
+                ], 'validators');
+                break;
+            case LoadUnvalidObjectsException::class:
+            case ImportDenormalizeException::class:
+                $this->addFlash('sonata_flash_error', $this->trans($e->getMessage(), [], 'validators'));
+                return $e;
+            default:
+                $message = $this->trans("import.error") . $e->getMessage();
+                break;
+        }
+
+        $this->addFlash('sonata_flash_error', $message);
+
+        return null;
     }
 }

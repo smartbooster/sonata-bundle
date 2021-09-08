@@ -20,6 +20,23 @@
                 <source>array_utils.multi_array_header_consistency_error</source>
                 <target>The number of expected columns per row does not match. Please check the delimiter as well as the data for the following rows: {keys}</target>
             </trans-unit>
+            <!-- Import Loader -->
+            <trans-unit id="smart_etl.loader.load_unvalid_objects_error">
+                <source>smart_etl.loader.load_unvalid_objects_error</source>
+                <target>Some data values to import contains errors, please fix them as describe bellow, then you can import again.</target>
+            </trans-unit>
+            <trans-unit id="smart_etl.loader.error_detected_on_line">
+                <source>smart_etl.loader.error_detected_on_line</source>
+                <target>%nb_error% Errors detected on line %nb_line%</target>
+            </trans-unit>
+            <trans-unit id="smart_etl.loader.available_choices">
+                <source>smart_etl.loader.available_choices</source>
+                <target>Available choices : </target>
+            </trans-unit>
+            <trans-unit id="smart_sonata.import.denormalize_error">
+                <source>smart_sonata.import.denormalize_error</source>
+                <target>Typing for some data values are wrong, please fix them as describe bellow, then you can import again.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
