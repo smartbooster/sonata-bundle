@@ -3,7 +3,7 @@
 
 {% block breadcrumb %}
     <li><a href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-home"></i></a></li>
-    <li><a href="{{ admin.generateUrl('list') }}">{{ ('breadcrumb.link_' ~ admin.classnameLabel|lower ~ '_list')|trans }}</a></li>
+    <li><a href="{{ admin.generateUrl('list') }}">{{ ('breadcrumb.link_' ~ admin.classnameLabel|u.snake ~ '_list')|trans }}</a></li>
     <li class="active"><span>{{ 'import.title'|trans }}</span></li>
 {% endblock %}
 
