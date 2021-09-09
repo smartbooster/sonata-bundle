@@ -15,8 +15,8 @@
         <tr>
             <th style="width: 55px">{{ 'import.row'|trans }}</th>
             <th style="width: 120px">{{ 'import.label_action'|trans }}</th>
-            {% for label in admin.importHeaderLabels %}
-                <th>{{ label }}</th>
+            {% for property in admin.importProperties %}
+                <th>{{ property.label }}</th>
             {% endfor %}
         </tr>
     </thead>

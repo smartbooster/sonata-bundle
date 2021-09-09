@@ -30,6 +30,7 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
         $loader->load('admin_extension.xml');
         $loader->load('controller.xml');
         $loader->load('form.xml');
+        $loader->load('twig_extension.xml');
     }
 
     /**

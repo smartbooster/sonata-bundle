@@ -9,6 +9,7 @@
             <tag name="controller.service_arguments"/>
             <argument type="service" id="Sonata\AdminBundle\Request\AdminFetcherInterface" />
             <argument type="service" id="Symfony\Contracts\Translation\TranslatorInterface" />
+            <argument type="service" id="Symfony\Component\Validator\Validator\ValidatorInterface" />
         </service>
     </services>
 </container>
