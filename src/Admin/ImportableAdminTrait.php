@@ -13,6 +13,9 @@ trait ImportableAdminTrait
             'nb_max_row' => 2000,
             'delimiter' => ',',
             'fix_header_consistency' => false,
+            'identifier' => null,
+            'identifier_callback' => null,
+            'entity_transform_callback' => null,
         ];
     }
 }
