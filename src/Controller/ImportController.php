@@ -65,6 +65,9 @@ class ImportController extends AbstractController
             try {
                 $rawData = $form->getData()['raw_data'];
                 $dataToImport = ArrayUtils::getMultiArrayFromString($rawData, $this->properties, $this->importOptions);
+                if (isset($this->importOptions['pre_import_transform_callback'])) {
+                    $dataToImport = array_map($this->importOptions['pre_import_transform_callback'], $dataToImport);
+                }
 
                 /** @var \Doctrine\ORM\EntityManagerInterface $em */
                 $em = $this->getDoctrine()->getManager();

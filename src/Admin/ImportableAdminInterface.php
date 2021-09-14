@@ -26,6 +26,7 @@ interface ImportableAdminInterface
      *  - nb_max_row (integer) maximum limit number of row allowed in the data content to import
      *  - delimiter (string) delimiter used to explode the row data
      *  - fix_header_consistency (boolean) allow to fix header consistency error
+     *  - pre_import_transform_callback (function) callback to apply transformation on data just after extracting from the form
      *  - identifier (string) if null will take the first key of importProperties as identifier else the set value
      *  - identifier_callback (function) can be used with identifier for the preview to define how to generate the identifier per row
      *  - entity_transform_callback (function) callback to apply transformation on entity before import
