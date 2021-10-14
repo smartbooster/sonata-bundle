@@ -3,7 +3,7 @@
 namespace Smart\SonataBundle\Admin\Extension;
 
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
-use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
+use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
 /**
@@ -28,7 +28,7 @@ class ActionExtension extends AbstractAdminExtension
      * @param ListMapper $list
      * @return void
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         if (!$list->getAdmin()->isGranted(strtoupper($this->action))) {
             return;
