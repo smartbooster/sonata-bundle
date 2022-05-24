@@ -16,6 +16,9 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     protected $translationDomain = 'admin';
 
+    /**
+     * @return object|\Sonata\AdminBundle\Translator\LabelTranslatorStrategyInterface|null
+     */
     public function getLabelTranslatorStrategy()
     {
         return $this->get('sonata.admin.label.strategy.underscore');
@@ -60,7 +63,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
      */
     protected function getUser()
     {
-        $token = $this->get('security.token_storage')->getToken();
+        $token = $this->get('security.token_storage')->getToken(); // @phpstan-ignore-line
         if (null === $token) {
             return null;
         }
@@ -89,6 +92,6 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
      */
     protected function isNew()
     {
-        return !$this->getSubject() || null === $this->getSubject()->getId();
+        return !$this->getSubject() || null === $this->getSubject()->getId(); // @phpstan-ignore-line
     }
 }

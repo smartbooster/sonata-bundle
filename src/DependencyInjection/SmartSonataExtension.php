@@ -37,7 +37,7 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
      */
     public function prepend(ContainerBuilder $container)
     {
-        $config = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/config.yml'));
+        $config = Yaml::parse((string) file_get_contents(__DIR__ . '/../Resources/config/config.yml'));
 
         foreach ($config as $name => $extension) {
             $container->prependExtensionConfig($name, $extension);

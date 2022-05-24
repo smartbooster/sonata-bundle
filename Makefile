@@ -34,4 +34,4 @@ metrics:
 
 .PHONY: phpstan
 phpstan:
-	vendor/bin/phpstan analyse src --level=6 -c phpstan.neon
+	vendor/bin/phpstan analyse src --level=7 -c phpstan.neon
