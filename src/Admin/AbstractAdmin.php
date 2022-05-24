@@ -2,7 +2,6 @@
 
 namespace Smart\SonataBundle\Admin;
 
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -15,16 +14,20 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     const ACTION_EDIT   = 'EDIT';
     const ACTION_DELETE = 'DELETE';
 
-    protected string $translationDomain = 'admin';
+    protected $translationDomain = 'admin';
 
-    protected ?Security $security = null;
+    public function getLabelTranslatorStrategy()
+    {
+        return $this->get('sonata.admin.label.strategy.underscore');
+    }
 
     /**
      * Remove default batch as customer never really want default behavior
      */
-    protected function configureBatchActions(array $actions): array
+    public function getBatchActions()
     {
-        // We just unset the batch action 'delete' instead of returning null to keep extensions
+        // On unset juste la batch action 'delete' plutôt que return null pour conserver les extensions
+        $actions = parent::getBatchActions();
         unset($actions['delete']);
 
         return $actions;
@@ -32,27 +35,37 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     /**
      * Remove default export as customer never really want default behavior
+     * @return array<string>|null
      */
-    public function getExportFormats(): array
+    public function getExportFormats()
     {
         return [];
     }
 
-    public function setSecurity(Security $security): void
+    /**
+     * Renove default mosaic as customer never really want default behavior
+     * @return array<string, array<string, string>>
+     */
+    public function getListModes()
     {
-        $this->security = $security;
+        return  [
+            'list' => [
+                'class' => 'fa fa-list fa-fw',
+            ]
+        ];
     }
 
     /**
      * @return UserInterface|null
      */
-    protected function getUser(): ?UserInterface
+    protected function getUser()
     {
-        if ($this->security === null) {
-            throw new \Exception("Security service not inject. Add a call setSecurity on your admin service definition to access the User");
+        $token = $this->get('security.token_storage')->getToken();
+        if (null === $token) {
+            return null;
         }
 
-        $user = $this->security->getUser();
+        $user = $token->getUser();
 
         if (!$user instanceof UserInterface) {
             return null;
@@ -62,10 +75,20 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     }
 
     /**
+     * @param string $id
+     *
+     * @return object
+     */
+    protected function get($id)
+    {
+        return $this->getConfigurationPool()->getContainer()->get($id);
+    }
+
+    /**
      * @return bool
      */
     protected function isNew()
     {
-        return $this->getSubject() == null || null === $this->getSubject()->getId();
+        return !$this->getSubject() || null === $this->getSubject()->getId();
     }
 }
