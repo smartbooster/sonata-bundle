@@ -1,12 +1,6 @@
 CHANGELOG for 1.x
 ===================
 
-## v1.1.5 - (2021-10-14)
-
-### Updated
-
-- [[#24](https://github.com/smartbooster/sonata-bundle/issues/24)] Update dependencies to allow SF5
-
 ## v1.1.4 - (2021-05-04)
 
 ### Added
