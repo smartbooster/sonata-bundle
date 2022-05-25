@@ -7,9 +7,9 @@
 {% if is_email_preview is not defined %}
 <!DOCTYPE html>
 <html lang="{{ app.request.getLocale() }}">
-<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 {% endif %}

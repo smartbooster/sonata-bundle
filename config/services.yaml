@@ -23,6 +23,7 @@ services:
   Smart\SonataBundle\Mailer\BaseMailer:
     arguments:
       - '@Symfony\Component\Mailer\MailerInterface'
+      - '@Smart\SonataBundle\Mailer\EmailProvider'
       - '@Symfony\Contracts\Translation\TranslatorInterface'
       - '@Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface'
   Smart\SonataBundle\Controller\Admin\DocumentationController:

@@ -53,6 +53,15 @@ class EmailProvider
         return $toReturn;
     }
 
+    public function getEmail(string $code): ?TemplatedEmail
+    {
+        if (isset($this->getEmails()[$code])) {
+            return $this->getEmails()[$code];
+        }
+
+        return null;
+    }
+
     /**
      * What we call domain for email is the first dotted string on an email code
      * For example, the domain for the email code 'admin.security.forgot_password' will be 'admin'

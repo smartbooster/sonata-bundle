@@ -3,20 +3,40 @@
 namespace Smart\SonataBundle\Mailer;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BaseMailer
 {
     protected MailerInterface $mailer;
+    protected EmailProvider $provider;
     protected TranslatorInterface $translator;
     private string $mailFrom;
 
-    public function __construct(MailerInterface $mailer, TranslatorInterface $translator, ParameterBagInterface $parameterBag)
+    public function __construct(MailerInterface $mailer, EmailProvider $provider, TranslatorInterface $translator, ParameterBagInterface $parameterBag)
     {
         $this->mailer = $mailer;
+        $this->provider = $provider;
         $this->translator = $translator;
         $this->mailFrom = (string) $parameterBag->get('smart_sonata.mail_from');
+    }
+
+    /**
+     * If the wanted code email is in the EmailProvider configuration then it return the new instantiated TemplatedEmail
+     *
+     * We separate instancing from the send method to call some other TemplatedEmail methods if we need to
+     * For example adding subjectParameters, cc, headers ...
+     */
+    public function newEmail(string $code, ?array $context = null): TemplatedEmail
+    {
+        $email = $this->provider->getEmail($code);
+        if ($email === null) {
+            throw new NotFoundHttpException("Email with code '$code' not found.");
+        }
+        $email->context($context);
+
+        return $email;
     }
 
     /**
