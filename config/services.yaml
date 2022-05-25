@@ -17,3 +17,11 @@ services:
       - view
     tags:
       - { name: sonata.admin.extension, global: true }
+  Smart\SonataBundle\Mailer\EmailProvider:
+    arguments:
+      - '@request_stack'
+  Smart\SonataBundle\Mailer\BaseMailer:
+    arguments:
+      - '@Symfony\Component\Mailer\MailerInterface'
+      - '@Symfony\Contracts\Translation\TranslatorInterface'
+      - '@Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface'

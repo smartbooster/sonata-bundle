@@ -25,6 +25,12 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
         // todo check to use logical paths instead https://symfony.com/doc/5.4/bundles/best_practices.html#resources
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.yaml');
+
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        if (isset($config['emails']) && is_array($config['emails'])) {
+            $container->getDefinition('Smart\SonataBundle\Mailer\EmailProvider')
+                ->addMethodCall('setEmailCodes', [$config['emails']]);
+        }
     }
 
     /**
