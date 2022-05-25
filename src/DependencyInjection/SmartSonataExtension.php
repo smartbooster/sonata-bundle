@@ -6,7 +6,6 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Yaml\Yaml;
 
@@ -23,11 +22,9 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader(
-            $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
-        );
-        $loader->load('admin_extension.xml');
+        // todo check to use logical paths instead https://symfony.com/doc/5.4/bundles/best_practices.html#resources
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
+        $loader->load('services.yaml');
     }
 
     /**
@@ -37,7 +34,7 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
      */
     public function prepend(ContainerBuilder $container)
     {
-        $config = Yaml::parse((string) file_get_contents(__DIR__ . '/../Resources/config/config.yml'));
+        $config = Yaml::parse((string) file_get_contents(__DIR__ . '/../../config/bundle_prepend_config.yml'));
 
         foreach ($config as $name => $extension) {
             $container->prependExtensionConfig($name, $extension);
