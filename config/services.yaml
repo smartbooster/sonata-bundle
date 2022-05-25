@@ -25,3 +25,5 @@ services:
       - '@Symfony\Component\Mailer\MailerInterface'
       - '@Symfony\Contracts\Translation\TranslatorInterface'
       - '@Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface'
+  Smart\SonataBundle\Controller\Admin\DocumentationController:
+    tags: ['controller.service_arguments']

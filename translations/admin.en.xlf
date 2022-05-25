@@ -19,6 +19,16 @@
                 <source>list.action_view</source>
                 <target>Show</target>
             </trans-unit>
+
+            <!--  Dashboard & navigation -->
+            <trans-unit id="dashboard.label_documentations">
+                <source>dashboard.label_documentations</source>
+                <target>Documentations</target>
+            </trans-unit>
+            <trans-unit id="dashboard.label_documentation_email">
+                <source>dashboard.label_documentation_email</source>
+                <target>Email</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
