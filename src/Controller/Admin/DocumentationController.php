@@ -40,7 +40,7 @@ class DocumentationController extends AbstractController
         }
 
         return $this->render("@SmartSonata/admin/documentation/email.html.twig", [
-            'emails_by_domain' => $provider->getEmailsGroupByDomain(),
+            'grouped_smart_emails' => $provider->getGroupedEmails(),
         ]);
     }
 }

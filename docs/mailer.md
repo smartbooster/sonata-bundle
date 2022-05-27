@@ -81,7 +81,7 @@ use Smart\SonataBundle\Mailer\BaseMailer;
     {
         // your logic
 
-        $email = $mailer->newEmail('domain.your.email.code', [
+        $email = $mailer->newEmail('group.your.email.code', [
             'some_context_variable' => 'some_value',
         ]);
         // if you need extra behavior on your email just use the appropriate TemplatedEmail method

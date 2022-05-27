@@ -25,7 +25,7 @@ Put this configuration inside your config/packages/smart_sonata.yaml
 ``` yaml
 smart_sonata:
     sender:
-        address: 'your_domain@example.com'
+        address: 'project@example.com'
 ```
 
 [Check full configuration reference here](docs/configuration.md)

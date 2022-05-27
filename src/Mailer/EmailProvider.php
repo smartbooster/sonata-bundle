@@ -72,22 +72,22 @@ class EmailProvider
     }
 
     /**
-     * What we call domain for email is the first dotted string on an email code
-     * For example, the domain for the email code 'admin.security.forgot_password' will be 'admin'
+     * What we call a group for email is the first dotted string on an email code
+     * For example, the group for the email code 'admin.security.forgot_password' will be 'admin'
      *
      * @return array<string, array<string, TemplatedEmail>>
      */
-    public function getEmailsGroupByDomain(): array
+    public function getGroupedEmails(): array
     {
-        $domains = [];
+        $groups = [];
         foreach ($this->getEmailCodes() as $code) {
-            $domains[] = substr($code, 0, (int) strpos($code, '.'));
+            $groups[] = substr($code, 0, (int) strpos($code, '.'));
         }
-        $domains = array_unique($domains);
+        $groups = array_unique($groups);
 
         $toReturn = [];
-        foreach ($domains as $domain) {
-            $toReturn[$domain] = $this->filterEmailsByDomain($domain);
+        foreach ($groups as $group) {
+            $toReturn[$group] = $this->filterEmailsByGroup($group);
         }
 
         return $toReturn;
@@ -96,13 +96,13 @@ class EmailProvider
     /**
      * @return array<string, TemplatedEmail>
      */
-    private function filterEmailsByDomain(string $domain): array
+    private function filterEmailsByGroup(string $group): array
     {
         $toReturn = $this->getEmails();
 
         //@phpstan-ignore-next-line
-        return array_filter($toReturn, function ($email) use ($domain) {
-            return preg_match("/^$domain\./", $email->getCode());
+        return array_filter($toReturn, function ($email) use ($group) {
+            return preg_match("/^$group\./", $email->getCode());
         });
     }
 }
