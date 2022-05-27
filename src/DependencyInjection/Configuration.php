@@ -26,6 +26,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->booleanNode('translate_email')->defaultFalse()->end()
                 ->arrayNode('emails')
+                    ->requiresAtLeastOneElement()
                     ->scalarPrototype()->end()
                 ->end()
             ->end()

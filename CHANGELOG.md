@@ -1,6 +1,16 @@
 CHANGELOG for 1.x
 ===================
 
+## v1.2.0 - (2022-05-27)
+
+### Added
+
+- [[#28](https://github.com/smartbooster/sonata-bundle/issues/28)] Automate Mailing management
+
+### Removed
+
+- Drop support for PHP 7.3
+
 ## v1.1.4 - (2021-05-04)
 
 ### Added
