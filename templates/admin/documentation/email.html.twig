@@ -49,7 +49,7 @@
                         <b>{{ 'smart.email.subject'|trans }}</b> :
                         {{ trans_check(email.getSubject, 'smart.email.missing_subject', 'email') }}
                     </p>
-                    {% include email.getHtmlTemplate ignore missing with { is_email_preview: true } %}
+                    {% include [email.getHtmlTemplate, '@SmartSonata/admin/documentation/_missing_email_template.html.twig'] ignore missing with { is_email_preview: true } %}
                     <br>
                 {% endfor %}
             </div>

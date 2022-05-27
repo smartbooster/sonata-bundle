@@ -17,7 +17,16 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->variableNode('emails')
+                ->arrayNode('sender')
+                    ->isRequired()
+                    ->children()
+                        ->scalarNode('name')->end()
+                        ->scalarNode('address')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+                ->booleanNode('translate_email')->defaultFalse()->end()
+                ->arrayNode('emails')
+                    ->scalarPrototype()->end()
                 ->end()
             ->end()
         ;

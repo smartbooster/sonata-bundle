@@ -2,24 +2,33 @@
 
 namespace Smart\SonataBundle\Mailer;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BaseMailer
 {
+    private string $senderAddress;
+    private string $senderName = '';
     protected MailerInterface $mailer;
     protected EmailProvider $provider;
     protected TranslatorInterface $translator;
-    private string $mailFrom;
 
-    public function __construct(MailerInterface $mailer, EmailProvider $provider, TranslatorInterface $translator, ParameterBagInterface $parameterBag)
+    public function __construct(MailerInterface $mailer, EmailProvider $provider, TranslatorInterface $translator)
     {
         $this->mailer = $mailer;
         $this->provider = $provider;
         $this->translator = $translator;
-        $this->mailFrom = (string) $parameterBag->get('smart_sonata.mail_from');
+    }
+
+    /**
+     * @param array<string, string> $sender
+     */
+    public function setSender(array $sender): void
+    {
+        $this->senderAddress = $sender['address'];
+        $this->senderName = $sender['name'] ?? '';
     }
 
     /**
@@ -27,6 +36,8 @@ class BaseMailer
      *
      * We separate instancing from the send method to call some other TemplatedEmail methods if we need to
      * For example adding subjectParameters, cc, headers ...
+     *
+     * @param array<mixed> $context
      */
     public function newEmail(string $code, ?array $context = null): TemplatedEmail
     {
@@ -47,7 +58,7 @@ class BaseMailer
         $email->subject($this->translator->trans($email->getSubject(), $email->getSubjectParameters(), 'email'));
 
         if ($email->getFrom() == null) {
-            $email->from($this->mailFrom);
+            $email->from(new Address($this->senderAddress, $this->senderName));
         }
         $this->setRecipientToEmail($email, $recipient);
 

@@ -2,6 +2,8 @@
 
 namespace Smart\SonataBundle\DependencyInjection;
 
+use Smart\SonataBundle\Mailer\BaseMailer;
+use Smart\SonataBundle\Mailer\EmailProvider;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -27,10 +29,13 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
         $loader->load('services.yaml');
 
         $config = $this->processConfiguration(new Configuration(), $configs);
+        $emailProvider = $container->getDefinition(EmailProvider::class);
+        $emailProvider->addMethodCall('setTranslateEmail', [$config['translate_email']]);
         if (isset($config['emails']) && is_array($config['emails'])) {
-            $container->getDefinition('Smart\SonataBundle\Mailer\EmailProvider')
-                ->addMethodCall('setEmailCodes', [$config['emails']]);
+            $emailProvider->addMethodCall('setEmailCodes', [$config['emails']]);
         }
+        $baseMailer = $container->getDefinition(BaseMailer::class);
+        $baseMailer->addMethodCall('setSender', [$config['sender']]);
     }
 
     /**

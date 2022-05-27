@@ -10,16 +10,20 @@ class TemplatedEmail extends \Symfony\Bridge\Twig\Mime\TemplatedEmail
     /** @var string Unique email identifier */
     private string $code;
 
-    /** @var array Used for subject parameters translation in AbstractMailer */
+    /** @var mixed[] Used for subject parameters translation in AbstractMailer */
     private array $subjectParameters = [];
 
-    public function __construct(string $code, string $locale)
+    public function __construct(string $code, ?string $locale = null)
     {
         parent::__construct();
 
         $this->code = $code;
         $this->subject("$code.subject");
-        $this->htmlTemplate('email/' . str_replace('.', '/', $code) . ".$locale.html.twig");
+        $this->htmlTemplate(sprintf(
+            "email/%s%s.html.twig",
+            $locale != null ? "$locale/" : '',
+            str_replace('.', '/', $code)
+        ));
     }
 
     public function code(string $code): self
@@ -34,6 +38,9 @@ class TemplatedEmail extends \Symfony\Bridge\Twig\Mime\TemplatedEmail
         return $this->code;
     }
 
+    /**
+     * @param mixed[] $subjectParameters
+     */
     public function subjectParameters(array $subjectParameters): self
     {
         $this->subjectParameters = $subjectParameters;
@@ -41,6 +48,9 @@ class TemplatedEmail extends \Symfony\Bridge\Twig\Mime\TemplatedEmail
         return $this;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getSubjectParameters(): array
     {
         return $this->subjectParameters;

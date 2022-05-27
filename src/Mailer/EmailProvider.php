@@ -12,6 +12,7 @@ class EmailProvider
     private string $locale;
     /** @var ?array<string> */
     private ?array $emailCodes = null;
+    private bool $translateEmail = false;
     /** @var ?array<TemplatedEmail> */
     private ?array $emails = null;
 
@@ -20,6 +21,14 @@ class EmailProvider
         $this->locale = $requestStack->getCurrentRequest()->getLocale();
     }
 
+    public function setTranslateEmail(bool $translateEmail): void
+    {
+        $this->translateEmail = $translateEmail;
+    }
+
+    /**
+     * @param array<string> $emailCodes
+     */
     public function setEmailCodes(array $emailCodes): void
     {
         $this->emailCodes = $emailCodes;
@@ -45,7 +54,7 @@ class EmailProvider
         $toReturn = [];
 
         foreach ($this->getEmailCodes() as $code) {
-            $toReturn[$code] = new TemplatedEmail($code, $this->locale);
+            $toReturn[$code] = new TemplatedEmail($code, $this->translateEmail ? $this->locale : null);
         }
 
         $this->emails = $toReturn;
@@ -65,6 +74,8 @@ class EmailProvider
     /**
      * What we call domain for email is the first dotted string on an email code
      * For example, the domain for the email code 'admin.security.forgot_password' will be 'admin'
+     *
+     * @return array<string, array<string, TemplatedEmail>>
      */
     public function getEmailsGroupByDomain(): array
     {
@@ -82,6 +93,9 @@ class EmailProvider
         return $toReturn;
     }
 
+    /**
+     * @return array<string, TemplatedEmail>
+     */
     private function filterEmailsByDomain(string $domain): array
     {
         $toReturn = $this->getEmails();

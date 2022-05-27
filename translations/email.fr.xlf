@@ -51,6 +51,10 @@
                 <source>smart.email.missing_subject</source>
                 <target>Traduction manquante de l'objet de l'email</target>
             </trans-unit>
+            <trans-unit id="smart.email.missing_template">
+                <source>smart.email.missing_template</source>
+                <target>Template de l'email introuvable</target>
+            </trans-unit>
             <trans-unit id="email.domain_admin">
                 <source>email.domain_admin</source>
                 <target>Backoffice</target>

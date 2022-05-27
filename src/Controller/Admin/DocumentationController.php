@@ -18,6 +18,7 @@ class DocumentationController extends AbstractController
         $emails = $provider->getEmails();
 
         if (Request::METHOD_POST === $request->getMethod()) {
+            /** @var array<string, string> $data */
             $data = $request->request->all();
             $recipient = $data['email_recipient'];
             if ($validator->validate($recipient, new Email())->count() > 0) {
