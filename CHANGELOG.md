@@ -1,16 +1,15 @@
 CHANGELOG for 1.x
 ===================
 
-## v1.2.0 - (2021-10-14)
+## v1.2.0 - (2022-05-27)
 
-### Updated
+### Added
 
-- [[#24](https://github.com/smartbooster/sonata-bundle/issues/24)] Update dependencies to allow SF5
+- [[#28](https://github.com/smartbooster/sonata-bundle/issues/28)] Automate Mailing management
 
 ### Removed
 
 - Drop support for PHP 7.3
-- Removed method `get` from `Smart\SonataBundle\Admin\AbstractAdmin` instead use typed DI on your Admin
 
 ## v1.1.4 - (2021-05-04)
 

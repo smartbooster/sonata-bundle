@@ -1,0 +1,30 @@
+services:
+  admin.extension.action_delete:
+    class: Smart\SonataBundle\Admin\Extension\ActionExtension
+    arguments:
+      - delete
+    tags:
+      - { name: sonata.admin.extension, global: true }
+  admin.extension.action_edit:
+    class: Smart\SonataBundle\Admin\Extension\ActionExtension
+    arguments:
+      - edit
+    tags:
+      - { name: sonata.admin.extension, global: true }
+  admin.extension.action_view:
+    class: Smart\SonataBundle\Admin\Extension\ActionExtension
+    arguments:
+      - view
+    tags:
+      - { name: sonata.admin.extension, global: true }
+  Smart\SonataBundle\Mailer\EmailProvider:
+    arguments:
+      - '@request_stack'
+  Smart\SonataBundle\Mailer\BaseMailer:
+    arguments:
+      - '@Symfony\Component\Mailer\MailerInterface'
+      - '@Smart\SonataBundle\Mailer\EmailProvider'
+      - '@Symfony\Contracts\Translation\TranslatorInterface'
+      - '@Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface'
+  Smart\SonataBundle\Controller\Admin\DocumentationController:
+    tags: ['controller.service_arguments']
