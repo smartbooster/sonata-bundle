@@ -39,8 +39,8 @@
                 <source>smart.email.empty_recipient_error</source>
                 <target>Undefined recipient for email with code %code%</target>
             </trans-unit>
-            <trans-unit id="smart.email.missing_category">
-                <source>smart.email.missing_category</source>
+            <trans-unit id="smart.email.missing_smart_group">
+                <source>smart.email.missing_smart_group</source>
                 <target>Missing email group translation</target>
             </trans-unit>
             <trans-unit id="smart.email.missing_title">
@@ -55,8 +55,8 @@
                 <source>smart.email.missing_template</source>
                 <target>Missing email template</target>
             </trans-unit>
-            <trans-unit id="email.domain_admin">
-                <source>email.domain_admin</source>
+            <trans-unit id="email.smart_group_admin">
+                <source>email.smart_group_admin</source>
                 <target>Backoffice</target>
             </trans-unit>
         </body>

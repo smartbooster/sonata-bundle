@@ -16,27 +16,27 @@
         </div>
     </div>
 
-    {% for domain, emails in emails_by_domain %}
+    {% for smart_group, smart_emails in grouped_smart_emails %}
         <div class="box box-solid">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    {{ trans_check('email.domain_' ~ domain, "smart.email.missing_domain", 'email') }}<br>
-                    <span class="text-muted">({{ emails|length }} emails)</span>
+                    {{ trans_check('email.smart_group_' ~ smart_group, "smart.email.missing_smart_group", 'email') }}<br>
+                    <span class="text-muted">({{ smart_emails|length }} emails)</span>
                 </h3>
                 {{ box_tools.collapse_box_tools }}
             </div>
             <div class="box-body">
-                {% for email in emails %}
+                {% for smart_email in smart_emails %}
                     <div class="row">
                         <div class="col-lg-8">
-                            <div class="text-muted">#{{ email.getCode }}</div>
-                            <h4>{{ trans_check(email.getDocumentationTitle, 'smart.email.missing_title', 'email') }}</h4>
+                            <div class="text-muted">#{{ smart_email.getCode }}</div>
+                            <h4>{{ trans_check(smart_email.getDocumentationTitle, 'smart.email.missing_title', 'email') }}</h4>
                         </div>
                         <div class="col-lg-4">
                             <form class="test-form" method="post">
-                                <label for="email_{{ email.getCode }}">Email</label>
-                                <input id="email_{{ email.getCode }}" name="email_recipient" type="email" required="required" placeholder="email@example.com">
-                                <input type="hidden" name="email_code" value="{{ email.getCode }}" >
+                                <label for="email_{{ smart_email.getCode }}">Email</label>
+                                <input id="email_{{ smart_email.getCode }}" name="email_recipient" type="email" required="required" placeholder="email@example.com">
+                                <input type="hidden" name="email_code" value="{{ smart_email.getCode }}" >
                                 <button type="submit" class="btn btn-xs btn-default" title="Envoyer">
                                     <i class="fa fa-send"></i>
                                 </button>
@@ -47,9 +47,12 @@
                     </div>
                     <p>
                         <b>{{ 'smart.email.subject'|trans }}</b> :
-                        {{ trans_check(email.getSubject, 'smart.email.missing_subject', 'email') }}
+                        {{ trans_check(smart_email.getSubject, 'smart.email.missing_subject', 'email') }}
                     </p>
-                    {% include [email.getHtmlTemplate, '@SmartSonata/admin/documentation/_missing_email_template.html.twig'] ignore missing with { is_email_preview: true } %}
+                    {% include [
+                        smart_email.getHtmlTemplate,
+                        '@SmartSonata/admin/documentation/_missing_email_template.html.twig'
+                    ] ignore missing with { is_email_preview: true } only %}
                     <br>
                 {% endfor %}
             </div>
