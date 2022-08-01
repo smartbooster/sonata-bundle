@@ -100,7 +100,6 @@ class EmailProvider
     {
         $toReturn = $this->getEmails();
 
-        //@phpstan-ignore-next-line
         return array_filter($toReturn, function ($email) use ($group) {
             return preg_match("/^$group\./", $email->getCode());
         });

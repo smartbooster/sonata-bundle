@@ -16,12 +16,10 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     const ACTION_EDIT   = 'EDIT';
     const ACTION_DELETE = 'DELETE';
 
-    protected $translationDomain = 'admin';
-
     /** @var ContainerInterface $container */
     private $container;
 
-    public function __construct($code, $class, $baseControllerName = null)
+    public function __construct(string $code, ?string $class, string $baseControllerName = null)
     {
         parent::__construct($code, $class, $baseControllerName);
         // Remove default mosaic as customer never really want default behavior
@@ -30,7 +28,8 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
                 'class' => 'fa fa-list fa-fw',
             ]
         ]);
-        $this->labelTranslatorStrategy = new UnderscoreLabelTranslatorStrategy();
+        $this->setLabelTranslatorStrategy(new UnderscoreLabelTranslatorStrategy());
+        $this->setTranslationDomain('admin');
     }
 
     /**
@@ -45,9 +44,9 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     /**
      * Remove default export as customer never really want default behavior
-     * @return array<string>|null
+     * @return string[]
      */
-    public function getExportFormats()
+    public function getExportFormats(): array
     {
         return [];
     }
