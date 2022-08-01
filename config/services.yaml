@@ -11,10 +11,10 @@ services:
       - edit
     tags:
       - { name: sonata.admin.extension, global: true }
-  admin.extension.action_view:
+  admin.extension.action_show:
     class: Smart\SonataBundle\Admin\Extension\ActionExtension
     arguments:
-      - view
+      - show
     tags:
       - { name: sonata.admin.extension, global: true }
   Smart\SonataBundle\Mailer\EmailProvider:
@@ -28,3 +28,7 @@ services:
       - '@Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface'
   Smart\SonataBundle\Controller\Admin\DocumentationController:
     tags: ['controller.service_arguments']
+  Smart\SonataBundle\Admin\AbstractAdmin:
+    abstract:  true
+    calls:
+      - setContainer: [ '@Symfony\Component\DependencyInjection\ContainerInterface' ]
