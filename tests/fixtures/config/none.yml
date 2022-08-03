@@ -1,0 +1,4 @@
+# Empty config
+smart_sonata:
+  sender:
+    address: 'test@test.test'

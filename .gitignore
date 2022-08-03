@@ -1,5 +1,8 @@
 /vendor/
 composer.lock
 /build/
-/node_modules/
-yarn.lock
+coverage.*
+.php_cs.cache
+.phpunit.result.cache
+/var/
+/.phpcs-cache

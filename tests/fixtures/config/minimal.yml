@@ -1,0 +1,7 @@
+# Config with only minimal parameter configuration
+smart_sonata:
+    parameters:
+        dummy_parameter:
+            value:  "some value"
+    sender:
+        address: 'test@test.test'

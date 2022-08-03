@@ -32,3 +32,44 @@ services:
     abstract:  true
     calls:
       - setContainer: [ '@Symfony\Component\DependencyInjection\ContainerInterface' ]
+
+  smart_sonata.parameter_provider:
+    class: Smart\SonataBundle\Provider\ParameterProvider
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  Smart\SonataBundle\Provider\ParameterProvider:
+    public: false
+    alias: smart_sonata.parameter_provider
+
+  smart_sonata.parameter_loader:
+    class: Smart\SonataBundle\Loader\ParameterLoader
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  Smart\SonataBundle\Loader\ParameterLoader:
+    public: false
+    alias: smart_sonata.parameter_loader
+
+  smart_sonata.parameter_load_command:
+    class: Smart\SonataBundle\Command\ParameterLoadCommand
+    public: true
+    arguments:
+      - '@smart_sonata.parameter_loader'
+    tags: [ 'console.command' ]
+
+  Smart\SonataBundle\Command\ParameterLoadCommand:
+    public: false
+    alias: smart_sonata.parameter_load_command
+
+  admin.parameter:
+    class: Smart\SonataBundle\Admin\ParameterAdmin
+    arguments:
+      - ~
+      - Smart\SonataBundle\Entity\Parameter
+      - ~
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: dashboard.label_parameter }
+
