@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="login.title">
+                <source>login.title</source>
+                <target>Veuillez vous authentifier</target>
+            </trans-unit>
+            <trans-unit id="login.label_username">
+                <source>login.label_username</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="login.label_password">
+                <source>login.label_password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="login.label_remember">
+                <source>login.label_remember</source>
+                <target>Se souvenir de moi</target>
+            </trans-unit>
+            <trans-unit id="login.label_submit">
+                <source>login.label_submit</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="login.bad_credentials">
+                <source>Bad credentials.</source>
+                <target>Nom d'utilisateur ou mot de passe invalides.</target>
+            </trans-unit>
+            <trans-unit id="login.action.forgot_password">
+                <source>login.action.forgot_password</source>
+                <target>Mot de passe oublié ?</target>
+            </trans-unit>
+            <trans-unit id="user.action.profile">
+                <source>user.action.profile</source>
+                <target>Mon compte</target>
+            </trans-unit>
+            <trans-unit id="user.action.end_impersonate">
+                <source>user.action.end_impersonate</source>
+                <target>Sortir</target>
+            </trans-unit>
+            <trans-unit id="user.action.logout">
+                <source>user.action.logout</source>
+                <target>Se déconnecter</target>
+            </trans-unit>
+            <trans-unit id="profile_edit.title">
+                <source>profile_edit.title</source>
+                <target>Modifier vos informations</target>
+            </trans-unit>
+            <trans-unit id="profile_edit.processed">
+                <source>profile_edit.processed</source>
+                <target>Vos informations ont été mise à jour.</target>
+            </trans-unit>
+
+            <trans-unit id="forgot_password.title">
+                <source>forgot_password.title</source>
+                <target>Demande de mot de passe</target>
+            </trans-unit>
+            <trans-unit id="forgot_password.label_username">
+                <source>forgot_password.label_username</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="forgot_password.label_cancel">
+                <source>forgot_password.label_cancel</source>
+                <target>Annuler</target>
+            </trans-unit>
+            <trans-unit id="forgot_password.label_submit">
+                <source>forgot_password.label_submit</source>
+                <target>Demander</target>
+            </trans-unit>
+            <trans-unit id="flash.forgot_password.success">
+                <source>flash.forgot_password.success</source>
+                <target>Nous vous avons envoyé un email pour réinitialiser votre mot de passe.</target>
+            </trans-unit>
+            <trans-unit id="flash.forgot_password.unknown">
+                <source>flash.forgot_password.unknown</source>
+                <target>Cet email ne correspond à aucun utilisateur.</target>
+            </trans-unit>
+            <trans-unit id="flash.security.invalid_token">
+                <source>flash.security.invalid_token</source>
+                <target><![CDATA[
+                    Le lien que vous avez utilisé est invalide.<br>
+                    Si vous ne vous souvenez plus de votre mot de passe, merci d'utiliser le lien "Mot de passe oublié ?"
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="flash.security.token_not_found">
+                <source>flash.security.token_not_found</source>
+                <target><![CDATA[
+                    Le lien que vous avez utilisé est incorrect.<br>
+                    Si vous ne vous souvenez plus de votre mot de passe, merci d'utiliser le lien "Mot de passe oublié ?"
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="flash.security.token_expired">
+                <source>flash.security.token_expired</source>
+                <target><![CDATA[
+                    Ce lien à usage unique a expiré.<br>
+                    Si vous ne vous souvenez plus de votre mot de passe, merci d'utiliser le lien "Mot de passe oublié ?"
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="flash.security.token_used">
+                <source>flash.security.token_used</source>
+                <target><![CDATA[
+                    Ce lien à usage unique a déjà été utilisé.<br>
+                    Si vous ne vous souvenez plus de votre mot de passe, merci d'utiliser le lien "Mot de passe oublié ?"
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="reset_password.title">
+                <source>reset_password.title</source>
+                <target>Ré-initialiser votre mot de passe</target>
+            </trans-unit>
+            <trans-unit id="reset_password.help">
+                <source>reset_password.help</source>
+                <target><![CDATA[
+                    <p>Afin de garantir la sécurité de vos données merci de choisir un nouveau mot de passe en respectant les règles suivantes :</p>
+                    <ul>
+                        <li>faire au moins 10 caractères ;</li>
+                        <li>contenir au moins une minuscule, une majuscule et un chiffre.</li>
+                    </ul>
+                    <p><i>Nous vous conseillons de faire soit des mots de passe faciles à retenir mais longs, soit des mots de passe complexes qui passent par un gestionnaire de mot de passe sécurisé.</i></p>
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="reset_password.label_password">
+                <source>reset_password.label_password</source>
+                <target>Nouveau mot de passe</target>
+            </trans-unit>
+            <trans-unit id="reset_password.label_password_confirmation">
+                <source>reset_password.label_password_confirmation</source>
+                <target>Confirmer le mot de passe</target>
+            </trans-unit>
+            <trans-unit id="reset_password.label_submit">
+                <source>reset_password.label_submit</source>
+                <target>Changer</target>
+            </trans-unit>
+            <trans-unit id="reset_password.password_must_match">
+                <source>reset_password.password_must_match</source>
+                <target>Votre mot de passe et sa confirmation ne sont pas les mêmes.</target>
+            </trans-unit>
+            <trans-unit id="flash.reset_password.success">
+                <source>flash.reset_password.success</source>
+                <target>Votre mot de passe a été ré-initialisé.</target>
+            </trans-unit>
+            <trans-unit id="flash.reset_password.error">
+                <source>flash.reset_password.error</source>
+                <target>Une erreur s'est produite lors de la réinitialisation de votre mot de passe.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

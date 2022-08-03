@@ -1,6 +1,9 @@
 framework:
     test: true
     secret: test
+    router:
+        utf8: true
+        resource:
 
 doctrine:
     dbal:
@@ -31,3 +34,10 @@ dama_doctrine_test:
 
 fidry_alice_data_fixtures:
     default_purge_mode: delete # default is "delete" but you can change it to "truncate" or "no_purge"
+
+security:
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+

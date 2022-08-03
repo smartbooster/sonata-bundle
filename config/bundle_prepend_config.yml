@@ -1,12 +1,19 @@
 sonata_admin:
     templates:
         layout: '@SmartSonata/standard_layout.html.twig'
+        user_block: '@SmartSonata/block/user.html.twig'
     # Remove default mosaic as customer never really want default behavior
     show_mosaic_button: false
     options:
         default_translation_domain: 'admin'
     default_admin_services:
         label_translator_strategy: 'sonata.admin.label.strategy.underscore'
+    security:
+        handler: sonata.admin.security.handler.role
+    extensions:
+        admin.extension.encode_password:
+            uses:
+                - Smart\AuthenticationBundle\Entity\User\UserTrait
 
 # Global Timezone Config
 # https://stackoverflow.com/a/26469662
@@ -24,3 +31,13 @@ fidry_alice_data_fixtures:
         doctrine_mongodb_odm: false
         doctrine_phpcr_odm: false
         eloquent_orm: false
+
+yokai_security_token:
+    tokens:
+        reset_password:
+            duration: +1 month
+
+smart_sonata:
+    emails:
+        - admin.security.forgot_password
+        - admin.security.account_creation

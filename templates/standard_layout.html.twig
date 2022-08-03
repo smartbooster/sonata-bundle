@@ -25,9 +25,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        {% if (admin_pool is defined) %}
-                            {% include admin_pool.getTemplate('user_block') %}
-                        {% endif %}
+                        {% include get_global_template('user_block') %}
                     </ul>
                 </li>
             </ul>

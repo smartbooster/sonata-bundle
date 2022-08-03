@@ -50,10 +50,18 @@
                 <source>fieldset.label_general</source>
                 <target>Informations générales</target>
             </trans-unit>
+            <trans-unit id="fieldset.label_profile">
+                <source>fieldset.label_profile</source>
+                <target>Mon compte</target>
+            </trans-unit>
 
             <trans-unit id="field.label_id">
                 <source>field.label_id</source>
                 <target>#</target>
+            </trans-unit>
+            <trans-unit id="form.label_email">
+                <source>form.label_email</source>
+                <target>Email</target>
             </trans-unit>
             <trans-unit id="field.label_code">
                 <source>field.label_code</source>
@@ -66,6 +74,40 @@
             <trans-unit id="field.label_value">
                 <source>field.label_value</source>
                 <target>Valeur</target>
+            </trans-unit>
+            <trans-unit id="form.label_first_name">
+                <source>form.label_first_name</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="form.label_last_name">
+                <source>form.label_last_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="form.label_last_login">
+                <source>form.label_last_login</source>
+                <target>Dernière connexion</target>
+            </trans-unit>
+            <trans-unit id="form.label_password">
+                <source>form.label_password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="form.label_password_confirmation">
+                <source>form.label_password_confirmation</source>
+                <target>Confirmation mot de passe</target>
+            </trans-unit>
+
+            <!-- Action -->
+            <trans-unit id="action.impersonate">
+                <source>action.impersonate</source>
+                <target>Se connecter en tant que</target>
+            </trans-unit>
+            <trans-unit id="action.send_account_creation_email">
+                <source>action.send_account_creation_email</source>
+                <target>Envoyer l'email de création de compte</target>
+            </trans-unit>
+            <trans-unit id="send_account_creation_email.success">
+                <source>send_account_creation_email.success</source>
+                <target>Email de création de compte envoyé à {email}</target>
             </trans-unit>
         </body>
     </file>

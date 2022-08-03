@@ -18,6 +18,7 @@ class AppKernel extends Kernel
     {
         return [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \DAMA\DoctrineTestBundle\DAMADoctrineTestBundle(),
@@ -25,6 +26,11 @@ class AppKernel extends Kernel
             new \Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
             new \Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
             new \Smart\SonataBundle\SmartSonataBundle(),
+            new \Sonata\AdminBundle\SonataAdminBundle(),
+            new \Symfony\Bundle\TwigBundle\TwigBundle(),
+            new \Yokai\SecurityTokenBundle\YokaiSecurityTokenBundle(),
+            new \Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
         ];
     }
 
