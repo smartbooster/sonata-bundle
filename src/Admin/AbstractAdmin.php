@@ -22,14 +22,6 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     public function __construct(string $code, ?string $class, string $baseControllerName = null)
     {
         parent::__construct($code, $class, $baseControllerName);
-        // Remove default mosaic as customer never really want default behavior
-        $this->setListModes([
-            'list' => [
-                'class' => 'fa fa-list fa-fw',
-            ]
-        ]);
-        $this->setLabelTranslatorStrategy(new UnderscoreLabelTranslatorStrategy());
-        $this->setTranslationDomain('admin');
     }
 
     /**
@@ -56,7 +48,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
      */
     protected function getUser()
     {
-        $token = $this->get('security.token_storage')->getToken(); // @phpstan-ignore-line
+        $token = $this->get('security.token_storage')->getToken();
         if (null === $token) {
             return null;
         }
@@ -91,5 +83,12 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     protected function isNew()
     {
         return !$this->getSubject() || null === $this->getSubject()->getId(); // @phpstan-ignore-line
+    }
+
+    public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null): string
+    {
+        $domain = $domain ?: $this->getTranslationDomain();
+
+        return $this->getTranslator()->trans($id, $parameters, $domain, $locale);
     }
 }

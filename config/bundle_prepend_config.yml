@@ -1,6 +1,12 @@
 sonata_admin:
     templates:
         layout: '@SmartSonata/standard_layout.html.twig'
+    # Remove default mosaic as customer never really want default behavior
+    show_mosaic_button: false
+    options:
+        default_translation_domain: 'admin'
+    default_admin_services:
+        label_translator_strategy: 'sonata.admin.label.strategy.underscore'
 
 # Global Timezone Config
 # https://stackoverflow.com/a/26469662

@@ -1,0 +1,6 @@
+# Fixture config with undefined parameter value
+smart_sonata:
+    parameters:
+        parameter_without_value:
+    sender:
+        address: 'test@test.test'

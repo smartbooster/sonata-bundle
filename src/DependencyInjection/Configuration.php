@@ -2,6 +2,7 @@
 
 namespace Smart\SonataBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -29,9 +30,24 @@ class Configuration implements ConfigurationInterface
                     ->requiresAtLeastOneElement()
                     ->scalarPrototype()->end()
                 ->end()
+                ->append($this->getParametersNode())
             ->end()
         ;
 
         return $treeBuilder;
+    }
+
+    private function getParametersNode(): ArrayNodeDefinition
+    {
+        return (new TreeBuilder('parameters'))->getRootNode()
+            ->requiresAtLeastOneElement()
+            ->useAttributeAsKey('name')
+            ->arrayPrototype()
+                ->children()
+                    ->scalarNode('value')->isRequired()->end()
+                    ->scalarNode('help')->end()
+                ->end()
+            ->end()
+            ;
     }
 }
