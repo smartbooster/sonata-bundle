@@ -1,6 +1,20 @@
 CHANGELOG for 1.x
 ===================
 
+## v1.3.0 - (2022-08-05)
+
+### Added
+
+- [[#32](https://github.com/smartbooster/sonata-bundle/issues/32)] Merge code from the [authentication-bundle](https://github.com/smartbooster/authentication-bundle) and the [parameter-bundle](https://github.com/smartbooster/parameter-bundle) because in practice all smartbooster/sonata project used them. So it will be easier to maintain in just one repo.  
+
+### Changed
+
+- [[#32](https://github.com/smartbooster/sonata-bundle/issues/32)] bumped major version of sonata-project/admin-bundle and doctrine-orm-admin-bundle to ^4.x to allow Symfony 5 compatibility
+
+### Removed
+
+- [[#32](https://github.com/smartbooster/sonata-bundle/issues/32)] the deprecated xxxAction formatted action from AbstractSecurityController have not been kept during the merge bundle migration. 
+
 ## v1.2.0 - (2022-05-27)
 
 ### Added
