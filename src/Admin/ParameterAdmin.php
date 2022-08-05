@@ -45,7 +45,7 @@ class ParameterAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $show): void
     {
         $show
-            ->with('fieldset.label_general')
+            ->with('fieldset.label_general', ['label' => 'fieldset.label_general'])
                 ->add('id', null, ['label' => 'field.label_id'])
                 ->add('code', null, ['label' => 'field.label_code'])
                 ->add('help', null, ['label' => 'field.label_help'])
@@ -57,7 +57,7 @@ class ParameterAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            ->with('fieldset.label_general')
+            ->with('fieldset.label_general', ['label' => 'fieldset.label_general'])
                 ->add('code', null, [
                     'label' => 'field.label_code',
                     'disabled' => true
