@@ -91,4 +91,12 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
         return $this->getTranslator()->trans($id, $parameters, $domain, $locale);
     }
+
+    /**
+     * @param mixed $attributes
+     */
+    public function smartIsGranted($attributes, ?object $object = null): bool
+    {
+        return true;
+    }
 }

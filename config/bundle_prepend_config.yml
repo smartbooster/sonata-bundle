@@ -9,7 +9,7 @@ sonata_admin:
     default_admin_services:
         label_translator_strategy: 'sonata.admin.label.strategy.underscore'
     security:
-        handler: sonata.admin.security.handler.role
+        handler:   Smart\SonataBundle\Security\Handler\SmartSecurityHandler
     extensions:
         admin.extension.encode_password:
             uses:

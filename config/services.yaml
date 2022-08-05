@@ -118,3 +118,7 @@ services:
 
   Sonata\AdminBundle\Templating\TemplateRegistry:
     alias: 'sonata.admin.global_template_registry'
+
+  Smart\SonataBundle\Security\Handler\SmartSecurityHandler:
+    arguments:
+      - '@sonata.admin.security.handler.role'
