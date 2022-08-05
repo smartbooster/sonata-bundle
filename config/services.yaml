@@ -48,6 +48,9 @@ services:
     tags: ['controller.service_arguments']
   Smart\SonataBundle\Controller\AbstractSecurityController:
     tags: [ 'controller.service_arguments' ]
+    arguments:
+      [ '@yokai_security_token.default_token_manager', '@Smart\SonataBundle\Mailer\BaseMailer', '@translator', '@security.user_password_encoder.generic', '@Sonata\AdminBundle\Templating\TemplateRegistry' ]
+
   Smart\SonataBundle\Admin\AbstractAdmin:
     abstract:  true
     calls:
