@@ -52,7 +52,7 @@
                     {% include [
                         smart_email.getHtmlTemplate,
                         '@SmartSonata/admin/documentation/_missing_email_template.html.twig'
-                    ] ignore missing with { is_email_preview: true } only %}
+                    ] ignore missing with { is_email_preview: true, smart_email_html_template_path: smart_email.getHtmlTemplate } only %}
                     <br>
                 {% endfor %}
             </div>

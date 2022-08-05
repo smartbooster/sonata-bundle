@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="login.title">
+                <source>login.title</source>
+                <target>Please authenticate</target>
+            </trans-unit>
+            <trans-unit id="login.label_username">
+                <source>login.label_username</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="login.label_password">
+                <source>login.label_password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="login.label_remember">
+                <source>login.label_remember</source>
+                <target>Remember me</target>
+            </trans-unit>
+            <trans-unit id="login.label_submit">
+                <source>login.label_submit</source>
+                <target>Log in</target>
+            </trans-unit>
+            <trans-unit id="login.bad_credentials">
+                <source>Bad credentials.</source>
+                <target>Username or invalid password.</target>
+            </trans-unit>
+            <trans-unit id="login.action.forgot_password">
+                <source>login.action.forgot_password</source>
+                <target>Forgot password ?</target>
+            </trans-unit>
+            <trans-unit id="user.action.profile">
+                <source>user.action.profile</source>
+                <target>My profile</target>
+            </trans-unit>
+            <trans-unit id="user.action.end_impersonate">
+                <source>user.action.end_impersonate</source>
+                <target>Get out</target>
+            </trans-unit>
+            <trans-unit id="user.action.logout">
+                <source>user.action.logout</source>
+                <target>Log out</target>
+            </trans-unit>
+
+            <trans-unit id="profile_edit.title">
+                <source>profile_edit.title</source>
+                <target>Edit your informations</target>
+            </trans-unit>
+            <trans-unit id="profile_edit.processed">
+                <source>profile_edit.processed</source>
+                <target>Informations updated.</target>
+            </trans-unit>
+
+            <trans-unit id="forgot_password.title">
+                <source>forgot_password.title</source>
+                <target>Password request</target>
+            </trans-unit>
+            <trans-unit id="forgot_password.label_username">
+                <source>forgot_password.label_username</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="forgot_password.label_cancel">
+                <source>forgot_password.label_cancel</source>
+                <target>Cancel</target>
+            </trans-unit>
+            <trans-unit id="forgot_password.label_submit">
+                <source>forgot_password.label_submit</source>
+                <target>Request</target>
+            </trans-unit>
+            <trans-unit id="flash.forgot_password.success">
+                <source>flash.forgot_password.success</source>
+                <target>We sent you an email to reset your password.</target>
+            </trans-unit>
+            <trans-unit id="flash.forgot_password.unknown">
+                <source>flash.forgot_password.unknown</source>
+                <target>This email is unknown.</target>
+            </trans-unit>
+            <trans-unit id="flash.security.invalid_token">
+            <source>flash.security.invalid_token</source>
+                <target><![CDATA[
+                    The link you used is invalid.<br>
+                    If you do not remember your password, please use the link "Forgot password ?"
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="flash.security.token_not_found">
+                <source>flash.security.token_not_found</source>
+                <target><![CDATA[
+                    The link you used is incorrect.<br>
+                    If you do not remember your password, please use the link "Forgot password ?"
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="flash.security.token_expired">
+                <source>flash.security.token_expired</source>
+                <target><![CDATA[
+                    This single use link has expired.<br>
+                    If you do not remember your password, please use the link "Forgot password ?"
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="flash.security.token_used">
+                <source>flash.security.token_used</source>
+                <target><![CDATA[
+                    This single use link has already been used.<br>
+                    If you do not remember your password, please use the link "Forgot password ?"
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="reset_password.title">
+                <source>reset_password.title</source>
+                <target>Reset your password</target>
+            </trans-unit>
+            <trans-unit id="reset_password.help">
+                <source>reset_password.help</source>
+                <target><![CDATA[
+                    <p>In order to guarantee the security of your data, please choose a new password respecting the following rules:</p>
+                    <ul>
+                        <li>be at least 10 characters long ;</li>
+                        <li>contain at least one lower case, one upper case and one number.</li>
+                    </ul>
+                    <p><i>We recommend that you either make passwords that are easy to remember but long, or complex passwords that go through a secure password manager.</i></p>
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="reset_password.label_password">
+                <source>reset_password.label_password</source>
+                <target>New password</target>
+            </trans-unit>
+            <trans-unit id="reset_password.label_password_confirmation">
+                <source>reset_password.label_password_confirmation</source>
+                <target>Confirm the password</target>
+            </trans-unit>
+            <trans-unit id="reset_password.label_submit">
+                <source>reset_password.label_submit</source>
+                <target>Change</target>
+            </trans-unit>
+            <trans-unit id="reset_password.password_must_match">
+                <source>reset_password.password_must_match</source>
+                <target>Your password and confirmation are not the same.</target>
+            </trans-unit>
+            <trans-unit id="flash.reset_password.success">
+                <source>flash.reset_password.success</source>
+                <target>Your password has been reset.</target>
+            </trans-unit>
+            <trans-unit id="flash.reset_password.error">
+                <source>flash.reset_password.error</source>
+                <target>A problem occurs during your password reset.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
