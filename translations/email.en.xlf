@@ -59,6 +59,65 @@
                 <source>email.smart_group_admin</source>
                 <target>Backoffice</target>
             </trans-unit>
+
+            <trans-unit id="admin.security.forgot_password.subject">
+                <source>admin.security.forgot_password.subject</source>
+                <target>Forgot password request</target>
+            </trans-unit>
+            <trans-unit id="admin.security.forgot_password.doc_title">
+                <source>admin.security.forgot_password.doc_title</source>
+                <target>Reinit Backoffice password</target>
+            </trans-unit>
+            <trans-unit id="reset_password.link.documentation_help">
+                <source>reset_password.link.documentation_help</source>
+                <target><![CDATA[
+                    Link <b>%action%</b> : Returns to the backoffice url /reset_password so that the admin can update his password
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="forgot_password.welcome">
+                <source>forgot_password.welcome</source>
+                <target><![CDATA[
+                    Hello,<br />
+                    <br />
+                    You have made a request to reset your password.<br />
+                    If you didn't request it, you can just ignore this email.
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="forgot_password.action.click">
+                <source>forgot_password.action.click</source>
+                <target>To reset your password click on the link below :</target>
+            </trans-unit>
+            <trans-unit id="forgot_password.reset_password.link">
+                <source>forgot_password.reset_password.link</source>
+                <target>Reset my password</target>
+            </trans-unit>
+
+            <trans-unit id="admin.security.account_creation.subject">
+                <source>admin.security.account_creation.subject</source>
+                <target>To complete your account, please initialize your password</target>
+            </trans-unit>
+            <trans-unit id="admin.security.account_creation.doc_title">
+                <source>admin.security.account_creation.doc_title</source>
+                <target>Finish Backoffice account creation</target>
+            </trans-unit>
+            <trans-unit id="account_creation.welcome">
+                <source>account_creation.welcome</source>
+                <target><![CDATA[
+                    Hello,
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="account_creation.action.click">
+                <source>account_creation.action.click</source>
+                <target>To finalize the creation of your account, please follow the link to initialize your password:</target>
+            </trans-unit>
+            <trans-unit id="account_creation.reset_password.link">
+                <source>account_creation.reset_password.link</source>
+                <target>Initialize my password</target>
+            </trans-unit>
+            <trans-unit id="security.token.information">
+                <source>security.token.information</source>
+                <target>Please note, for security reasons, these links are for single use only. Please delete these emails once the action has been performed.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

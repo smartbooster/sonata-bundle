@@ -3,8 +3,8 @@
 namespace Smart\SonataBundle\Admin\Extension;
 
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
-use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
@@ -19,7 +19,7 @@ class ActionExtension extends AbstractAdminExtension
     /**
      * @param string $action
      */
-    public function __construct($action)
+    public function __construct(string $action)
     {
         $this->action = $action;
     }
@@ -28,7 +28,7 @@ class ActionExtension extends AbstractAdminExtension
      * @param ListMapper $list
      * @return void
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         if (!$list->getAdmin()->isGranted(strtoupper($this->action))) {
             return;
@@ -51,7 +51,7 @@ class ActionExtension extends AbstractAdminExtension
      * @param FieldDescriptionInterface $field
      * @return void
      */
-    private function alterActionField(FieldDescriptionInterface $field)
+    private function alterActionField(FieldDescriptionInterface $field): void
     {
         $field->setOption(
             'actions',

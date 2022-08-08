@@ -1,0 +1,7 @@
+# test batch flush on handleParametersToInsert
+Smart\SonataBundle\Entity\Parameter:
+  parameter_to_delete_{1..19}:
+    code: parameter_to_delete_<current()>
+    value:  "value"
+
+

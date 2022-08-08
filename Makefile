@@ -1,37 +1,17 @@
+# Variables
+ENV?=dev
+CONSOLE=php bin/console
+APPLICATION := smartbooster-sonatabundle
 
-# ====================
-# Qualimetry rules
+include make/*.mk
 
-.PHONY: qa qualimetry
-qa: qualimetry
-qualimetry: checkstyle lint.php composer.validate metrics phpstan
-
-.PHONY: cs checkstyle
-cs: checkstyle
-checkstyle:
-	vendor/bin/phpcs --extensions=php -n --standard=PSR12 --report=full src
-
-.PHONY: lint.php
-lint.php:
-	find src -type f -name "*.php" -exec php -l {} \;
-
-.PHONY: composer.validate
-composer.validate:
-	composer validate composer.json
-
-.PHONY: cb code-beautifier
-cb: code-beautifier
-code-beautifier:
-	vendor/bin/phpcbf --extensions=php --standard=PSR12 src
-
-.PHONY: cpd
-cpd:
-	vendor/bin/phpcpd --fuzzy src
-
-.PHONY: metrics
-metrics:
-	vendor/bin/phpmetrics --report-html=build/phpmetrics.html src
-
-.PHONY: phpstan
-phpstan:
-	vendor/bin/phpstan analyse src --level=7 -c phpstan.neon
+##
+## Installation and update
+## -------
+.PHONY: install
+install: ## Install the project
+ifeq ($(ENV),dev)
+	composer install
+else
+	composer install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction
+endif

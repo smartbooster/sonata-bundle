@@ -2,6 +2,8 @@
 
 namespace Smart\SonataBundle\Admin;
 
+use Sonata\AdminBundle\Translator\UnderscoreLabelTranslatorStrategy;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -14,23 +16,19 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     const ACTION_EDIT   = 'EDIT';
     const ACTION_DELETE = 'DELETE';
 
-    protected $translationDomain = 'admin';
+    /** @var ContainerInterface $container */
+    private $container;
 
-    /**
-     * @return object|\Sonata\AdminBundle\Translator\LabelTranslatorStrategyInterface|null
-     */
-    public function getLabelTranslatorStrategy()
+    public function __construct(string $code, ?string $class, string $baseControllerName = null)
     {
-        return $this->get('sonata.admin.label.strategy.underscore');
+        parent::__construct($code, $class, $baseControllerName);
     }
 
     /**
      * Remove default batch as customer never really want default behavior
      */
-    public function getBatchActions()
+    protected function configureBatchActions($actions): array
     {
-        // On unset juste la batch action 'delete' plutôt que return null pour conserver les extensions
-        $actions = parent::getBatchActions();
         unset($actions['delete']);
 
         return $actions;
@@ -38,24 +36,11 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     /**
      * Remove default export as customer never really want default behavior
-     * @return array<string>|null
+     * @return string[]
      */
-    public function getExportFormats()
+    public function getExportFormats(): array
     {
         return [];
-    }
-
-    /**
-     * Renove default mosaic as customer never really want default behavior
-     * @return array<string, array<string, string>>
-     */
-    public function getListModes()
-    {
-        return  [
-            'list' => [
-                'class' => 'fa fa-list fa-fw',
-            ]
-        ];
     }
 
     /**
@@ -63,7 +48,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
      */
     protected function getUser()
     {
-        $token = $this->get('security.token_storage')->getToken(); // @phpstan-ignore-line
+        $token = $this->get('security.token_storage')->getToken();
         if (null === $token) {
             return null;
         }
@@ -84,7 +69,12 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
      */
     protected function get($id)
     {
-        return $this->getConfigurationPool()->getContainer()->get($id);
+        return $this->container->get($id);
+    }
+
+    public function setContainer(ContainerInterface $container): void
+    {
+        $this->container = $container;
     }
 
     /**
@@ -93,5 +83,20 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     protected function isNew()
     {
         return !$this->getSubject() || null === $this->getSubject()->getId(); // @phpstan-ignore-line
+    }
+
+    public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null): string
+    {
+        $domain = $domain ?: $this->getTranslationDomain();
+
+        return $this->getTranslator()->trans($id, $parameters, $domain, $locale);
+    }
+
+    /**
+     * @param mixed $attributes
+     */
+    public function smartIsGranted($attributes, ?object $object = null): bool
+    {
+        return true;
     }
 }

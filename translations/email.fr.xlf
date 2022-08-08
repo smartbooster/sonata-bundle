@@ -59,6 +59,65 @@
                 <source>email.smart_group_admin</source>
                 <target>Backoffice</target>
             </trans-unit>
+
+            <trans-unit id="admin.security.forgot_password.subject">
+                <source>admin.security.forgot_password.subject</source>
+                <target>Demande de changement de mot de passe</target>
+            </trans-unit>
+            <trans-unit id="admin.security.forgot_password.doc_title">
+                <source>admin.security.forgot_password.doc_title</source>
+                <target>Réinitialisation de mot de passe Backoffice</target>
+            </trans-unit>
+            <trans-unit id="reset_password.link.documentation_help">
+                <source>reset_password.link.documentation_help</source>
+                <target><![CDATA[
+                    Lien <b>%action%</b> : Renvoie sur l'url du backoffice /reset_password pour que l'admin puisse mettre à jour son mot de passe
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="forgot_password.welcome">
+                <source>forgot_password.welcome</source>
+                <target><![CDATA[
+                    Bonjour,<br />
+                    <br />
+                    Vous avez fait une demande de réinitialisation de mot de passe pour accéder à votre compte.<br />
+                    Si vous n'êtes pas à l'origine de cette demande, vous pouvez simplement ignorer cet email.
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="forgot_password.action.click">
+                <source>forgot_password.action.click</source>
+                <target>Pour réinitialiser votre mot de passe, merci de suivre le lien ci-dessous :</target>
+            </trans-unit>
+            <trans-unit id="forgot_password.reset_password.link">
+                <source>forgot_password.reset_password.link</source>
+                <target>Renouveler mon mot de passe</target>
+            </trans-unit>
+
+            <trans-unit id="admin.security.account_creation.subject">
+                <source>admin.security.account_creation.subject</source>
+                <target>Pour finaliser votre compte, merci d'initialiser votre mot de passe</target>
+            </trans-unit>
+            <trans-unit id="admin.security.account_creation.doc_title">
+                <source>admin.security.account_creation.doc_title</source>
+                <target>Finaliser votre compte Backoffice</target>
+            </trans-unit>
+            <trans-unit id="account_creation.welcome">
+                <source>account_creation.welcome</source>
+                <target><![CDATA[
+                    Bonjour,
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="account_creation.action.click">
+                <source>account_creation.action.click</source>
+                <target>Pour finaliser la création de votre compte, merci de suivre le lien suivant afin d'initialiser votre mot de passe :</target>
+            </trans-unit>
+            <trans-unit id="account_creation.reset_password.link">
+                <source>account_creation.reset_password.link</source>
+                <target>Initialiser mon mot de passe</target>
+            </trans-unit>
+            <trans-unit id="security.token.information">
+                <source>security.token.information</source>
+                <target>Attention, par mesure de sécurité ces liens sont à usage unique. Merci de supprimer ces mails une fois l'action effectuée.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

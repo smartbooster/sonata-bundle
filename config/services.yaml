@@ -11,12 +11,30 @@ services:
       - edit
     tags:
       - { name: sonata.admin.extension, global: true }
-  admin.extension.action_view:
+  admin.extension.action_show:
     class: Smart\SonataBundle\Admin\Extension\ActionExtension
     arguments:
-      - view
+      - show
     tags:
       - { name: sonata.admin.extension, global: true }
+  admin.extension.encode_password:
+    class: Smart\SonataBundle\Admin\Extension\EncodePasswordExtension
+    arguments:
+      - '@Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface'
+    tags:
+      - { name: sonata.admin.extension }
+  admin.extension.action_impersonate:
+    class: Smart\SonataBundle\Admin\Extension\ActionExtension
+    arguments:
+      - 'impersonate'
+    tags:
+      - { name: sonata.admin.extension }
+  admin.extension.action_send_account_creation_email:
+    class: Smart\SonataBundle\Admin\Extension\ActionExtension
+    arguments:
+      - 'send_account_creation_email'
+    tags:
+      - { name: sonata.admin.extension }
   Smart\SonataBundle\Mailer\EmailProvider:
     arguments:
       - '@request_stack'
@@ -28,3 +46,79 @@ services:
       - '@Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface'
   Smart\SonataBundle\Controller\Admin\DocumentationController:
     tags: ['controller.service_arguments']
+  Smart\SonataBundle\Controller\AbstractSecurityController:
+    tags: [ 'controller.service_arguments' ]
+    arguments:
+      [ '@yokai_security_token.default_token_manager', '@Smart\SonataBundle\Mailer\BaseMailer', '@translator', '@security.user_password_encoder.generic', '@Sonata\AdminBundle\Templating\TemplateRegistry' ]
+
+  Smart\SonataBundle\Admin\AbstractAdmin:
+    abstract:  true
+    calls:
+      - setContainer: [ '@Symfony\Component\DependencyInjection\ContainerInterface' ]
+
+  smart_sonata.parameter_provider:
+    class: Smart\SonataBundle\Provider\ParameterProvider
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  Smart\SonataBundle\Provider\ParameterProvider:
+    public: false
+    alias: smart_sonata.parameter_provider
+
+  smart_sonata.parameter_loader:
+    class: Smart\SonataBundle\Loader\ParameterLoader
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  Smart\SonataBundle\Loader\ParameterLoader:
+    public: false
+    alias: smart_sonata.parameter_loader
+
+  smart_sonata.parameter_load_command:
+    class: Smart\SonataBundle\Command\ParameterLoadCommand
+    public: true
+    arguments:
+      - '@smart_sonata.parameter_loader'
+    tags: [ 'console.command' ]
+
+  Smart\SonataBundle\Command\ParameterLoadCommand:
+    public: false
+    alias: smart_sonata.parameter_load_command
+
+  admin.parameter:
+    class: Smart\SonataBundle\Admin\ParameterAdmin
+    arguments:
+      - ~
+      - Smart\SonataBundle\Entity\Parameter
+      - ~
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: dashboard.label_parameter }
+
+  fixture.processor.password:
+    class: Smart\SonataBundle\DataFixtures\Processor\UserProcessor
+    arguments:
+      - '@Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface'
+    tags:
+      - { name: fidry_alice_data_fixtures.processor }
+
+  security.processor.last_login:
+    class: Smart\SonataBundle\Security\Processor\LastLoginProcessor
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  security.subscriber:
+    class: Smart\SonataBundle\Security\EventSubscriber\SecuritySubscriber
+    arguments:
+      - '@security.processor.last_login'
+      - '@translator'
+    tags:
+      - { name: kernel.event_subscriber }
+
+  Sonata\AdminBundle\Templating\TemplateRegistry:
+    alias: 'sonata.admin.global_template_registry'
+
+  Smart\SonataBundle\Security\Handler\SmartSecurityHandler:
+    arguments:
+      - '@sonata.admin.security.handler.role'

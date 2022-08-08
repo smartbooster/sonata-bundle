@@ -36,6 +36,13 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
         }
         $baseMailer = $container->getDefinition(BaseMailer::class);
         $baseMailer->addMethodCall('setSender', [$config['sender']]);
+
+        $parameterLoader = $container->getDefinition('smart_sonata.parameter_loader');
+        if (isset($config['parameters']) && is_array($config['parameters'])) {
+            foreach ($config['parameters'] as $code => $data) {
+                $parameterLoader->addMethodCall('addParameter', [$code, $data]);
+            }
+        }
     }
 
     /**
@@ -50,5 +57,12 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
         foreach ($config as $name => $extension) {
             $container->prependExtensionConfig($name, $extension);
         }
+
+        // Override bundle template from another bundle in Symfony 4/5 https://stackoverflow.com/a/52693472
+        $container->prependExtensionConfig('twig', array(
+            'paths' => array(
+                '%kernel.project_dir%/vendor/smartbooster/sonata-bundle/src/Resources/SmartSonataBundle/views' => 'SmartSonata',
+            ),
+        ));
     }
 }

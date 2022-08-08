@@ -1,0 +1,5 @@
+# Fixture config with empty parameters config
+smart_sonata:
+    parameters:
+    sender:
+        address: 'test@test.test'
