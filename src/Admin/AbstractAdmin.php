@@ -2,7 +2,7 @@
 
 namespace Smart\SonataBundle\Admin;
 
-use Sonata\AdminBundle\Translator\UnderscoreLabelTranslatorStrategy;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -24,6 +24,11 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
         parent::__construct($code, $class, $baseControllerName);
     }
 
+    protected function configureRoutes(RouteCollectionInterface $collection): void
+    {
+        $collection->remove('export');
+    }
+
     /**
      * Remove default batch as customer never really want default behavior
      */
@@ -32,15 +37,6 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
         unset($actions['delete']);
 
         return $actions;
-    }
-
-    /**
-     * Remove default export as customer never really want default behavior
-     * @return string[]
-     */
-    public function getExportFormats(): array
-    {
-        return [];
     }
 
     /**
