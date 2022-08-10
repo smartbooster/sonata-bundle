@@ -20,7 +20,7 @@ trait UserTrait
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected ?int $id;
+    protected ?int $id = null;
 
     /**
      * @var string
@@ -220,7 +220,7 @@ trait UserTrait
     }
 
     /**
-     * @param string $firstName
+     * @param string|null $firstName
      *
      * @return $this
      */
@@ -240,7 +240,7 @@ trait UserTrait
     }
 
     /**
-     * @param string $lastName
+     * @param string|null $lastName
      *
      * @return $this
      */

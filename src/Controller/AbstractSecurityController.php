@@ -98,7 +98,6 @@ class AbstractSecurityController extends AbstractController
         }
 
         try {
-            $this->container->get('doctrine');
             $user = $this->getUserProvider()->loadUserByUsername($form->get('email')->getData());
 
             if ($user instanceof SmartUserInterface) {

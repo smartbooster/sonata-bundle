@@ -1,6 +1,15 @@
 CHANGELOG for 1.x
 ===================
 
+## v1.3.1 - (2022-08-10)
+
+### Fixed
+
+- [[#37](https://github.com/smartbooster/sonata-bundle/issues/37)] Fix UserTrait name setter typping for Phpstan
+- [[#31](https://github.com/smartbooster/sonata-bundle/issues/31)] Fix old namespace SmartAuthentication with SmartSonata on templates/email/{locale}
+- Fixed missing typing on UserTrait that prevent creating user on Admin 
+- Fixed missnaming of NAME_ACTIONS in ActionExtension to keep one column for it
+
 ## v1.3.0 - (2022-08-08)
 
 ### Added

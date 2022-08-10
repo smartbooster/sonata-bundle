@@ -34,13 +34,13 @@ class ActionExtension extends AbstractAdminExtension
             return;
         }
 
-        if (!$list->has('_action')) {
+        if (!$list->has(ListMapper::NAME_ACTIONS)) {
             $this->createActionField($list);
 
             return;
         }
 
-        $field = $list->get('_action');
+        $field = $list->get(ListMapper::NAME_ACTIONS);
 
         if ('actions' === $field->getType()) {
             $this->alterActionField($field);
@@ -72,7 +72,7 @@ class ActionExtension extends AbstractAdminExtension
      */
     private function createActionField(ListMapper $list)
     {
-        $list->add('_action', 'actions', [
+        $list->add(ListMapper::NAME_ACTIONS, 'actions', [
             'actions' => [
                 $this->action => [
                     'template' => sprintf('@SmartSonata/action/%s.html.twig', $this->action)

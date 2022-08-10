@@ -3,8 +3,8 @@
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
             <!-- Lists Action -->
-            <trans-unit id="list.label__action">
-                <source>list.label__action</source>
+            <trans-unit id="list.label__actions">
+                <source>list.label__actions</source>
                 <target>Actions</target>
             </trans-unit>
             <trans-unit id="list.action_delete">
