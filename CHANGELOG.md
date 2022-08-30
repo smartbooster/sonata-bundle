@@ -1,5 +1,14 @@
 CHANGELOG for 1.x
 ===================
+## v1.3.2 - (2022-08-30)
+
+### Added
+
+- Re add validate method on configureFormOption to ease form validation on the all object
+
+### Fixed
+
+- Fixed Namespace sonata admin extension for UserTrait 
 
 ## v1.3.1 - (2022-08-10)
 

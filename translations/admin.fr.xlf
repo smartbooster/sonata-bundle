@@ -19,6 +19,10 @@
                 <source>list.action_view</source>
                 <target>Voir</target>
             </trans-unit>
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>#</target>
+            </trans-unit>
 
             <!--  Dashboard & navigation -->
             <trans-unit id="dashboard.label_documentations">

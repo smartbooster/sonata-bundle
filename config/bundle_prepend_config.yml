@@ -13,7 +13,7 @@ sonata_admin:
     extensions:
         admin.extension.encode_password:
             uses:
-                - Smart\AuthenticationBundle\Entity\User\UserTrait
+                - Smart\SonataBundle\Entity\User\UserTrait
 
 # Global Timezone Config
 # https://stackoverflow.com/a/26469662
