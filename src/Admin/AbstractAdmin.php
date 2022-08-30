@@ -2,7 +2,10 @@
 
 namespace Smart\SonataBundle\Admin;
 
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
+use Sonata\Form\Validator\Constraints\InlineConstraint;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -94,5 +97,40 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     public function smartIsGranted($attributes, ?object $object = null): bool
     {
         return true;
+    }
+
+    /**
+     * Since sonata 4 validate method is gone. Custom implementation for retrieve his behavior
+     * https://github.com/sonata-project/SonataAdminBundle/issues/6232
+     */
+    protected function configureFormOptions(array &$formOptions): void
+    {
+        parent::configureFormOptions($formOptions);
+        $admin = $this;
+        $formOptions['constraints'] = [
+            new InlineConstraint([
+                'service' => $this,
+                'method' => static function (ErrorElement $errorElement, object $object) use ($admin) {
+                    /* @var AdminInterface $admin */
+
+                    // This avoid the main validation to be cascaded to children
+                    // The problem occurs when a model Page has a collection of Page as property
+                    if ($admin->hasSubject() && spl_object_hash($object) !== spl_object_hash($admin->getSubject())) {
+                        return;
+                    }
+
+                    $admin->validate($errorElement, $object);
+                },
+                'serializingWarning' => true,
+            ])
+        ];
+    }
+
+    /**
+     * Override for validate object
+     */
+    protected function validate(ErrorElement $errorElement, object $object): void
+    {
+        // do nothing
     }
 }
