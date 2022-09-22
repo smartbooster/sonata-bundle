@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.3.3 - (2022-09-22)
+
+### Fixed
+
+- Fixed infinite loop in impersonate.html.twig because of not strict comparison
+
 ## v1.3.2 - (2022-08-30)
 
 ### Added
