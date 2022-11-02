@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Louis Fortunier <louis.fortunier@smartbooster.io>
  *
  * @ORM\Table(name="batch_log")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Smart\SonataBundle\Repository\Log\BatchLogRepository")
  */
 class BatchLog
 {

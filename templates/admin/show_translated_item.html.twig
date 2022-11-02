@@ -1,0 +1,5 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+{% trans_default_domain 'messages' %}
+{% block field %}
+    {{ value|trans }}
+{% endblock %}
