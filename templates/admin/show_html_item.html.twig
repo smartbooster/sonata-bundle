@@ -1,5 +1,4 @@
 {% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
-{% trans_default_domain 'admin' %}
 {% block field %}
-    {{ value|trans }}
+    {{ value|raw }}
 {% endblock %}

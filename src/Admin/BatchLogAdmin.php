@@ -23,7 +23,7 @@ class BatchLogAdmin extends AbstractAdmin
 {
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
-        $collection->clearExcept(['list', 'show']);
+        $collection->clearExcept(['list', 'show', 'delete']);
         parent::configureRoutes($collection);
     }
 
@@ -110,8 +110,14 @@ class BatchLogAdmin extends AbstractAdmin
                 ->add('success', null, ['label' => 'field.label_success'])
             ->end()
             ->with('log', ['label' => 'fieldset.label_log', 'class' => 'col-md-8'])
-                ->add('summary', null, ['label' => 'field.label_summary'])
-                ->add('rawData', null, ['label' => 'field.label_row_data'])
+                ->add('summary', null, [
+                    'label' => 'field.label_summary',
+                    'template' => '@SmartSonata/admin/show_html_item.html.twig'
+                ])
+                ->add('rawData', null, [
+                    'label' => 'field.label_row_data',
+                    'template' => '@SmartSonata/admin/show_html_item.html.twig'
+                ])
             ->end()
         ;
     }
