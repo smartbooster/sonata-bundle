@@ -41,6 +41,10 @@
                 <source>dashboard.label_parameter</source>
                 <target>Paramètres</target>
             </trans-unit>
+            <trans-unit id="dashboard.label_batch_log">
+                <source>dashboard.label_batch_log</source>
+                <target>Logs</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_parameter_list">
                 <source>breadcrumb.link_parameter_list</source>
                 <target>Liste des paramètres</target>
@@ -48,6 +52,10 @@
             <trans-unit id="breadcrumb.link_parameter_create">
                 <source>breadcrumb.link_parameter_create</source>
                 <target>Création d'un paramètre</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_batch_log_list">
+                <source>breadcrumb.link_batch_log_list</source>
+                <target>Liste des logs</target>
             </trans-unit>
 
             <trans-unit id="fieldset.label_general">
@@ -57,6 +65,10 @@
             <trans-unit id="fieldset.label_profile">
                 <source>fieldset.label_profile</source>
                 <target>Mon compte</target>
+            </trans-unit>
+            <trans-unit id="fieldset.label_log">
+                <source>fieldset.label_log</source>
+                <target>Log</target>
             </trans-unit>
 
             <trans-unit id="field.label_id">
@@ -98,6 +110,30 @@
             <trans-unit id="form.label_password_confirmation">
                 <source>form.label_password_confirmation</source>
                 <target>Confirmation mot de passe</target>
+            </trans-unit>
+            <trans-unit id="field.label_name">
+                <source>field.label_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="field.label_context">
+                <source>field.label_context</source>
+                <target>Context</target>
+            </trans-unit>
+            <trans-unit id="field.label_date">
+                <source>field.label_date</source>
+                <target>Date</target>
+            </trans-unit>
+            <trans-unit id="field.label_success">
+                <source>field.label_success</source>
+                <target>Succès</target>
+            </trans-unit>
+            <trans-unit id="field.label_summary">
+                <source>field.label_summary</source>
+                <target>Résumer</target>
+            </trans-unit>
+            <trans-unit id="field.label_row_data">
+                <source>field.label_row_data</source>
+                <target>Détail</target>
             </trans-unit>
 
             <!-- Action -->
