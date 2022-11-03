@@ -2,6 +2,11 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="by">
+                <source>by</source>
+                <target> par </target>
+            </trans-unit>
+
             <!-- Lists Action -->
             <trans-unit id="list.label__actions">
                 <source>list.label__actions</source>
@@ -138,6 +143,44 @@
             <trans-unit id="field.label_data">
                 <source>field.label_data</source>
                 <target>Data</target>
+            </trans-unit>
+
+            <!-- Action -->
+            <trans-unit id="history.none">
+                <source>history.none</source>
+                <target>Pas d'historique disponible.</target>
+            </trans-unit>
+            <trans-unit id="history.email.sent">
+                <source>history.email.sent</source>
+                <target>Email envoyé : </target>
+            </trans-unit>
+            <trans-unit id="history.entity.created">
+                <source>history.entity.created</source>
+                <target>Entité créée</target>
+            </trans-unit>
+            <trans-unit id="history.entity.updated">
+                <source>history.entity.updated</source>
+                <target>Entité mise à jour</target>
+            </trans-unit>
+            <trans-unit id="history.entity.archived">
+                <source>history.entity.archived</source>
+                <target>Entité archivée</target>
+            </trans-unit>
+            <trans-unit id="history.error">
+                <source>history.error</source>
+                <target>Erreur : </target>
+            </trans-unit>
+            <trans-unit id="history.external">
+                <source>history.external</source>
+                <target>Évènement externe : </target>
+            </trans-unit>
+            <trans-unit id="history.interne">
+                <source>history.interne</source>
+                <target>Process interne : </target>
+            </trans-unit>
+            <trans-unit id="history.timeline_context">
+                <source>history.timeline_context</source>
+                <target> [context %context%]</target>
             </trans-unit>
 
             <!-- Action -->
