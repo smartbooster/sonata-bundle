@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new \Yokai\SecurityTokenBundle\YokaiSecurityTokenBundle(),
             new \Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new \Sentry\SentryBundle\SentryBundle(),
         ];
     }
 

@@ -137,6 +137,7 @@ services:
     public: true
     arguments:
       - '@Doctrine\ORM\EntityManagerInterface'
+      - '@Sentry\ClientInterface'
 
   Smart\SonataBundle\Logger\BatchLogger:
     public: false

@@ -3,19 +3,26 @@
 namespace Smart\SonataBundle\Logger;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sentry\ClientInterface;
 use Smart\SonataBundle\Entity\Log\BatchLog;
 
 class BatchLogger
 {
     private EntityManagerInterface $entityManager;
+    private ClientInterface $sentry;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ClientInterface $sentry)
     {
         $this->entityManager = $entityManager;
+        $this->sentry = $sentry;
     }
 
     public function log(array $parameters): void
     {
+        if (isset($parameters['exception'])) {
+            $this->sentry->captureException($parameters['exception']);
+        }
+
         $batchLog = new BatchLog();
         if (!isset($parameters['context'])) {
             throw new \Exception("'context' must be present in batch log");

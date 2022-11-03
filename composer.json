@@ -29,7 +29,8 @@
     "symfony/yaml": "^4.4 || ^5.4 || ^6.0",
     "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
     "nelmio/security-bundle": "^2.8",
-    "yokai/security-token-bundle": "^3.3"
+    "yokai/security-token-bundle": "^3.3",
+    "sentry/sentry-symfony": "^4.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7",
