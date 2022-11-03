@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.0 - (2022-11-03)
+
+### Added
+
+- [[#41](https://github.com/smartbooster/sonata-bundle/issues/41)] Admin, model and logger for batch logging
+
 ## v1.3.3 - (2022-09-22)
 
 ### Fixed
