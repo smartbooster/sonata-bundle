@@ -4,6 +4,7 @@ namespace Smart\SonataBundle\Tests\DependencyInjection;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Sentry\ClientInterface;
 use Smart\SonataBundle\SmartSonataBundle;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
@@ -25,6 +26,7 @@ class DependencyInjectionTest extends TestCase
         $bundle = new SmartSonataBundle();
         $this->container = new ContainerBuilder();
         $this->container->setDefinition('Doctrine\ORM\EntityManagerInterface', new Definition(EntityManagerInterface::class));
+        $this->container->setDefinition('Sentry\ClientInterface', new Definition(ClientInterface::class));
         $this->container->registerExtension($bundle->getContainerExtension());
         $bundle->build($this->container);
     }
