@@ -122,3 +122,22 @@ services:
   Smart\SonataBundle\Security\Handler\SmartSecurityHandler:
     arguments:
       - '@sonata.admin.security.handler.role'
+
+  admin.batch_log:
+    class: Smart\SonataBundle\Admin\BatchLogAdmin
+    arguments:
+      - ~
+      - Smart\SonataBundle\Entity\Log\BatchLog
+      - ~
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: dashboard.label_batch_log }
+
+  smart_sonata.batch_logger:
+    class: Smart\SonataBundle\Logger\BatchLogger
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  Smart\SonataBundle\Logger\BatchLogger:
+    public: false
+    alias: smart_sonata.batch_logger
