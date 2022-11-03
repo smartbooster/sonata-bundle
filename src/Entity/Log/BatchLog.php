@@ -20,9 +20,9 @@ class BatchLog
     private int $id;
 
     /**
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
-    private \DateTime $createdAt;
+    private \DateTime $date;
 
     /**
      * @ORM\Column(name="context", type="string", nullable=false)
@@ -31,9 +31,9 @@ class BatchLog
 
     /**
      * Name of the batch action
-     * @ORM\Column(name="name", type="string", nullable=true)
+     * @ORM\Column(name="name", type="string", nullable=false)
      */
-    private ?string $name = null;
+    private string $name;
 
     /**
      * @ORM\Column(name="summary", type="text", nullable=true)
@@ -41,9 +41,14 @@ class BatchLog
     private ?string $summary = null;
 
     /**
-     * @ORM\Column(name="raw_data", type="text", nullable=true)
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
-    private ?string $rawData = null;
+    private ?string $comment = null;
+
+    /**
+     * @ORM\Column(name="data", type="json", nullable=true)
+     */
+    private ?array $data = null;
 
     /**
      * @ORM\Column(name="success", type="boolean", nullable=true)
@@ -52,7 +57,7 @@ class BatchLog
 
     public function __construct()
     {
-        $this->setCreatedAt(new \DateTime());
+        $this->setDate(new \DateTime());
     }
 
     public function __toString(): string
@@ -68,17 +73,17 @@ class BatchLog
     /**
      * @return \DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getDate(): \DateTime
     {
-        return $this->createdAt;
+        return $this->date;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param \DateTime $date
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setDate(\DateTime $date): void
     {
-        $this->createdAt = $createdAt;
+        $this->date = $date;
     }
 
     /**
@@ -100,15 +105,15 @@ class BatchLog
     /**
      * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param string|null $name
+     * @param string $name
      */
-    public function setName(?string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -132,17 +137,33 @@ class BatchLog
     /**
      * @return string|null
      */
-    public function getRawData(): ?string
+    public function getComment(): ?string
     {
-        return $this->rawData;
+        return $this->comment;
     }
 
     /**
-     * @param string|null $rawData
+     * @param string|null $comment
      */
-    public function setRawData(?string $rawData): void
+    public function setComment(?string $comment): void
     {
-        $this->rawData = $rawData;
+        $this->comment = $comment;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getData(): ?array
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array|null $data
+     */
+    public function setData(?array $data): void
+    {
+        $this->data = $data;
     }
 
     /**

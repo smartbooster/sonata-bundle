@@ -30,7 +30,7 @@ class BatchLogAdmin extends AbstractAdmin
     protected function configureDefaultSortValues(array &$sortValues): void
     {
         $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
-        $sortValues[DatagridInterface::SORT_BY] = 'createdAt';
+        $sortValues[DatagridInterface::SORT_BY] = 'date';
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -38,14 +38,18 @@ class BatchLogAdmin extends AbstractAdmin
         $list
             ->add('context', null, [
                 'label' => 'field.label_context',
-                'template' => '@SmartSonata/admin/list_translated_item.html.twig'
+                'template' => '@SmartSonata/admin/base_field/list_translated_field.html.twig'
             ])
             ->addIdentifier('name', null, [
                 'label' => 'field.label_name',
-                'template' => '@SmartSonata/admin/list_translated_item.html.twig'
+                'template' => '@SmartSonata/admin/base_field/list_translated_field.html.twig'
             ])
-            ->add('createdAt', null, ['label' => 'field.label_date'])
+            ->add('date', null, ['label' => 'field.label_date'])
             ->add('success', null, ['label' => 'field.label_success'])
+            ->add('summary', null, [
+                'label' => 'field.label_summary',
+                'template' => '@SmartSonata/admin/base_field/list_html_field.html.twig'
+            ])
         ;
     }
 
@@ -79,7 +83,7 @@ class BatchLogAdmin extends AbstractAdmin
             ])
             ->add('success', BooleanFilter::class, ['label' => 'field.label_success', 'show_filter' => true])
             ->add(
-                'createdAt',
+                'date',
                 DateTimeRangeFilter::class,
                 [
                     'show_filter' => true,
@@ -100,23 +104,27 @@ class BatchLogAdmin extends AbstractAdmin
             ->with('general', ['label' => 'fieldset.label_general', 'class' => 'col-md-4'])
                 ->add('context', null, [
                     'label' => 'field.label_context',
-                    'template' => '@SmartSonata/admin/show_translated_item.html.twig'
+                    'template' => '@SmartSonata/admin/base_field/show_translated_field.html.twig'
                 ])
                 ->add('name', null, [
                     'label' => 'field.label_name',
-                    'template' => '@SmartSonata/admin/show_translated_item.html.twig'
+                    'template' => '@SmartSonata/admin/base_field/show_translated_field.html.twig'
                 ])
-                ->add('createdAt', null, ['label' => 'field.label_date'])
+                ->add('date', null, ['label' => 'field.label_date'])
                 ->add('success', null, ['label' => 'field.label_success'])
             ->end()
             ->with('log', ['label' => 'fieldset.label_log', 'class' => 'col-md-8'])
                 ->add('summary', null, [
                     'label' => 'field.label_summary',
-                    'template' => '@SmartSonata/admin/show_html_item.html.twig'
+                    'template' => '@SmartSonata/admin/base_field/show_html_field.html.twig'
                 ])
-                ->add('rawData', null, [
-                    'label' => 'field.label_row_data',
-                    'template' => '@SmartSonata/admin/show_html_item.html.twig'
+                ->add('comment', null, [
+                    'label' => 'field.label_comment',
+                    'template' => '@SmartSonata/admin/base_field/show_html_field.html.twig'
+                ])
+                ->add('data', null, [
+                    'label' => 'field.label_data',
+                    'template' => '@SmartSonata/admin/base_field/show_pre_field.html.twig'
                 ])
             ->end()
         ;

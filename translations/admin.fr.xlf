@@ -43,7 +43,7 @@
             </trans-unit>
             <trans-unit id="dashboard.label_batch_log">
                 <source>dashboard.label_batch_log</source>
-                <target>Logs</target>
+                <target>Batch log</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_parameter_list">
                 <source>breadcrumb.link_parameter_list</source>
@@ -131,9 +131,13 @@
                 <source>field.label_summary</source>
                 <target>Résumer</target>
             </trans-unit>
-            <trans-unit id="field.label_row_data">
-                <source>field.label_row_data</source>
-                <target>Détail</target>
+            <trans-unit id="field.label_comment">
+                <source>field.label_comment</source>
+                <target>Commentaire</target>
+            </trans-unit>
+            <trans-unit id="field.label_data">
+                <source>field.label_data</source>
+                <target>Data</target>
             </trans-unit>
 
             <!-- Action -->
