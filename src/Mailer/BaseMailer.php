@@ -2,6 +2,8 @@
 
 namespace Smart\SonataBundle\Mailer;
 
+use Smart\SonataBundle\Entity\Log\HistorizableInterface;
+use Smart\SonataBundle\Logger\HistoryLogger;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -14,12 +16,14 @@ class BaseMailer
     protected MailerInterface $mailer;
     protected EmailProvider $provider;
     protected TranslatorInterface $translator;
+    protected HistoryLogger $logger;
 
-    public function __construct(MailerInterface $mailer, EmailProvider $provider, TranslatorInterface $translator)
+    public function __construct(MailerInterface $mailer, EmailProvider $provider, TranslatorInterface $translator, HistoryLogger $logger)
     {
         $this->mailer = $mailer;
         $this->provider = $provider;
         $this->translator = $translator;
+        $this->logger = $logger;
     }
 
     /**
@@ -63,6 +67,13 @@ class BaseMailer
         $this->setRecipientToEmail($email, $recipient);
 
         $this->mailer->send($email);
+
+        if ($recipient instanceof HistorizableInterface) {
+            $this->logger->log($recipient, HistoryLogger::EMAIL_SENT_CODE, [
+                'title' => $email->getSubject(),
+                'email_code' => $email->getCode(),
+            ]);
+        }
     }
 
     /**

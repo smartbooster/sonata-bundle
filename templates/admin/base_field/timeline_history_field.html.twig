@@ -1,0 +1,91 @@
+{% trans_default_domain 'admin' %}
+
+{% if value is null or value is empty %}
+    <div class="panel panel-default">
+        <div class="panel-body">{{ 'history.none'|trans }}</div>
+    </div>
+{% else %}
+    <ul class="timeline timeline-inverse" style="margin-bottom: 0">
+        {# row variable contains one line of the JSON history #}
+        {% for index, row in value %}
+            <li>
+                {% set title = row.title ?? null %}
+                {% set icon = null %}
+
+                {% if row.code is defined %}
+                    {% if row.code == constant('Smart\\SonataBundle\\Logger\\HistoryLogger::EMAIL_SENT_CODE') %}
+                        {% set title = ('history.' ~ row.code)|trans ~ title %}
+                        {% set icon = 'fa-paper-plane bg-blue' %}
+                    {% elseif row.code == constant('Smart\\SonataBundle\\Logger\\HistoryLogger::ENTITY_CREATED_CODE') %}
+                        {% set icon = 'fa-plus bg-green' %}
+                        {% set title = ('history.' ~ row.code)|trans %}
+                    {% elseif row.code == constant('Smart\\SonataBundle\\Logger\\HistoryLogger::ENTITY_UPDATED_CODE') %}
+                        {% set icon = 'fa-edit bg-blue' %}
+                        {% set title = ('history.' ~ row.code)|trans %}
+                    {% elseif row.code == constant('Smart\\SonataBundle\\Logger\\HistoryLogger::ENTITY_ARCHIVED_CODE') %}
+                        {% set icon = 'fa-archive bg-gray' %}
+                        {% set title = ('history.' ~ row.code)|trans %}
+                    {% elseif row.code == constant('Smart\\SonataBundle\\Logger\\HistoryLogger::ERROR_CODE') %}
+                        {% set icon = 'fa-warning bg-orange' %}
+                        {% set title = ('history.' ~ row.code)|trans ~ title %}
+                    {% elseif row.code == constant('Smart\\SonataBundle\\Logger\\HistoryLogger::EXTERNAL_CODE') %}
+                        {% set icon = 'fa-external-link bg-grey' %}
+                        {% set title = ('history.' ~ row.code)|trans ~ title %}
+                    {% elseif row.code == constant('Smart\\SonataBundle\\Logger\\HistoryLogger::INTERNE_CODE') %}
+                        {% set icon = 'fa-arrow-down bg-blue' %}
+                        {% set title = ('history.' ~ row.code)|trans ~ title %}
+                    {% endif %}
+                {% endif %}
+                {% if title is defined and row.author is defined and row.author is not null %}
+                    {% set title = title ~ ('by'|trans ~ row.author) %}
+                {% endif %}
+                {% if title is defined and row.context is defined and row.context is not null %}
+                    {% set title = title ~ '<span class="text-primary">' ~ 'history.timeline_context'|trans({'%context%': row.context}) ~ '</span>' %}
+                {% endif %}
+
+                {% if icon is not null %}
+                    <i class="fa {{ icon }}"></i>
+                {% endif %}
+                <div class="timeline-item">
+                    <span class="time">{{ row.date|date('d/m/Y à H:i:s') }}</span>
+                    <h3 class="timeline-header">
+                        {% if row.data is defined %}
+                            <button type="button" class="btn btn-box-tool no-padding" data-toggle="collapse" data-target="#timeline-body-{{ index }}"
+                                    aria-expanded="false" aria-controls="timeline-body-{{ index }}">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        {% endif %}
+                        {% if title is not null %}
+                            {{ title|raw }}
+                        {% elseif row.title_template is defined %}
+                            {% include row.title_template ignore missing with row.title_template_params ?? {} %}
+                        {% endif %}
+                    </h3>
+                    {% if row.data is defined or row.message is defined or row.message_template is defined or row.history_updated_diff is defined %}
+                        <div id="timeline-body-{{ index }}" class="timeline-body {% if row.data is defined %}collapse{% endif %}">
+                            {% if row.message is defined %}
+                                {{ row.message }}
+                            {% elseif row.message_template is defined %}
+                                {% include row.message_template ignore missing with row.message_template_params ?? {} %}
+                            {% endif %}
+                            {% if row.history_updated_diff is defined %}
+                                <ul>
+                                {% for field, value in row.history_updated_diff.after %}
+                                    <li>
+                                        <b>{{ ('field.label_' ~ field) |trans }}</b>
+                                        <span class="text-muted">{{ row.history_updated_diff.before[field] ?? null }}</span> >
+                                        <span>{{ value }}</span>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                            {% if row.data is defined %}
+                                <pre>{{ row.data|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

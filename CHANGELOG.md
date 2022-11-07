@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.1 - (2022-11-07)
+
+### Added
+
+- [[#41](https://github.com/smartbooster/sonata-bundle/issues/41)] Add HistoryLogger for entity modification logs + default admin template timeline_history
+
 ## v1.4.0 - (2022-11-03)
 
 ### Added

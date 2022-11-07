@@ -43,7 +43,7 @@ services:
       - '@Symfony\Component\Mailer\MailerInterface'
       - '@Smart\SonataBundle\Mailer\EmailProvider'
       - '@Symfony\Contracts\Translation\TranslatorInterface'
-      - '@Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface'
+      - '@Smart\SonataBundle\Logger\HistoryLogger'
   Smart\SonataBundle\Controller\Admin\DocumentationController:
     tags: ['controller.service_arguments']
   Smart\SonataBundle\Controller\AbstractSecurityController:
@@ -142,3 +142,13 @@ services:
   Smart\SonataBundle\Logger\BatchLogger:
     public: false
     alias: smart_sonata.batch_logger
+
+  smart_sonata.history_logger:
+    class: Smart\SonataBundle\Logger\HistoryLogger
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  Smart\SonataBundle\Logger\HistoryLogger:
+    public: false
+    alias: smart_sonata.history_logger
