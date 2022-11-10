@@ -35,4 +35,22 @@ trait HistorizableTrait
 
         return $this;
     }
+
+    public function getDataForHistoryDiff(): array
+    {
+        $toReturn = [];
+        foreach ($this->getAttributsForHistoryDiff() as $attribut) {
+            $toReturn[$attribut] = $this->{'get' . ucwords($attribut)}();
+        }
+
+        return $toReturn;
+    }
+
+    /**
+     * Redefine in entity
+     */
+    public function getAttributsForHistoryDiff(): array
+    {
+        return [];
+    }
 }

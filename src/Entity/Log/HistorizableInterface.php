@@ -12,4 +12,8 @@ interface HistorizableInterface
     public function setHistory(?array $history): self;
 
     public function addHistory(array $history): self;
+
+    public function getDataForHistoryDiff(): array;
+
+    public function getAttributsForHistoryDiff(): array;
 }

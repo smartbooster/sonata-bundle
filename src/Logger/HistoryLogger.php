@@ -71,4 +71,29 @@ class HistoryLogger
 
         $this->entityManager->flush();
     }
+
+    /**
+     * check and add $updatedEntity diff log between $initalEntity and $updatedEntity
+     */
+    public function logEntityDiff(HistorizableInterface $initalEntity, HistorizableInterface $updatedEntity, string $code, array $data = []): void
+    {
+        $this->logDataDiff(
+            $updatedEntity,
+            $initalEntity->getDataForHistoryDiff(),
+            $updatedEntity->getDataForHistoryDiff(),
+            $code,
+            $data
+        );
+    }
+
+    /**
+     * check and add $entity diff log between $initialData and $updatedData
+     */
+    public function logDataDiff(HistorizableInterface $entity, array $initialData, array $updatedData, string $code, array $data = []): void
+    {
+        $this->init(array_intersect_key($initialData, array_flip($entity->getAttributsForHistoryDiff())));
+        if ($this->hasDiff($updatedData)) {
+            $this->log($entity, $code, $data);
+        }
+    }
 }
