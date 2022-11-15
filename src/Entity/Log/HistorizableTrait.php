@@ -3,12 +3,16 @@
 namespace Smart\SonataBundle\Entity\Log;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
 trait HistorizableTrait
 {
+    private ?PropertyAccessorInterface $propertyAccess = null;
+
     /**
      * @ORM\Column(type="json", nullable=true)
      */
@@ -38,9 +42,11 @@ trait HistorizableTrait
 
     public function getDataForHistoryDiff(): array
     {
+        $propertyAccessor = $this->getPropertyAccessor();
+
         $toReturn = [];
         foreach ($this->getAttributsForHistoryDiff() as $attribut) {
-            $toReturn[$attribut] = $this->{'get' . ucwords($attribut)}();
+            $toReturn[$attribut] = $propertyAccessor->getValue($this, $attribut);
         }
 
         return $toReturn;
@@ -52,5 +58,16 @@ trait HistorizableTrait
     public function getAttributsForHistoryDiff(): array
     {
         return [];
+    }
+
+    private function getPropertyAccessor(): PropertyAccessorInterface
+    {
+        if (!$this->propertyAccess instanceof PropertyAccessorInterface) {
+            $this->propertyAccess = PropertyAccess::createPropertyAccessorBuilder()
+                ->enableExceptionOnInvalidIndex()
+                ->getPropertyAccessor();
+        }
+
+        return $this->propertyAccess;
     }
 }
