@@ -1,5 +1,12 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.2 - (2022-11-10)
+
+### Added
+
+- Improve HistoryLogger with new methods for add diff log
+- Add new methods for help to find the diff in HistorizableTrait and HistorizableInterface.
+
 ## v1.4.1 - (2022-11-07)
 
 ### Added

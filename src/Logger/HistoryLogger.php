@@ -71,4 +71,19 @@ class HistoryLogger
 
         $this->entityManager->flush();
     }
+
+    /**
+     * Check and log diff on entity
+     * @param HistorizableInterface $entity entity updated what we want to log
+     * @param array $initialData associative array of initial entity before the update. The attributes in this array define the checked differences of the entity
+     * @param array $data additional data to log
+     * @return void
+     */
+    public function logDiff(HistorizableInterface $entity, array $initialData, array $data = []): void
+    {
+        $this->init($initialData);
+        if ($this->hasDiff(array_intersect_key($entity->getDataForHistoryDiff(), $initialData))) {
+            $this->log($entity, self::ENTITY_UPDATED_CODE, $data);
+        }
+    }
 }
