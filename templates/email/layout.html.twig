@@ -6,7 +6,7 @@
 
 {% if is_email_preview is not defined %}
 <!DOCTYPE html>
-<html lang="{{ app.request.getLocale() }}">
+<html lang="{{ app.request != null ? app.request.getLocale() : 'fr' }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>{% block title %}{% endblock %}</title>

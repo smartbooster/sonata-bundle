@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.3 - (2023-01-27)
+
+### Fixed
+
+- Fixed local in email layout if request is null
+
 ## v1.4.2 - (2022-11-10)
 
 ### Added
