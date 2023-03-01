@@ -70,11 +70,19 @@
                             {% endif %}
                             {% if row.history_updated_diff is defined %}
                                 <ul>
-                                {% for field, value in row.history_updated_diff.after %}
+                                {% for field, after_value in row.history_updated_diff.after %}
                                     <li>
                                         <b>{{ ('field.label_' ~ field) |trans }}</b>
-                                        <span class="text-muted">{{ row.history_updated_diff.before[field] ?? null }}</span> >
-                                        <span>{{ value }}</span>
+                                        {% set value = row.history_updated_diff.before[field] %}
+                                        <span class="text-muted">
+                                            {% block render_value %}
+                                                {{ value }}
+                                            {% endblock %}
+                                        </span> >
+                                        {% set value = after_value %}
+                                        <span>
+                                            {{ block('render_value') }}
+                                        </span>
                                     </li>
                                 {% endfor %}
                                 </ul>
