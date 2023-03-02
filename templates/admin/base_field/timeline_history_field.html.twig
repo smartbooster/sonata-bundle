@@ -73,7 +73,7 @@
                                 {% for field, after_value in row.history_updated_diff.after %}
                                     <li>
                                         <b>{{ ('field.label_' ~ field) |trans }}</b>
-                                        {% set value = row.history_updated_diff.before[field] %}
+                                        {% set value = row.history_updated_diff.before[field] ?? null %}
                                         <span class="text-muted">
                                             {% block render_value %}
                                                 {{ value }}
