@@ -33,7 +33,8 @@ class HistoryLogger
     }
 
     /**
-     * Set entity data before processing for comparison during update history log
+     * Set entity data before processing for comparison during update history log.
+     * Define the checked differences of the entity
      */
     public function init(array $entityData): void
     {
@@ -42,10 +43,19 @@ class HistoryLogger
 
     /**
      * Call this method with the data after update processing and use the return bool to condition the log call
+     * @param array $entityData array of data to compare. Additional key are removed.
      */
     public function hasDiff(array $entityData): bool
     {
-        $this->afterHandleEntityData = $entityData;
+        if (empty($this->beforeHandleEntityData)) {
+            throw new \LogicException('method init must be call and not empty before hasDiff');
+        }
+
+        $this->afterHandleEntityData = array_intersect_key($entityData, $this->beforeHandleEntityData);
+
+        if (empty($this->afterHandleEntityData)) {
+            throw new \LogicException('$entityData has no comparable data with init');
+        }
 
         return $this->beforeHandleEntityData !== $this->afterHandleEntityData;
     }
@@ -55,16 +65,37 @@ class HistoryLogger
      */
     public function log(HistorizableInterface $entity, string $code, array $data = []): void
     {
+        $isUpdate = $code === self::ENTITY_UPDATED_CODE;
+
+        if ($isUpdate && empty($this->beforeHandleEntityData)) {
+            throw new \LogicException('method init must be call and not empty before log on code ' . self::ENTITY_UPDATED_CODE);
+        }
+
+        if ($isUpdate && empty($this->afterHandleEntityData)) {
+            throw new \LogicException('method hasDiff must be call and not empty before log on code ' . self::ENTITY_UPDATED_CODE);
+        }
+
         $history = array_merge([
             'code' => $code,
             'date' => time(),
         ], $data);
 
-        if ($history['code'] === self::ENTITY_UPDATED_CODE && !empty($this->afterHandleEntityData)) {
-            $history['history_updated_diff'] = [
-                'before' => $this->beforeHandleEntityData,
-                'after' => $this->afterHandleEntityData,
+        if ($isUpdate) {
+            $diffs = [
+                'before' => [],
+                'after' => [],
             ];
+
+            foreach ($this->afterHandleEntityData as $key => $value) {
+                if ($this->beforeHandleEntityData[$key] === $this->afterHandleEntityData[$key]) {
+                    continue;
+                }
+
+                $diffs['before'][$key] = $this->beforeHandleEntityData[$key];
+                $diffs['after'][$key] = $this->afterHandleEntityData[$key];
+            }
+
+            $history['history_updated_diff'] = $diffs;
         }
 
         $entity->addHistory($history);
@@ -81,8 +112,18 @@ class HistoryLogger
      */
     public function logDiff(HistorizableInterface $entity, array $initialData, array $data = []): void
     {
+        if (empty($initialData)) {
+            throw new \InvalidArgumentException('initialData must not be empty');
+        }
+
+        $dataForHistoryDiff = $entity->getDataForHistoryDiff();
+
+        if (empty($dataForHistoryDiff)) {
+            throw new \LogicException('entity->getDataForHistoryDiff() must not be empty');
+        }
+
         $this->init($initialData);
-        if ($this->hasDiff(array_intersect_key($entity->getDataForHistoryDiff(), $initialData))) {
+        if ($this->hasDiff($dataForHistoryDiff)) {
             $this->log($entity, self::ENTITY_UPDATED_CODE, $data);
         }
     }

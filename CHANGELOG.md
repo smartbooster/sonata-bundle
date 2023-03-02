@@ -1,5 +1,13 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.4 - (2023-03-01)
+
+### Added
+
+- Add new logic check when use HistoryLogger method
+- Saving only different value on save diff in HistoryLogger
+- Add overriding possibility of display value in diff show of history
+
 ## v1.4.3 - (2023-01-27)
 
 ### Fixed
