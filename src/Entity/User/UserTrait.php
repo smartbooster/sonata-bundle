@@ -40,7 +40,7 @@ trait UserTrait
     private ?string $password = null;
 
     /**
-     * @var string
+     * @var ?string
      */
     private ?string $plainPassword = null;
 

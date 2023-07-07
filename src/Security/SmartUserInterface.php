@@ -21,14 +21,14 @@ interface SmartUserInterface extends UserInterface
     /**
      * This should not be stored, used only in resetting password process
      *
-     * @return string
+     * @return ?string
      */
     public function getPlainPassword();
 
     /**
      * Set plain password (this should not be stored)
      *
-     * @param  string $plainPassword
+     * @param ?string $plainPassword
      *
      * @return void
      */
