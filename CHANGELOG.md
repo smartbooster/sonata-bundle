@@ -1,5 +1,12 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.5 - (2023-07-07)
+
+### Fixed
+
+- Encoder call with test on null password
+- Sonata deprecated not use construct parameter in Admin
+
 ## v1.4.4 - (2023-03-01)
 
 ### Added

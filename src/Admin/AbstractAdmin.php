@@ -24,7 +24,8 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     public function __construct(string $code, ?string $class, string $baseControllerName = null)
     {
-        parent::__construct($code, $class, $baseControllerName);
+        parent::__construct();
+        $this->init($code, $class, $baseControllerName);
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -132,5 +133,12 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     protected function validate(ErrorElement $errorElement, object $object): void
     {
         // do nothing
+    }
+
+    protected function init(string $code, ?string $class, string $baseControllerName = null): void
+    {
+        $this->setCode($code);
+        $this->setModelClass($class);
+        $this->setBaseControllerName($baseControllerName);
     }
 }

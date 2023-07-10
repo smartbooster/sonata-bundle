@@ -34,7 +34,7 @@ class UserProcessor implements ProcessorInterface
             return;
         }
 
-        $object->setPassword($this->encoder->encodePassword($object, $object->getPlainPassword()));
+        $object->setPassword($this->encoder->encodePassword($object, $object->getPlainPassword() ?? ''));
     }
 
     /**

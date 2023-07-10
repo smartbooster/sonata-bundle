@@ -7,7 +7,7 @@ use Smart\SonataBundle\Validator\Constraints as SmartAssert;
 trait PasswordSafeableTrait
 {
     /**
-     * @var string
+     * @var ?string
      *
      * @SmartAssert\IsPasswordSafe
      */
