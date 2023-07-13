@@ -5,7 +5,10 @@ CHANGELOG for 1.x
 ### Update
 
 - Update bundle version and remove bundle require by other bundle.
-- Can't upgrade `doctrine/dbal` because of `yokai/security-token-bundle`
+
+### Fixed
+
+- Change `json_array` into `json` orm type on roles attribute in `UserTrait`. Need migration on project.
 
 ## v1.4.5 - (2023-07-07)
 
