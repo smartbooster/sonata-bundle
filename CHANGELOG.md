@@ -1,5 +1,12 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.6 - (2023-07-13)
+
+### Update
+
+- Update bundle version and remove bundle require by other bundle.
+- Can't upgrade `doctrine/dbal` because of `yokai/security-token-bundle`
+
 ## v1.4.5 - (2023-07-07)
 
 ### Fixed
