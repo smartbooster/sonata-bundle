@@ -49,7 +49,9 @@ abstract class AbstractWebTestCase extends WebTestCase
 
     protected function getParameterRepository(): ParameterRepository
     {
-        return $this->entityManager->getRepository(Parameter::class);
+        /** @var ParameterRepository $parameterRepository */
+        $parameterRepository = $this->entityManager->getRepository(Parameter::class);
+        return $parameterRepository;
     }
 
     protected function loadFixtureFiles(array $files): void

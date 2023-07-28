@@ -4,6 +4,7 @@ namespace Smart\SonataBundle\Loader;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Smart\SonataBundle\Entity\Parameter;
+use Smart\SonataBundle\Repository\ParameterRepository;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
@@ -43,7 +44,9 @@ class ParameterLoader
         }
 
         try {
-            $existingParameters = $this->entityManager->getRepository(Parameter::class)->findAllByCode();
+            /** @var ParameterRepository $parameterRepository */
+            $parameterRepository = $this->entityManager->getRepository(Parameter::class);
+            $existingParameters = $parameterRepository->findAllByCode();
             $i = 1;
             foreach ($existingParameters as $code => $parameter) {
                 $this->handleExistingParameters($code, $parameter, $i);

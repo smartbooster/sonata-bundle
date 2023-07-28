@@ -19,7 +19,7 @@ class ParameterLoaderTest extends AbstractWebTestCase
     {
         parent::setUp();
 
-        $this->loader = self::$container->get(ParameterLoader::class);
+        $this->loader = $this->getContainer()->get(ParameterLoader::class);
     }
 
     public function testUpdate(): void

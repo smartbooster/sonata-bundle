@@ -4,7 +4,11 @@ CHANGELOG for 1.x
 
 ### Update
 
-- Update composer php version to use ^8.0 and add possibility to use version ^7.0 of `dama/doctrine-test-bundle`
+- Update composer php version to use ^8.0
+- Add possibility to use version ^7.0 of `dama/doctrine-test-bundle`
+- Restrict use maximal version `^5.4` of `symfony/security-http` because of changing on `UserPasswordEncoderInterface` in symfony 6
+- Add `doctrine/annotations` in the require of composer
+- Update codes for phpstan issues
 
 ## v1.4.6 - (2023-07-13)
 
