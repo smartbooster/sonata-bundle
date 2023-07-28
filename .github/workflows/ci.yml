@@ -9,11 +9,13 @@ on:
 jobs:
   build_test:
     runs-on: ubuntu-latest
-    name: Build and test on php-fpm:${{ matrix.php }}-builder
-    container: smartbooster/php-fpm:${{ matrix.php }}-builder
+    name: Build and test on ${{ matrix.image }}
+    container: ${{ matrix.image }}
     strategy:
       matrix:
-        php: [ 7.4 ]
+        image:
+          - smartbooster/php-fpm:7.4-builder
+          - registry.gitlab.com/pia-production/hosting/docker-php:8.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
