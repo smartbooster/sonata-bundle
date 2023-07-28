@@ -5,7 +5,6 @@ CHANGELOG for 1.x
 ### Update
 
 - Update composer php version to use ^8.0 and add possibility to use version ^7.0 of `dama/doctrine-test-bundle`
-- Update github action to run tests on php 8.2
 
 ## v1.4.6 - (2023-07-13)
 
