@@ -19,7 +19,7 @@ class ParameterProviderTest extends AbstractWebTestCase
     {
         parent::setUp();
 
-        $this->provider = self::$container->get(ParameterProvider::class);
+        $this->provider = $this->getContainer()->get(ParameterProvider::class);
     }
 
     public function testGetNotFoundException(): void

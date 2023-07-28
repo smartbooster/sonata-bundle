@@ -2,6 +2,7 @@
 
 namespace Smart\SonataBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Smart\SonataBundle\Form\Type\Security\ForgotPasswordType;
 use Smart\SonataBundle\Mailer\BaseMailer;
 use Smart\SonataBundle\Security\Form\Type\ResetPasswordType;
@@ -52,14 +53,16 @@ class AbstractSecurityController extends AbstractController
     protected UserProviderInterface $userProvider;
     protected UserPasswordEncoderInterface $userPasswordEncoder;
     protected TemplateRegistry $templateRegistry;
+    protected EntityManagerInterface $entityManager;
 
-    public function __construct(TokenManagerInterface $tokenManager, BaseMailer $mailer, TranslatorInterface $translator, UserPasswordEncoderInterface $userPasswordEncoder, TemplateRegistry $templateRegistry)
+    public function __construct(TokenManagerInterface $tokenManager, BaseMailer $mailer, TranslatorInterface $translator, UserPasswordEncoderInterface $userPasswordEncoder, TemplateRegistry $templateRegistry, EntityManagerInterface $entityManager)
     {
         $this->tokenManager = $tokenManager;
         $this->mailer = $mailer;
         $this->translator = $translator;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->templateRegistry = $templateRegistry;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -238,7 +241,7 @@ class AbstractSecurityController extends AbstractController
             );
         }
 
-        $manager = $this->getDoctrine()->getManager();
+        $manager = $this->entityManager;
         $manager->persist($user);
         $manager->flush();
     }
