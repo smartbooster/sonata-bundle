@@ -152,3 +152,7 @@ services:
   Smart\SonataBundle\Logger\HistoryLogger:
     public: false
     alias: smart_sonata.history_logger
+
+  Smart\SonataBundle\Config\IniOverrideConfig:
+    arguments:
+      - '%env(default::PLATFORM_BATCH_MEMORY)%'

@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.8 - (2023-08-09)
+
+### Added
+
+- Service `IniOverrideConfig` for override php memory limit. If application use it, the env variable `PLATFORM_BATCH_MEMORY` must be set. ex : `PLATFORM_BATCH_MEMORY=1024M`
+
 ## v1.4.7 - (2023-07-28)
 
 ### Update
