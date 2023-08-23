@@ -1,5 +1,14 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.9 - (2023-08-24)
+
+### Fixed
+
+- Remove implement `\Serializable` in User
+- Add magic method `__serialize` and `__unserialize` instead of `\Serializable` method
+- Add class variable of `$databaseTool` and `$client` in `AbstractWebTestCase`
+- Add `unset($this->databaseTool);` in `tearDown()` in `AbstractWebTestCase`
+
 ## v1.4.8 - (2023-08-09)
 
 ### Added

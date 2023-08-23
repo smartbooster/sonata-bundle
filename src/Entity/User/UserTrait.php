@@ -279,30 +279,20 @@ trait UserTrait
         return $this->getEmail();
     }
 
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
+    public function __serialize(): array
     {
-        return serialize(array(
-            $this->id,
-            $this->email,
-            $this->password,
-        ));
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'pass' => $this->password,
+        ];
     }
 
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
+    public function __unserialize(array $data): void
     {
-        list (
-            $this->id,
-            $this->email,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized);
+        $this->id = $data['id'];
+        $this->email = $data['email'];
+        $this->password = $data['pass'];
     }
 
     /**

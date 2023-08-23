@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
     use UserTrait;
 }
