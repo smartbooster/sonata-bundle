@@ -156,3 +156,6 @@ services:
   Smart\SonataBundle\Config\IniOverrideConfig:
     arguments:
       - '%env(default::PLATFORM_BATCH_MEMORY)%'
+
+  Symfony\Component\DependencyInjection\ContainerInterface:
+    public: true

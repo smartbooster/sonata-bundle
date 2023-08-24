@@ -11,6 +11,8 @@ CHANGELOG for 1.x
 - Call controller method with `::` not `:` in routing config
 - Add return types
 - Change `ROLE_PREVIOUS_ADMIN` to `IS_IMPERSONATOR`
+- `Configuration::getConfigTreeBuilder` must return type `TreeBuilder`
+- Add `Symfony\Component\DependencyInjection\ContainerInterface` in service because use symfony service is deprecated
 
 ## v1.4.8 - (2023-08-09)
 
