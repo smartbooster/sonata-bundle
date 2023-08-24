@@ -8,6 +8,9 @@ CHANGELOG for 1.x
 - Add magic method `__serialize` and `__unserialize` instead of `\Serializable` method
 - Add class variable of `$databaseTool` and `$client` in `AbstractWebTestCase`
 - Add `unset($this->databaseTool);` in `tearDown()` in `AbstractWebTestCase`
+- Call controller method with `::` not `:` in routing config
+- Add return types
+- Change `ROLE_PREVIOUS_ADMIN` to `IS_IMPERSONATOR`
 
 ## v1.4.8 - (2023-08-09)
 

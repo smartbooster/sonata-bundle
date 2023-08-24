@@ -106,6 +106,7 @@ trait UserTrait
     }
 
     /**
+     * @return  string
      * @inheritdoc
      */
     public function getUsername()
@@ -134,6 +135,7 @@ trait UserTrait
     }
 
     /**
+     * @return  null|string
      * @inheritdoc
      */
     public function getPassword()
@@ -154,6 +156,7 @@ trait UserTrait
     }
 
     /**
+     * @return  null|string
      * @inheritdoc
      */
     public function getSalt()
@@ -192,6 +195,7 @@ trait UserTrait
     }
 
     /**
+     * @return array
      * @inheritdoc
      */
     public function getRoles()
