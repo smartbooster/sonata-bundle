@@ -15,8 +15,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -38,29 +38,21 @@ class AbstractSecurityController extends AbstractController
      * @var string
      */
     protected $context;
-
-    /**
-     * @var TokenManagerInterface
-     */
-    protected $tokenManager;
-
-    /**
-     * @var BaseMailer
-     */
-    protected $mailer;
+    protected TokenManagerInterface $tokenManager;
+    protected BaseMailer $mailer;
 
     protected TranslatorInterface $translator;
     protected UserProviderInterface $userProvider;
-    protected UserPasswordEncoderInterface $userPasswordEncoder;
+    protected UserPasswordHasherInterface $hasher;
     protected TemplateRegistry $templateRegistry;
     protected EntityManagerInterface $entityManager;
 
-    public function __construct(TokenManagerInterface $tokenManager, BaseMailer $mailer, TranslatorInterface $translator, UserPasswordEncoderInterface $userPasswordEncoder, TemplateRegistry $templateRegistry, EntityManagerInterface $entityManager)
+    public function __construct(TokenManagerInterface $tokenManager, BaseMailer $mailer, TranslatorInterface $translator, UserPasswordHasherInterface $hasher, TemplateRegistry $templateRegistry, EntityManagerInterface $entityManager)
     {
         $this->tokenManager = $tokenManager;
         $this->mailer = $mailer;
         $this->translator = $translator;
-        $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->hasher = $hasher;
         $this->templateRegistry = $templateRegistry;
         $this->entityManager = $entityManager;
     }
@@ -101,7 +93,7 @@ class AbstractSecurityController extends AbstractController
         }
 
         try {
-            $user = $this->getUserProvider()->loadUserByUsername($form->get('email')->getData());
+            $user = $this->getUserProvider()->loadUserByIdentifier($form->get('email')->getData());
 
             if ($user instanceof SmartUserInterface) {
                 $token = $this->tokenManager->create(Token::RESET_PASSWORD, $user);
@@ -116,7 +108,7 @@ class AbstractSecurityController extends AbstractController
 
                 $this->addFlash('success', 'flash.forgot_password.success');
             }
-        } catch (UsernameNotFoundException $e) {
+        } catch (UserNotFoundException $e) {
             $this->addFlash('error', 'flash.forgot_password.unknown');
 
             return $this->redirectToRoute($this->context . '_security_forgot_password');
@@ -237,7 +229,7 @@ class AbstractSecurityController extends AbstractController
     {
         if (null !== $user->getPlainPassword()) {
             $user->setPassword(
-                $this->userPasswordEncoder->encodePassword($user, $user->getPlainPassword())
+                $this->hasher->hashPassword($user, $user->getPlainPassword())
             );
         }
 

@@ -5,25 +5,18 @@ namespace Smart\SonataBundle\Admin\Extension;
 use Smart\SonataBundle\Security\SmartUserInterface;
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
 class EncodePasswordExtension extends AbstractAdminExtension
 {
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $encoder;
+    private UserPasswordHasherInterface $hasher;
 
-    /**
-     * @param UserPasswordEncoderInterface $encoder
-     */
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordHasherInterface $hasher)
     {
-        $this->encoder = $encoder;
+        $this->hasher = $hasher;
     }
 
     /**
@@ -31,7 +24,7 @@ class EncodePasswordExtension extends AbstractAdminExtension
      */
     public function preUpdate(AdminInterface $admin, $user): void
     {
-        $this->encodePassword($user);
+        $this->hashPassword($user);
     }
 
     /**
@@ -39,18 +32,18 @@ class EncodePasswordExtension extends AbstractAdminExtension
      */
     public function prePersist(AdminInterface $admin, $user): void
     {
-        $this->encodePassword($user);
+        $this->hashPassword($user);
     }
 
     /**
      * @param SmartUserInterface $user
      */
-    private function encodePassword(SmartUserInterface $user): void
+    private function hashPassword(SmartUserInterface $user): void
     {
         if ("" === trim($user->getPlainPassword())) {
             return;
         }
 
-        $user->setPassword($this->encoder->encodePassword($user, $user->getPlainPassword()));
+        $user->setPassword($this->hasher->hashPassword($user, $user->getPlainPassword()));
     }
 }

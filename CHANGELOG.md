@@ -1,5 +1,12 @@
 CHANGELOG for 1.x
 ===================
+## v2.0.0 - (2023-08-25)
+
+### Fixed
+
+- Use `Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface` service instead of `Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface` because it's deprecated
+- Stop symfony 4.4 maintenance
+
 ## v1.4.9 - (2023-08-24)
 
 ### Fixed
