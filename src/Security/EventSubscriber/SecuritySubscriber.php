@@ -56,10 +56,6 @@ class SecuritySubscriber implements EventSubscriberInterface
     {
         $token = $event->getAuthenticationToken();
 
-        if (!$token instanceof TokenInterface) {
-            return;
-        }
-
         $user = $token->getUser();
 
         if (!$user instanceof LastLoginInterface) {

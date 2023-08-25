@@ -13,6 +13,9 @@ CHANGELOG for 1.x
 - Change `ROLE_PREVIOUS_ADMIN` to `IS_IMPERSONATOR`
 - `Configuration::getConfigTreeBuilder` must return type `TreeBuilder`
 - Add `Symfony\Component\DependencyInjection\ContainerInterface` in service because use symfony service is deprecated
+- Set token storage by injection in `AbstractAdmin`
+- User must implement `PasswordAuthenticatedUserInterface`. Add implementation in `SmartUserInterface`
+- Add missing method and update method in `UserTrait`
 
 ## v1.4.8 - (2023-08-09)
 

@@ -2,12 +2,13 @@
 
 namespace Smart\SonataBundle\Security;
 
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Add methods for resetting password
  */
-interface SmartUserInterface extends UserInterface
+interface SmartUserInterface extends PasswordAuthenticatedUserInterface, UserInterface
 {
     /**
      * Set the password used to authenticate the user.

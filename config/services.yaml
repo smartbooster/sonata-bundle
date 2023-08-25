@@ -55,6 +55,7 @@ services:
     abstract:  true
     calls:
       - setContainer: [ '@Symfony\Component\DependencyInjection\ContainerInterface' ]
+      - setTokenManager: [ '@security.token_storage' ]
 
   smart_sonata.parameter_provider:
     class: Smart\SonataBundle\Provider\ParameterProvider
