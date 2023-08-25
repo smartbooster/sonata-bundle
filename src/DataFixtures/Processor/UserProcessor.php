@@ -4,24 +4,18 @@ namespace Smart\SonataBundle\DataFixtures\Processor;
 
 use Fidry\AliceDataFixtures\ProcessorInterface;
 use Smart\SonataBundle\Security\SmartUserInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * Nicolas Bastien <nicolas.bastien@smartbooster.io>
  */
 class UserProcessor implements ProcessorInterface
 {
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $encoder;
+    private UserPasswordHasherInterface $hasher;
 
-    /**
-     * @param UserPasswordEncoderInterface $encoder
-     */
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordHasherInterface $hasher)
     {
-        $this->encoder = $encoder;
+        $this->hasher = $hasher;
     }
 
     /**
@@ -34,7 +28,7 @@ class UserProcessor implements ProcessorInterface
             return;
         }
 
-        $object->setPassword($this->encoder->encodePassword($object, $object->getPlainPassword() ?? 'test'));
+        $object->setPassword($this->hasher->hashPassword($object, $object->getPlainPassword() ?? 'test'));
     }
 
     /**
