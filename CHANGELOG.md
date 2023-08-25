@@ -16,6 +16,7 @@ CHANGELOG for 1.x
 - Set token storage by injection in `AbstractAdmin`
 - User must implement `PasswordAuthenticatedUserInterface`. Add implementation in `SmartUserInterface`
 - Add missing method and update method in `UserTrait`
+- Set dummy password by default in `UserProcessor`
 
 ## v1.4.8 - (2023-08-09)
 
