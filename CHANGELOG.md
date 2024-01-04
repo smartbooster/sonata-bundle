@@ -1,8 +1,8 @@
 CHANGELOG for 1.x
 ===================
-## v1.4.9 - (2023-08-24)
+## v1.4.9 - (2024-01-04)
 
-### Fixed
+### Changes
 
 - Remove implement `\Serializable` in User
 - Add magic method `__serialize` and `__unserialize` instead of `\Serializable` method
@@ -17,6 +17,10 @@ CHANGELOG for 1.x
 - User must implement `PasswordAuthenticatedUserInterface`. Add implementation in `SmartUserInterface`
 - Add missing method and update method in `UserTrait`
 - Set dummy password by default in `UserProcessor`
+- Add `symfony/property-info` into composer to fix compatibility issue
+- Add `symfony/expression-language` into composer to fix compatibility issue
+- Add `symfony/security-core` into composer to fix missing service `@security.user_password_encoder.generic`
+- Remove `scrutinizer.yml` because we don't use it
 
 ## v1.4.8 - (2023-08-09)
 
