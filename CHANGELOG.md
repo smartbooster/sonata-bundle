@@ -1,13 +1,16 @@
 CHANGELOG for 1.x
 ===================
-## v1.4.10 - (2024-01-04)
+## v1.5.0 - (2024-01-04)
 
 ### Changes
 
+- Stop support for php 7.4
 - Add `smartbooster/core-bundle` bundle
 - Remove `IniOverrideConfig.php` to use `smartbooster/core-bundle`
 - Remove `IsPasswordSafe` validator to use `smartbooster/core-bundle`
 - Remove `AbstractFixtures.php` validator to use `smartbooster/core-bundle`
+- Remove php 7.4 matrix on action because it can't use `smartbooster/core-bundle` on php 7.4. Matrix implementation stay for future dev
+- Change php version on composer for run with >= 8.1
 
 ## v1.4.9 - (2024-01-04)
 
