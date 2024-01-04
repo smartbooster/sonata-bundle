@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Basic methods to implements Symfony\Component\Security\Core\User\UserInterface
+ * Basic methods to implements Symfony\Component\Security\Core\User\UserInterface and symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
  *
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
  */
@@ -59,29 +59,21 @@ trait UserTrait
     protected ?string $lastName = null;
 
     /**
-     * @var array
-     *
      * @ORM\Column(type="json")
      */
-    private $roles;
+    private array $roles = [];
 
     /**
-     * @var DateTime
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $lastLogin;
+    protected ?DateTime $lastLogin = null;
 
     /**
      * @return string
      */
     public function __toString()
     {
-        if (strlen(trim($this->getFullName())) > 0) {
-            return (string) $this->getFullName();
-        }
-
-        return (string) $this->getEmail();
+        return $this->getListDisplay();
     }
 
     /**
@@ -91,7 +83,7 @@ trait UserTrait
     public function getListDisplay()
     {
         if (strlen(trim($this->getLastName())) > 0) {
-            return (string) $this->getListFullName();
+            return $this->getListFullName();
         }
 
         return (string) $this->getEmail();
@@ -106,6 +98,7 @@ trait UserTrait
     }
 
     /**
+     * @return  string
      * @inheritdoc
      */
     public function getUsername()
@@ -134,9 +127,9 @@ trait UserTrait
     }
 
     /**
-     * @inheritdoc
+     * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -154,9 +147,22 @@ trait UserTrait
     }
 
     /**
-     * @inheritdoc
+     * The public representation of the user (e.g. a username, an email address, etc.)
+     *
+     * @see UserInterface
      */
-    public function getSalt()
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * Returning a salt is only needed if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
         return null;
     }
@@ -182,21 +188,20 @@ trait UserTrait
     }
 
     /**
-     * @inheritdoc
+     * @see UserInterface
      */
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
-
-        return;
     }
 
     /**
+     * @return array
      * @inheritdoc
      */
     public function getRoles()
     {
-        return $this->roles;
+        return array_unique($this->roles);
     }
 
     /**
@@ -279,30 +284,20 @@ trait UserTrait
         return $this->getEmail();
     }
 
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
+    public function __serialize(): array
     {
-        return serialize(array(
-            $this->id,
-            $this->email,
-            $this->password,
-        ));
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'pass' => $this->password,
+        ];
     }
 
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
+    public function __unserialize(array $data): void
     {
-        list (
-            $this->id,
-            $this->email,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized);
+        $this->id = $data['id'];
+        $this->email = $data['email'];
+        $this->password = $data['pass'];
     }
 
     /**

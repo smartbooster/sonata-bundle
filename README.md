@@ -6,7 +6,6 @@
 [![License](https://poser.pugx.org/smartbooster/sonata-bundle/license)](https://packagist.org/packages/smartbooster/sonata-bundle)
 
 ![CI workflow](https://github.com/smartbooster/sonata-bundle/actions/workflows/ci.yml/badge.svg)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/smartbooster/sonata-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/smartbooster/sonata-bundle/?branch=master)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4bfdbbf3b3d14e50b545d5e9d466ade6)](https://www.codacy.com/gh/smartbooster/sonata-bundle/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=smartbooster/sonata-bundle&amp;utm_campaign=Badge_Grade)
 [![GitHub contributors](https://img.shields.io/github/contributors/smartbooster/sonata-bundle.svg)](https://github.com/smartbooster/sonata-bundle/graphs/contributors)
 

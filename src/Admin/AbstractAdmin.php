@@ -8,6 +8,7 @@ use Sonata\Form\Validator\Constraints\InlineConstraint;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
@@ -21,6 +22,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 
     /** @var ContainerInterface $container */
     private $container;
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(string $code, ?string $class, string $baseControllerName = null)
     {
@@ -48,7 +50,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
      */
     protected function getUser()
     {
-        $token = $this->get('security.token_storage')->getToken();
+        $token = $this->tokenStorage->getToken();
         if (null === $token) {
             return null;
         }
@@ -75,6 +77,11 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     public function setContainer(ContainerInterface $container): void
     {
         $this->container = $container;
+    }
+
+    public function setTokenManager(TokenStorageInterface $tokenStorage): void
+    {
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**

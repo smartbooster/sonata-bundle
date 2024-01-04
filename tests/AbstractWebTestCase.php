@@ -4,8 +4,10 @@ namespace Smart\SonataBundle\Tests;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
+use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Smart\SonataBundle\Entity\Parameter;
 use Smart\SonataBundle\Repository\ParameterRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -14,17 +16,18 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 abstract class AbstractWebTestCase extends WebTestCase
 {
     private ?EntityManagerInterface $entityManager;
+    protected AbstractDatabaseTool $databaseTool;
+    protected KernelBrowser $client;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        // @phpstan-ignore-next-line
         $this->client = self::createClient();
         self::bootKernel();
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
+
         // https://github.com/liip/LiipTestFixturesBundle/blob/2.x/UPGRADE-2.0.md
-        // @phpstan-ignore-next-line
         $this->databaseTool = static::getContainer()->get(DatabaseToolCollection::class)->get();
 
         // Empty load to guarantee that the base will always be available
@@ -40,6 +43,7 @@ abstract class AbstractWebTestCase extends WebTestCase
             $this->entityManager->close();
             $this->entityManager = null;
         }
+        unset($this->databaseTool);
     }
 
     protected function getFixtureDir(): string
@@ -56,7 +60,6 @@ abstract class AbstractWebTestCase extends WebTestCase
 
     protected function loadFixtureFiles(array $files): void
     {
-        // @phpstan-ignore-next-line
         $this->databaseTool->loadAliceFixture($files);
     }
 }

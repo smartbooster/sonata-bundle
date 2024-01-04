@@ -55,6 +55,7 @@ services:
     abstract:  true
     calls:
       - setContainer: [ '@Symfony\Component\DependencyInjection\ContainerInterface' ]
+      - setTokenManager: [ '@security.token_storage' ]
 
   smart_sonata.parameter_provider:
     class: Smart\SonataBundle\Provider\ParameterProvider
@@ -156,3 +157,7 @@ services:
   Smart\SonataBundle\Config\IniOverrideConfig:
     arguments:
       - '%env(default::PLATFORM_BATCH_MEMORY)%'
+
+  # The "Symfony\Component\DependencyInjection\ContainerInterface" autowiring alias is deprecated. Define it explicitly in your app if you want to keep using it.
+  # It's not a good way, but it's practical for the moment. It's used in AbstractAdmin::get. Need to replace all get call by injection
+  Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'

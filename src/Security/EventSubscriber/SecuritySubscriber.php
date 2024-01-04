@@ -39,7 +39,7 @@ class SecuritySubscriber implements EventSubscriberInterface
     /**
      * @inheritDoc
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SecurityEvents::SWITCH_USER => 'onSwitchUser',
@@ -55,10 +55,6 @@ class SecuritySubscriber implements EventSubscriberInterface
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         $token = $event->getAuthenticationToken();
-
-        if (!$token instanceof TokenInterface) {
-            return;
-        }
 
         $user = $token->getUser();
 

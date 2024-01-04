@@ -1,5 +1,27 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.9 - (2024-01-04)
+
+### Changes
+
+- Remove implement `\Serializable` in User
+- Add magic method `__serialize` and `__unserialize` instead of `\Serializable` method
+- Add class variable of `$databaseTool` and `$client` in `AbstractWebTestCase`
+- Add `unset($this->databaseTool);` in `tearDown()` in `AbstractWebTestCase`
+- Call controller method with `::` not `:` in routing config
+- Add return types
+- Change `ROLE_PREVIOUS_ADMIN` to `IS_IMPERSONATOR`
+- `Configuration::getConfigTreeBuilder` must return type `TreeBuilder`
+- Add `Symfony\Component\DependencyInjection\ContainerInterface` in service because use symfony service is deprecated
+- Set token storage by injection in `AbstractAdmin`
+- User must implement `PasswordAuthenticatedUserInterface`. Add implementation in `SmartUserInterface`
+- Add missing method and update method in `UserTrait`
+- Set dummy password by default in `UserProcessor`
+- Add `symfony/property-info` into composer to fix compatibility issue
+- Add `symfony/expression-language` into composer to fix compatibility issue
+- Add `symfony/security-core` into composer to fix missing service `@security.user_password_encoder.generic`
+- Remove `scrutinizer.yml` because we don't use it
+
 ## v1.4.8 - (2023-08-09)
 
 ### Added

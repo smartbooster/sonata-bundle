@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="pull-right">
-        {% if app.user and is_granted('ROLE_PREVIOUS_ADMIN') %}
+        {% if app.user and is_granted('IS_IMPERSONATOR') %}
             <a role="menuitem" class="btn btn-default btn-flat" href="{{ path('sonata_admin_dashboard', {'_switch_user': '_exit'}) }}">
                 <i class="fa fa-unlink"></i> {{ 'user.action.end_impersonate'|trans }}
             </a>
