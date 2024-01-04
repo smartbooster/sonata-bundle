@@ -1,5 +1,14 @@
 CHANGELOG for 1.x
 ===================
+## v1.4.10 - (2024-01-04)
+
+### Changes
+
+- Add `smartbooster/core-bundle` bundle
+- Remove `IniOverrideConfig.php` to use `smartbooster/core-bundle`
+- Remove `IsPasswordSafe` validator to use `smartbooster/core-bundle`
+- Remove `AbstractFixtures.php` validator to use `smartbooster/core-bundle`
+
 ## v1.4.9 - (2024-01-04)
 
 ### Changes
