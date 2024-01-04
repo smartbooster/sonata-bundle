@@ -14,7 +14,6 @@ jobs:
     strategy:
       matrix:
         image:
-          - smartbooster/php-fpm:7.4-builder
           - registry.gitlab.com/pia-production/hosting/docker-php:8.2
     steps:
       - name: Checkout
