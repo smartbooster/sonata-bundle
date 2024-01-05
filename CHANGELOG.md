@@ -1,5 +1,11 @@
 CHANGELOG for 1.x
 ===================
+## v1.5.1 - (2024-01-05)
+
+### Fix
+
+- use namespace after use core bundle in `PasswordSafeableTrait.php`
+
 ## v1.5.0 - (2024-01-04)
 
 ### Changes
