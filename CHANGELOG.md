@@ -15,6 +15,8 @@ CHANGELOG for 1.x
   - Changes config of phpcs, phpstan and phpunit
   - Comment base test because it doesn't work with the new `smartbooster/standard-bundle` implementation
 - Fix some style because of the new `smartbooster/standard-bundle` implementation
+- Change action phpunit and qa order and use make, delete cache steps
+- Add install.mk
 
 ## v1.5.0 - (2024-01-04)
 
