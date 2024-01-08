@@ -17,6 +17,7 @@ CHANGELOG for 1.x
 - Fix some style because of the new `smartbooster/standard-bundle` implementation
 - Change action phpunit and qa order and use make, delete cache steps
 - Add install.mk
+- Delete codecov scan sending
 
 ## v1.5.0 - (2024-01-04)
 
