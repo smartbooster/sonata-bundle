@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Basic methods to implements Symfony\Component\Security\Core\User\UserInterface and symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
+ * Basic methods to implements Symfony\Component\Security\Core\User\UserInterface and
+ * Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
  *
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
  */

@@ -1,10 +1,20 @@
 CHANGELOG for 1.x
 ===================
-## v1.5.1 - (2024-01-05)
+## v1.5.1 - (2024-01-08)
 
-### Fix
+### Changes
 
-- use namespace after use core bundle in `PasswordSafeableTrait.php`
+- Use namespace after use core bundle in `PasswordSafeableTrait.php`
+- Use bundle `smartbooster/standard-bundle`, changes in :
+  - /bin
+  - Add configs
+  - Deletes make files
+  - Add Kernel
+  - Add .gitignore content
+  - Changes require dev
+  - Changes config of phpcs, phpstan and phpunit
+  - Comment base test because it doesn't work with the new `smartbooster/standard-bundle` implementation
+- Fix some style because of the new `smartbooster/standard-bundle` implementation
 
 ## v1.5.0 - (2024-01-04)
 

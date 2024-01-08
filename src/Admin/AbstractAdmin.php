@@ -15,10 +15,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
 {
-    const ACTION_CREATE = 'CREATE';
-    const ACTION_VIEW   = 'VIEW';
-    const ACTION_EDIT   = 'EDIT';
-    const ACTION_DELETE = 'DELETE';
+    public const ACTION_CREATE = 'CREATE';
+    public const ACTION_VIEW   = 'VIEW';
+    public const ACTION_EDIT   = 'EDIT';
+    public const ACTION_DELETE = 'DELETE';
 
     /** @var ContainerInterface $container */
     private $container;
@@ -142,6 +142,12 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
         // do nothing
     }
 
+    /**
+     * @param string $code
+     * @param class-string|null $class
+     * @param string|null $baseControllerName
+     * @return void
+     */
     protected function init(string $code, ?string $class, string $baseControllerName = null): void
     {
         $this->setCode($code);

@@ -7,5 +7,5 @@ namespace Smart\SonataBundle\Security;
  */
 class Token
 {
-    const RESET_PASSWORD = 'reset_password';
+    public const RESET_PASSWORD = 'reset_password';
 }

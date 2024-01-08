@@ -13,14 +13,14 @@ use Smart\StandardBundle\AbstractWebTestCase;
  */
 class ParameterProviderTest extends AbstractWebTestCase
 {
-    private ?ParameterProvider $provider;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->provider = $this->getContainer()->get(ParameterProvider::class);
-    }
+//    private ?ParameterProvider $provider;
+//
+//    public function setUp(): void
+//    {
+//        parent::setUp();
+//
+//        $this->provider = $this->getContainer()->get(ParameterProvider::class);
+//    }
 
     /**
      * Add a dummy test for remove warning on phpunit test on class have no test

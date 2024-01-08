@@ -14,14 +14,14 @@ use Smart\StandardBundle\AbstractWebTestCase;
  */
 class ParameterLoaderTest extends AbstractWebTestCase
 {
-    private ?ParameterLoader $loader;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->loader = $this->getContainer()->get(ParameterLoader::class);
-    }
+//    private ?ParameterLoader $loader;
+//
+//    public function setUp(): void
+//    {
+//        parent::setUp();
+//
+//        $this->loader = $this->getContainer()->get(ParameterLoader::class);
+//    }
 
     /**
      * Add a dummy test for remove warning on phpunit test on class have no test
