@@ -1,8 +1,32 @@
-/vendor/
-composer.lock
 /build/
-coverage.*
-.php_cs.cache
-.phpunit.result.cache
+/composer.lock
+/symfony.lock
+/config/packages/test/dama_doctrine_test_bundle.yaml
+/config/packages/test/liip_test_fixtures.yaml
+/make/dev.mk
+/make/qualimetry.mk
+/make/test.mk
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
 /var/
+/vendor/
+###< symfony/framework-bundle ###
+###> smartbooster/standard-bundle ###
 /.phpcs-cache
+###< smartbooster/standard-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

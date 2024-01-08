@@ -1,0 +1,11 @@
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+        mappings:
+            Smart\SonataBundle:
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'Smart\SonataBundle\Entity'
+
