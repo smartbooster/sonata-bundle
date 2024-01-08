@@ -11,7 +11,7 @@ use Smart\SonataBundle\Repository\ParameterRepository;
  */
 class ParameterLoader
 {
-    const BATCH_SIZE = 20;
+    private const BATCH_SIZE = 20;
 
     private EntityManagerInterface $entityManager;
     private array $parameters = [];

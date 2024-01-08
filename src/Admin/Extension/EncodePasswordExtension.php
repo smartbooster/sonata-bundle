@@ -28,6 +28,7 @@ class EncodePasswordExtension extends AbstractAdminExtension
 
     /**
      * {@inheritDoc}
+     * @param SmartUserInterface $user
      */
     public function preUpdate(AdminInterface $admin, $user): void
     {
@@ -36,6 +37,7 @@ class EncodePasswordExtension extends AbstractAdminExtension
 
     /**
      * {@inheritDoc}
+     * @param SmartUserInterface $user
      */
     public function prePersist(AdminInterface $admin, $user): void
     {

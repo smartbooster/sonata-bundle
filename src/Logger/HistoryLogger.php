@@ -10,18 +10,18 @@ use Smart\SonataBundle\Entity\Log\HistorizableInterface;
  */
 class HistoryLogger
 {
-    const EMAIL_SENT_CODE = 'email.sent';
-    const ENTITY_CREATED_CODE = 'entity.created';
-    const ENTITY_UPDATED_CODE = 'entity.updated';
-    const ENTITY_ARCHIVED_CODE = 'entity.archived';
-    const ERROR_CODE = 'error';
-    const EXTERNAL_CODE = 'external';
-    const INTERNE_CODE = 'interne';
+    public const EMAIL_SENT_CODE = 'email.sent';
+    public const ENTITY_CREATED_CODE = 'entity.created';
+    public const ENTITY_UPDATED_CODE = 'entity.updated';
+    public const ENTITY_ARCHIVED_CODE = 'entity.archived';
+    public const ERROR_CODE = 'error';
+    public const EXTERNAL_CODE = 'external';
+    public const INTERNE_CODE = 'interne';
 
-    const ADMIN_CONTEXT = 'admin';
-    const API_CONTEXT = 'api';
-    const FRONT_CONTEXT = 'front';
-    const CRON_CONTEXT = 'cron';
+    public const ADMIN_CONTEXT = 'admin';
+    public const API_CONTEXT = 'api';
+    public const FRONT_CONTEXT = 'front';
+    public const CRON_CONTEXT = 'cron';
 
     protected EntityManagerInterface $entityManager;
     protected array $beforeHandleEntityData = [];
@@ -106,7 +106,8 @@ class HistoryLogger
     /**
      * Check and log diff on entity
      * @param HistorizableInterface $entity entity updated what we want to log
-     * @param array $initialData associative array of initial entity before the update. The attributes in this array define the checked differences of the entity
+     * @param array $initialData associative array of initial entity before the update.
+     * The attributes in this array define the checked differences of the entity
      * @param array $data additional data to log
      * @return void
      */

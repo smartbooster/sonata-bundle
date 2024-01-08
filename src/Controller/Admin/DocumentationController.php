@@ -13,8 +13,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DocumentationController extends AbstractController
 {
-    public function email(Request $request, EmailProvider $provider, ValidatorInterface $validator, BaseMailer $mailer, TranslatorInterface $translator): Response
-    {
+    public function email(
+        Request $request,
+        EmailProvider $provider,
+        ValidatorInterface $validator,
+        BaseMailer $mailer,
+        TranslatorInterface $translator
+    ): Response {
         $emails = $provider->getEmails();
 
         if (Request::METHOD_POST === $request->getMethod()) {

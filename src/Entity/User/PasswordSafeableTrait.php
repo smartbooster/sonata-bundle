@@ -2,7 +2,7 @@
 
 namespace Smart\SonataBundle\Entity\User;
 
-use Smart\SonataBundle\Validator\Constraints as SmartAssert;
+use Smart\CoreBundle\Validator\Constraints as SmartAssert;
 
 trait PasswordSafeableTrait
 {

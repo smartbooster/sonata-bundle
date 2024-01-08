@@ -55,8 +55,14 @@ class AbstractSecurityController extends AbstractController
     protected TemplateRegistry $templateRegistry;
     protected EntityManagerInterface $entityManager;
 
-    public function __construct(TokenManagerInterface $tokenManager, BaseMailer $mailer, TranslatorInterface $translator, UserPasswordEncoderInterface $userPasswordEncoder, TemplateRegistry $templateRegistry, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        TokenManagerInterface $tokenManager,
+        BaseMailer $mailer,
+        TranslatorInterface $translator,
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        TemplateRegistry $templateRegistry,
+        EntityManagerInterface $entityManager
+    ) {
         $this->tokenManager = $tokenManager;
         $this->mailer = $mailer;
         $this->translator = $translator;
@@ -253,7 +259,13 @@ class AbstractSecurityController extends AbstractController
      */
     protected function getDomain()
     {
-        return $this->container->getParameter('domain');
+        $toReturn = $this->container->getParameter('domain');
+
+        if (!is_string($toReturn)) {
+            throw new \LogicException('domain must be string');
+        }
+
+        return $toReturn;
     }
 
     public function setUserProvider(UserProviderInterface $userProvider): void

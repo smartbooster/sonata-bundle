@@ -26,29 +26,13 @@ jobs:
       - name: Validate composer.json and composer.lock
         run: composer validate
 
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
       - name: Install
-        run: composer install --prefer-dist
+        run: make install
+
+      # —— Tests 🧪 ————————————————————————————————————————————————————————————
+      - name: Phpunit tests
+        run: make coverage
 
       # —— QA ✔️‍️ ———————————————————————————————————————————————————————————————
       - name: Qualimetry
         run: make qa
-
-      # —— Tests 🧪 ————————————————————————————————————————————————————————————
-      - name: Phpunit tests
-        run: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover coverage.xml
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: "Upload coverage to Codecov"
-        uses: codecov/codecov-action@v1
