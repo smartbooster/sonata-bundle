@@ -3,6 +3,7 @@
 namespace Smart\SonataBundle\Entity\User;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,64 +15,30 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 trait UserTrait
 {
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     protected ?int $id = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
-     *
-     * @Assert\NotBlank
-     * @Assert\Email
-     */
+    #[ORM\Column(length: 255, unique: true, nullable: false)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private ?string $email = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=100, nullable=false)
-     */
+    #[ORM\Column(name: "password", length: 100, nullable: false)]
     private ?string $password = null;
 
-    /**
-     * @var ?string
-     */
     private ?string $plainPassword = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(length: 255, nullable: true)]
     protected ?string $firstName = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(length: 255, nullable: true)]
     protected ?string $lastName = null;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    private array $roles = [];
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     protected ?DateTime $lastLogin = null;
 
-    /**
-     * @return string
-     */
     public function __toString()
     {
         return $this->getListDisplay();
@@ -194,26 +161,6 @@ trait UserTrait
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getRoles(): array
-    {
-        return array_unique($this->roles);
-    }
-
-    /**
-     * @param array $roles
-     *
-     * @return $this
-     */
-    public function setRoles(array $roles = [])
-    {
-        $this->roles = $roles;
-
-        return $this;
     }
 
     /**

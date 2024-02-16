@@ -26,7 +26,6 @@
     "nelmio/security-bundle": "^2.8 || ^3.0",
     "yokai/security-token-bundle": "^3.3",
     "sentry/sentry-symfony": "^4.1",
-    "doctrine/annotations": "^1.0 || ^2.0",
     "symfony/expression-language": "^4.4 || ^5.4 || ^6.0",
     "smartbooster/core-bundle": "^1.0"
   },

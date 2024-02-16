@@ -2,41 +2,33 @@
 
 namespace Smart\SonataBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
- *
- * @ORM\Table(name="smart_parameter")
- * @ORM\Entity(repositoryClass="Smart\SonataBundle\Repository\ParameterRepository")
  */
+#[ORM\Table(name: "smart_parameter")]
+#[ORM\Entity(repositoryClass: "Smart\SonataBundle\Repository\ParameterRepository")]
 class Parameter
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(name="code", type="string", nullable=false, unique=true)
-     */
+    #[ORM\Column(name: "code", unique: true, nullable: false)]
     private string $code;
 
-    /**
-     * @ORM\Column(name="value", type="text", nullable=false)
-     */
+    #[ORM\Column(name: "value", type: Types::TEXT, nullable: false)]
     private string $value;
 
-    /**
-     * @ORM\Column(name="help", type="text", nullable=true)
-     */
+    #[ORM\Column(name: "help", type: Types::TEXT, nullable: true)]
     private ?string $help = null;
 
     public function __toString()
     {
-        return (string) $this->getCode();
+        return $this->getCode();
     }
 
     public function getId(): ?int
