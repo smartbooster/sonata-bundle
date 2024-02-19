@@ -26,6 +26,10 @@
                 <source>Bad credentials.</source>
                 <target>Username or invalid password.</target>
             </trans-unit>
+            <trans-unit id="The presented password is invalid.">
+                <source>The presented password is invalid.</source>
+                <target>Username or invalid password.</target>
+            </trans-unit>
             <trans-unit id="login.action.forgot_password">
                 <source>login.action.forgot_password</source>
                 <target>Forgot password ?</target>

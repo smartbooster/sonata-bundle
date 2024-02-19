@@ -51,12 +51,6 @@ services:
     arguments:
       [ '@yokai_security_token.default_token_manager', '@Smart\SonataBundle\Mailer\BaseMailer', '@translator', '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface', '@Sonata\AdminBundle\Templating\TemplateRegistry', '@Doctrine\ORM\EntityManagerInterface' ]
 
-  Smart\SonataBundle\Admin\AbstractAdmin:
-    abstract:  true
-    calls:
-      - setContainer: [ '@Symfony\Component\DependencyInjection\ContainerInterface' ]
-      - setTokenManager: [ '@security.token_storage' ]
-
   smart_sonata.parameter_provider:
     class: Smart\SonataBundle\Provider\ParameterProvider
     public: true

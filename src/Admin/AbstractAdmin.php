@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 /**
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
  */
-abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
+abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin implements SmartAdminInterface
 {
     public const ACTION_CREATE = 'CREATE';
     public const ACTION_VIEW   = 'VIEW';
@@ -30,6 +30,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
         $this->init($code, $class, $baseControllerName);
     }
 
+    // Requires to always call the parent to remove the export route if the method is redefined in a concrete admin implementation and don't want it
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('export');
@@ -65,6 +66,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin
     }
 
     /**
+     * @deprecated Do a service injection via the __construct instead of using the get method
      * @param string $id
      *
      * @return object
