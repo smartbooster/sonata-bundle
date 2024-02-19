@@ -20,7 +20,7 @@ services:
   admin.extension.encode_password:
     class: Smart\SonataBundle\Admin\Extension\EncodePasswordExtension
     arguments:
-      - '@Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface'
+      - '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface'
     tags:
       - { name: sonata.admin.extension }
   admin.extension.action_impersonate:
@@ -49,13 +49,7 @@ services:
   Smart\SonataBundle\Controller\AbstractSecurityController:
     tags: [ 'controller.service_arguments' ]
     arguments:
-      [ '@yokai_security_token.default_token_manager', '@Smart\SonataBundle\Mailer\BaseMailer', '@translator', '@security.user_password_encoder.generic', '@Sonata\AdminBundle\Templating\TemplateRegistry', '@Doctrine\ORM\EntityManagerInterface' ]
-
-  Smart\SonataBundle\Admin\AbstractAdmin:
-    abstract:  true
-    calls:
-      - setContainer: [ '@Symfony\Component\DependencyInjection\ContainerInterface' ]
-      - setTokenManager: [ '@security.token_storage' ]
+      [ '@yokai_security_token.default_token_manager', '@Smart\SonataBundle\Mailer\BaseMailer', '@translator', '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface', '@Sonata\AdminBundle\Templating\TemplateRegistry', '@Doctrine\ORM\EntityManagerInterface' ]
 
   smart_sonata.parameter_provider:
     class: Smart\SonataBundle\Provider\ParameterProvider
@@ -100,7 +94,7 @@ services:
   fixture.processor.password:
     class: Smart\SonataBundle\DataFixtures\Processor\UserProcessor
     arguments:
-      - '@Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface'
+      - '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface'
     tags:
       - { name: fidry_alice_data_fixtures.processor }
 

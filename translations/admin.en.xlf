@@ -50,9 +50,17 @@
                 <source>fieldset.label_general</source>
                 <target>General informations</target>
             </trans-unit>
+            <trans-unit id="fieldset.label_password">
+                <source>fieldset.label_password</source>
+                <target>Password</target>
+            </trans-unit>
             <trans-unit id="fieldset.label_profile">
                 <source>fieldset.label_profile</source>
                 <target>My profile</target>
+            </trans-unit>
+            <trans-unit id="fieldset.label_log">
+                <source>fieldset.label_log</source>
+                <target>Log</target>
             </trans-unit>
 
             <trans-unit id="field.label_id">

@@ -13,9 +13,7 @@ trait HistorizableTrait
 {
     private ?PropertyAccessorInterface $propertyAccess = null;
 
-    /**
-     * @ORM\Column(type="json", nullable=true)
-     */
+    #[ORM\Column(nullable: true)]
     protected ?array $history = null;
 
     public function getHistory(): ?array

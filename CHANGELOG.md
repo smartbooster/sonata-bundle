@@ -1,5 +1,28 @@
 CHANGELOG for 1.x
 ===================
+## v2.0.0 - (2024-02-19)
+### Added
+- **Add Symfony v6.4 support**
+- Default `nelmio_alice` locale config to **fr_FR**
+- `SmartAdminInterface` which is used on AdminCompilerPass to add the required extra services
+- Missing admin and security trad added 
+
+### Removed
+- **Drop Symfony v4 support**
+- Remove `doctrine/annotations` as we now use PHP8 attributes to define ORM properties
+- User roles aren't stored in database anymore, each entity with UserInterface must just define the getRoles function
+
+### Changed
+- Use `Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface` service instead of `Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface` to be compatible with
+SF 6
+- Reformat all the entity annotations with PHP8 attributes
+- `AbstractAdmin::setTokenManager` is now preset by the new `AdminCompilerPass` (as the services.yaml abstract: true old way don't work properly with
+SF 6 and the latest Sonata version)
+- The `AbstractAdmin::get` function has been flagged as @deprecated and will be remove next major (instead inject service via construct DI)
+
+### Fixed
+- Fix auto margin of the login-box using display flex
+ 
 ## v1.5.1 - (2024-01-08)
 
 ### Changes

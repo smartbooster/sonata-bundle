@@ -6,10 +6,11 @@ html.login, html.login body {
 
   .wrapper {
     background: none;
+    display: flex;
 
     .login-box, .register-box {
       width: 375px;
-      margin: 15% auto;
+      margin: auto;
     }
     .login-box-body {
       box-shadow: 3px 3px 0 rgba(12,12,12,.3);

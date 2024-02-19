@@ -20,4 +20,5 @@ return [
     Sonata\AdminBundle\SonataAdminBundle::class => ['all' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['prod' => true],
     Yokai\SecurityTokenBundle\YokaiSecurityTokenBundle::class => ['all' => true],
+    Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
 ];

@@ -67,6 +67,10 @@
                 <source>fieldset.label_general</source>
                 <target>Informations générales</target>
             </trans-unit>
+            <trans-unit id="fieldset.label_password">
+                <source>fieldset.label_password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
             <trans-unit id="fieldset.label_profile">
                 <source>fieldset.label_profile</source>
                 <target>Mon compte</target>

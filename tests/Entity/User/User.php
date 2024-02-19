@@ -13,4 +13,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     use UserTrait;
+
+    public function getRoles(): array
+    {
+        return [];
+    }
 }
