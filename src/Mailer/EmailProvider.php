@@ -2,6 +2,7 @@
 
 namespace Smart\SonataBundle\Mailer;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -9,7 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class EmailProvider
 {
-    private string $locale;
+    private ?string $locale = null;
     /** @var ?array<string> */
     private ?array $emailCodes = null;
     private bool $translateEmail = false;
@@ -18,7 +19,9 @@ class EmailProvider
 
     public function __construct(RequestStack $requestStack)
     {
-        $this->locale = $requestStack->getCurrentRequest()->getLocale();
+        if ($requestStack->getCurrentRequest() instanceof Request) {
+            $this->locale = $requestStack->getCurrentRequest()->getLocale();
+        }
     }
 
     public function setTranslateEmail(bool $translateEmail): void

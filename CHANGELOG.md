@@ -1,5 +1,9 @@
 CHANGELOG for 1.x
 ===================
+## v2.0.1 - (2024-02-22)
+### Fixed
+- Fix clear cache error on `EmailProvider` locale -> can be nullable and check `$requestStack->getCurrentRequest()` is not null.
+
 ## v2.0.0 - (2024-02-19)
 ### Added
 - **Add Symfony v6.4 support**
