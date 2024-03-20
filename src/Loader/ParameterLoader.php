@@ -99,9 +99,13 @@ class ParameterLoader
     {
         $parameter = new Parameter();
         $parameter->setCode($code);
+        $parameter->setType($data['type']);
         $parameter->setValue($data['value']);
         if (isset($data['help'])) {
             $parameter->setHelp($data['help']);
+        }
+        if (isset($data['regex'])) {
+            $parameter->setRegex($data['regex']);
         }
 
         $this->entityManager->persist($parameter);

@@ -23,6 +23,18 @@
                 <source>is_password_safe.missing_number_error</source>
                 <target>It must contain at least one number.</target>
             </trans-unit>
+            <trans-unit id="smart_parameter.regex_error">
+                <source>smart_parameter.regex_error</source>
+                <target>The value does not respect the regex.</target>
+            </trans-unit>
+            <trans-unit id="smart_parameter.list_regex_error">
+                <source>smart_parameter.list_regex_error</source>
+                <target>The following values in the list do not respect the regex: %errors%</target>
+            </trans-unit>
+            <trans-unit id="email_chain.format_error">
+                <source>email_chain.format_error</source>
+                <target>Contains invalid emails, please correct them.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

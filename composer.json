@@ -27,7 +27,8 @@
     "yokai/security-token-bundle": "^3.3",
     "sentry/sentry-symfony": "^4.1",
     "symfony/expression-language": "^4.4 || ^5.4 || ^6.0",
-    "smartbooster/core-bundle": "^1.0"
+    "smartbooster/core-bundle": "^1.0",
+    "yokai/enum-bundle": "^3.3 || ^4.1"
   },
   "require-dev": {
     "smartbooster/standard-bundle": "^1.0",
@@ -49,7 +50,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.3.x-dev"
+      "dev-master": "2.1.x-dev"
     },
     "symfony": {
       "endpoint": ["https://api.github.com/repos/smartbooster/standard-bundle/contents/recipes.json"]

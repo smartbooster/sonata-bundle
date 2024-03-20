@@ -21,4 +21,5 @@ return [
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['prod' => true],
     Yokai\SecurityTokenBundle\YokaiSecurityTokenBundle::class => ['all' => true],
     Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
+    Yokai\EnumBundle\YokaiEnumBundle::class => ['all' => true],
 ];

@@ -1,5 +1,44 @@
-CHANGELOG for 1.x
+CHANGELOG
 ===================
+## v2.1.0 - (2024-03-17)
+
+### Uprade guide
+
+**The upgrade to this version needs some extra steps from your part to work properly. Please do the following :**
+- Run a doctrine migration for the new properties added to the Smart Parameter Entity if you use them.
+- Also add the following templates on your project if you use our ParameterAdmin
+```twig
+{# templates/admin/parameter_admin/list_value.html.twig #}
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+{% block field %}
+    {% include '@SmartSonata/admin/parameter_admin/render_value.html.twig' %}
+{% endblock %}
+
+{# templates/admin/parameter_admin/timeline_history_field.html.twig #}
+{% extends '@SmartSonata/admin/base_field/timeline_history_field.html.twig' %}
+{% block render_value %}
+    {% include '@SmartSonata/admin/parameter_admin/render_value.html.twig' %}
+{% endblock %}
+```
+- Once this is done, the ParameterAmin should work back as before. Update your smart_sonata.parameters types if you need to and you are good to go.
+
+_Now back to what have changes on this version ..._
+
+### Added
+- `ParameterInterface` for a better following on Parameter method and type evolution
+  - It extends the `HistorizableInterface` which add the history field to the entity
+  - So when upgrading to this version make sure to run a doctrine migration to have your updated values properly logged.
+- `ParameterInterface::type` Parameter can now have a type (text by default) which impact the validation and the return type of the getValue
+- `ParameterInterface::getArrayValue` for list values and email chain, this method return the value as a proper array type
+- `ParameterInterface::regex` used for value validation for text and list parameter type
+- Add `yokai/enum-bundle` composer requirement for the ParameterTypeEnum
+
+### Changed
+- `ParameterProvider::getValue` now handle every new type added to the `ParameterInterface`
+- `ParameterAdmin` impact of new type and regex property added to the `ParameterInterface`
+  - Changes made to the parameter value are now logged in the history of the Parameter
+  - The help field is now visible on the show/form only if it's not null
+
 ## v2.0.1 - (2024-02-22)
 ### Fixed
 - Fix clear cache error on `EmailProvider` locale -> can be nullable and check `$requestStack->getCurrentRequest()` is not null.
