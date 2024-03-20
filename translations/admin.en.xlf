@@ -62,6 +62,10 @@
                 <source>fieldset.label_log</source>
                 <target>Log</target>
             </trans-unit>
+            <trans-unit id="fieldset.label_history">
+                <source>fieldset.label_history</source>
+                <target>History</target>
+            </trans-unit>
 
             <trans-unit id="field.label_id">
                 <source>field.label_id</source>
@@ -82,6 +86,18 @@
             <trans-unit id="field.label_value">
                 <source>field.label_value</source>
                 <target>Value</target>
+            </trans-unit>
+            <trans-unit id="field.help_parameter_array_values">
+                <source>field.help_parameter_array_values</source>
+                <target>Separate each value with a line return.</target>
+            </trans-unit>
+            <trans-unit id="field.label_type">
+                <source>field.label_type</source>
+                <target>Type</target>
+            </trans-unit>
+            <trans-unit id="field.label_regex">
+                <source>field.label_regex</source>
+                <target>Regex</target>
             </trans-unit>
             <trans-unit id="form.label_first_name">
                 <source>form.label_first_name</source>

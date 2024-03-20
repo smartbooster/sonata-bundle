@@ -88,6 +88,8 @@ services:
       - ~
       - Smart\SonataBundle\Entity\Parameter
       - ~
+      - '@Smart\SonataBundle\Enum\ParameterTypeEnum'
+      - '@Smart\SonataBundle\Logger\HistoryLogger'
     tags:
       - { name: sonata.admin, manager_type: orm, label: dashboard.label_parameter }
 
@@ -155,3 +157,10 @@ services:
   # The "Symfony\Component\DependencyInjection\ContainerInterface" autowiring alias is deprecated. Define it explicitly in your app if you want to keep using it.
   # It's not a good way, but it's practical for the moment. It's used in AbstractAdmin::get. Need to replace all get call by injection
   Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
+
+  # Enum
+  Smart\SonataBundle\Enum\ParameterTypeEnum:
+    arguments:
+      - '@translator'
+    tags:
+      - {name: yokai_enum.enum}

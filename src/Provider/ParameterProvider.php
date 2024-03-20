@@ -5,6 +5,7 @@ namespace Smart\SonataBundle\Provider;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Smart\SonataBundle\Entity\Parameter;
+use Smart\SonataBundle\Entity\ParameterInterface;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
@@ -25,7 +26,7 @@ class ParameterProvider
      *
      * @throws EntityNotFoundException
      */
-    public function get(string $code): Parameter
+    public function get(string $code): ParameterInterface
     {
         if (isset($this->parameters[$code])) {
             return $this->parameters[$code];
@@ -44,8 +45,13 @@ class ParameterProvider
     /**
      * Get a Parameter value
      */
-    public function getValue(string $code): string
+    public function getValue(string $code): array|bool|float|int|string
     {
-        return $this->get($code)->getValue();
+        $parameter = $this->get($code);
+        if ($parameter->isArrayValue()) {
+            return $parameter->getArrayValue();
+        } else {
+            return $parameter->getValue();
+        }
     }
 }

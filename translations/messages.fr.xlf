@@ -11,6 +11,38 @@
                 <source>impersonate.exit_message</source>
                 <target>Retour à l'utilisateur d'origine.</target>
             </trans-unit>
+            <trans-unit id="enum.parameter_type.text">
+                <source>enum.parameter_type.text</source>
+                <target>Texte</target>
+            </trans-unit>
+            <trans-unit id="enum.parameter_type.email">
+                <source>enum.parameter_type.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="enum.parameter_type.email_chain">
+                <source>enum.parameter_type.email_chain</source>
+                <target>Liste d'emails</target>
+            </trans-unit>
+            <trans-unit id="enum.parameter_type.boolean">
+                <source>enum.parameter_type.boolean</source>
+                <target>Boolean</target>
+            </trans-unit>
+            <trans-unit id="enum.parameter_type.list">
+                <source>enum.parameter_type.list</source>
+                <target>Liste</target>
+            </trans-unit>
+            <trans-unit id="enum.parameter_type.textarea">
+                <source>enum.parameter_type.textarea</source>
+                <target>Textarea</target>
+            </trans-unit>
+            <trans-unit id="enum.parameter_type.integer">
+                <source>enum.parameter_type.integer</source>
+                <target>Entier</target>
+            </trans-unit>
+            <trans-unit id="enum.parameter_type.float">
+                <source>enum.parameter_type.float</source>
+                <target>Décimal</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
