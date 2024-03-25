@@ -24,7 +24,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin imp
     private $container;
     private TokenStorageInterface $tokenStorage;
 
-    public function __construct(string $code, ?string $class, string $baseControllerName = null)
+    public function __construct(?string $code = null, ?string $class = null, ?string $baseControllerName = null)
     {
         parent::__construct();
         $this->init($code, $class, $baseControllerName);
@@ -145,15 +145,18 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin imp
     }
 
     /**
-     * @param string $code
      * @param class-string|null $class
-     * @param string|null $baseControllerName
-     * @return void
      */
-    protected function init(string $code, ?string $class, string $baseControllerName = null): void
+    protected function init(?string $code = null, ?string $class = null, ?string $baseControllerName = null): void
     {
-        $this->setCode($code);
-        $this->setModelClass($class);
-        $this->setBaseControllerName($baseControllerName);
+        if ($code !== null) {
+            $this->setCode($code);
+        }
+        if ($class !== null) {
+            $this->setModelClass($class);
+        }
+        if ($baseControllerName !== null) {
+            $this->setBaseControllerName($baseControllerName);
+        }
     }
 }
