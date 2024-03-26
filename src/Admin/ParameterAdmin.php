@@ -61,7 +61,6 @@ class ParameterAdmin extends AbstractAdmin
             ->add('type', FieldDescriptionInterface::TYPE_CHOICE, [
                 'label' => 'field.label_type',
                 'choices' => array_flip($this->typeEnum->getChoices()),
-                'catalog' => false, // enum is self translated
             ])
             ->add('help', null, ['label' => 'field.label_help'])
             ->add('value', null, [
@@ -80,7 +79,10 @@ class ParameterAdmin extends AbstractAdmin
             ])
             ->add('type', ChoiceFilter::class, [
                 'field_type' => EnumType::class,
-                'field_options' => ['enum' => ParameterTypeEnum::class],
+                'field_options' => [
+                    'enum' => ParameterTypeEnum::class,
+                    'choice_translation_domain' => false,
+                ],
                 'show_filter' => true,
                 'label' => 'field.label_type',
             ])
