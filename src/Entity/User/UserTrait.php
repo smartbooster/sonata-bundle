@@ -15,28 +15,50 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 trait UserTrait
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     protected ?int $id = null;
 
+    /**
+     * @ORM\Column(length=255, unique=true, nullable=false)
+     * @Assert\NotBlank
+     * @Assert\Email
+     */
     #[ORM\Column(length: 255, unique: true, nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Email]
     private ?string $email = null;
 
+    /**
+     * @ORM\Column(name="password", length=100, nullable=false)
+     */
     #[ORM\Column(name: "password", length: 100, nullable: false)]
     private ?string $password = null;
 
     private ?string $plainPassword = null;
 
+    /**
+     * @ORM\Column(length=255, nullable=true)
+     */
     #[ORM\Column(length: 255, nullable: true)]
     protected ?string $firstName = null;
 
+    /**
+     * @ORM\Column(length=255, nullable=true)
+     */
     #[ORM\Column(length: 255, nullable: true)]
     protected ?string $lastName = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    /**
+     * @ORM\Column(type=Types::DATETIME_MUTABLE, nullable=true)
+     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     protected ?DateTime $lastLogin = null;
 
     public function __toString()

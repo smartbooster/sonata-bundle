@@ -6,6 +6,9 @@ use Smart\CoreBundle\Validator\Constraints as SmartAssert;
 
 trait PasswordSafeableTrait
 {
+    /**
+     * @SmartAssert\IsPasswordSafe
+     */
     #[SmartAssert\IsPasswordSafe]
     private ?string $plainPassword = null;
 }
