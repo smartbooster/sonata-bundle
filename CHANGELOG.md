@@ -1,5 +1,14 @@
 CHANGELOG
 ===================
+## v2.1.1 - (2024-03-28)
+
+### Added
+- Add annotations for orm mapping in addition to attributes to be compatible with both implementation
+
+### Fixed
+- `BatchLog::date` type to `DATETIME_MUTABLE` (type error introduce in update v2.0.0)
+- `UserTrait::lastLogin` type to `DATETIME_MUTABLE` (type error introduce in update v2.0.0)
+
 ## v2.1.0 - (2024-03-17)
 
 ### Uprade guide

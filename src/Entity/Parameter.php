@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
+ *
+ * @ORM\Table(name="smart_parameter")
+ * @ORM\Entity(repositoryClass="Smart\SonataBundle\Repository\ParameterRepository")
  */
 #[ORM\Table(name: "smart_parameter")]
 #[ORM\Entity(repositoryClass: "Smart\SonataBundle\Repository\ParameterRepository")]
@@ -20,25 +23,44 @@ class Parameter implements ParameterInterface
 {
     use HistorizableTrait;
 
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @ORM\Column(name="code", unique=true, nullable=false)
+     */
     #[ORM\Column(name: "code", unique: true, nullable: false)]
     private string $code;
 
+    /**
+     * @ORM\Column(name="value", type="text", nullable=false)
+     */
     #[ORM\Column(name: "value", type: Types::TEXT, nullable: false)]
     private string|bool|null $value = null;
 
+    /**
+     * @ORM\Column(name="help", type="text", nullable=true)
+     */
     #[ORM\Column(name: "help", type: Types::TEXT, nullable: true)]
     private ?string $help = null;
 
+    /**
+     * @ORM\Column(length=15, nullable=false, options={"default"="text"})
+     */
     #[ORM\Column(length: 15, nullable: false, options: ['default' => 'text'])]
     private string $type = ParameterTypeEnum::TEXT;
 
     /**
      * MDT We don't need to set the start/end delimiter when setting the regex, it is automatically added when the validate callback is triggered
+     * @ORM\Column(length=100, nullable=true)
+     * @Assert\Length(max=100)
      */
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\Length(max: 100)]
@@ -46,6 +68,7 @@ class Parameter implements ParameterInterface
 
     /**
      * @param mixed $payload
+     * @Assert\Callback
      */
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context, $payload): void
