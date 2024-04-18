@@ -1,5 +1,13 @@
 CHANGELOG
 ===================
+## v2.2.0 - (2024-04-22)
+### Changed
+- `AbstractAdmin::__construct` params are now all optionnal as we must configure it through tags from what's ask on the next v5 of Sonata Admin
+- Update minimal smartbooster/core-bundle requirements to have ProcessMonitor and ApiCallMonitor services
+
+### Fixed
+- `ParameterAdmin` fix remove useless translations options on the type enum field
+
 ## v2.1.1 - (2024-03-28)
 
 ### Added
