@@ -43,6 +43,18 @@
                 <source>enum.parameter_type.float</source>
                 <target>Decimal</target>
             </trans-unit>
+            <trans-unit id="enum.process_status.ongoing">
+                <source>enum.process_status.ongoing</source>
+                <target>Ongoing</target>
+            </trans-unit>
+            <trans-unit id="enum.process_status.success">
+                <source>enum.process_status.success</source>
+                <target>Success</target>
+            </trans-unit>
+            <trans-unit id="enum.process_status.error">
+                <source>enum.process_status.error</source>
+                <target>Error</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
