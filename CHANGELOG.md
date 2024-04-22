@@ -5,6 +5,13 @@ CHANGELOG
 - `AbstractAdmin::__construct` params are now all optionnal as we must configure it through tags from what's ask on the next v5 of Sonata Admin
 - Update minimal smartbooster/core-bundle requirements to have ProcessMonitor and ApiCallMonitor services
 
+### Added
+- Sonata admin template for generic fields such as :
+  - `list_nl2br.html.twig`
+  - `process_status.html.twig`
+  - `show_json.html.twig`
+  - `api_call_status_code.html.twig`
+
 ### Fixed
 - `ParameterAdmin` fix remove useless translations options on the type enum field
 
