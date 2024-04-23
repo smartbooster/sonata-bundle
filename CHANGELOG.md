@@ -1,5 +1,10 @@
 CHANGELOG
 ===================
+## v2.1.2 - (2024-04-23)
+
+### Removed
+- Remove allowing version `^3.3` for `yokai/enum-bundle` bundle because `ParameterTypeEnum` extends `TranslatedEnum` and this is not present in version `^3.3`
+
 ## v2.1.1 - (2024-03-28)
 
 ### Added

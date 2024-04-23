@@ -28,7 +28,7 @@
     "sentry/sentry-symfony": "^4.1",
     "symfony/expression-language": "^4.4 || ^5.4 || ^6.0",
     "smartbooster/core-bundle": "^1.0",
-    "yokai/enum-bundle": "^3.3 || ^4.1"
+    "yokai/enum-bundle": "^4.1"
   },
   "require-dev": {
     "smartbooster/standard-bundle": "^1.0",
