@@ -133,6 +133,16 @@
                 <source>send_account_creation_email.success</source>
                 <target>Account creation email sent to {email}</target>
             </trans-unit>
+
+            <!-- Process -->
+            <trans-unit id="process.no_logs">
+                <source>process.no_logs</source>
+                <target>No logs.</target>
+            </trans-unit>
+            <trans-unit id="process.nb_logs_lines">
+                <source>process.nb_logs_lines</source>
+                <target>log lines in total.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

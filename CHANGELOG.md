@@ -8,8 +8,9 @@ CHANGELOG
 ### Added
 - Sonata admin template for generic fields such as :
   - `list_nl2br.html.twig`
-  - `process_status.html.twig`
   - `show_json.html.twig`
+  - `show_process_logs.html.twig`
+  - `process_status.html.twig`
   - `api_call_status_code.html.twig`
 
 ### Fixed
