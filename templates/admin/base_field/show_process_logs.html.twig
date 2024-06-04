@@ -1,0 +1,54 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+{% trans_default_domain 'admin' %}
+
+{% block field %}
+    {% if value is empty %}
+        <div>{{ 'process.no_logs'|trans }}</div>
+    {% else %}
+        <ul style="
+            background-color: rgb(38 38 38);
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            color: rgb(255 255 255);
+            font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+            font-size: 12px;
+            max-height :400px;
+            overflow-y: auto;
+            margin-bottom: 0;
+        ">
+            {% set isSuccess = object.status.value == 'success' %}
+            {% for row in value %}
+                {% set isSection = false %}
+                {% if row starts with '--- ' %}
+                    {% set isSection = true %}
+                {% endif %}
+                {% set isWarning = false %}
+                {% if row starts with '/!\\ ' %}
+                    {% set isWarning = true %}
+                {% endif %}
+                {% if isSection or isWarning %}
+                    {% set formattedRow = row|slice(4) %}
+                {% else %}
+                    {% set formattedRow = row %}
+                {% endif %}
+                <li style="
+                    {% if isSection %}color: #60a5fa;{% elseif isWarning %}color: #fde047;{% endif %}
+                    {% if isSection and loop.index0 > 0 %}margin-top: 1rem;{% endif %}
+                    padding: 0 0.25rem; white-space: nowrap;
+                ">{{ formattedRow }}</li>
+            {% endfor %}
+            <li
+                class="text-white"
+                style="
+                    margin-top: 1rem;
+                    padding: 0.5rem 0.25rem;
+                    white-space: nowrap;
+                    background-color: {% if isSuccess %}#15803d;{% else %}#b91c1c;{% endif %};
+                "
+            >
+                {% if isSuccess %}[OK]{% else %}[ERROR]{% endif %} {{ object.summary }}
+            </li>
+        </ul>
+        <i class="text-muted">{{ object.logs|length + (object.summary ? 1 : 0) }} {{ 'process.nb_logs_lines'|trans }}</i>
+    {% endif %}
+{% endblock %}

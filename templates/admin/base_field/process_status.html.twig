@@ -1,0 +1,12 @@
+{% if value == constant('Smart\\CoreBundle\\Enum\\ProcessStatusEnum::ONGOING') %}
+    {% set status_class = 'primary' %}
+{% elseif value == constant('Smart\\CoreBundle\\Enum\\ProcessStatusEnum::SUCCESS') %}
+    {% set status_class = value.value %}
+{% elseif value == constant('Smart\\CoreBundle\\Enum\\ProcessStatusEnum::ERROR') %}
+    {% set status_class = 'danger' %}
+{% else %}
+    {% set status_class = 'default' %}
+{% endif %}
+<span class="label label-{{ status_class }}">
+    {{ (constant('Smart\\CoreBundle\\Enum\\ProcessStatusEnum::PREFIX_LABEL') ~ value.value)|trans }}
+</span>

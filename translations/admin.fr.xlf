@@ -165,7 +165,7 @@
                 <target>Data</target>
             </trans-unit>
 
-            <!-- Action -->
+            <!-- History -->
             <trans-unit id="history.none">
                 <source>history.none</source>
                 <target>Pas d'historique disponible.</target>
@@ -215,6 +215,16 @@
             <trans-unit id="send_account_creation_email.success">
                 <source>send_account_creation_email.success</source>
                 <target>Email de création de compte envoyé à {email}</target>
+            </trans-unit>
+
+            <!-- Process -->
+            <trans-unit id="process.no_logs">
+                <source>process.no_logs</source>
+                <target>Auncun logs.</target>
+            </trans-unit>
+            <trans-unit id="process.nb_logs_lines">
+                <source>process.nb_logs_lines</source>
+                <target>lignes de logs au total.</target>
             </trans-unit>
         </body>
     </file>

@@ -1,0 +1,16 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+    <div class="box box-default collapsed-box box-solid" style="margin-bottom: 0">
+        <div class="box-header with-border">
+            <h3 class="box-title">JSON</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body" style="display: none">
+            <pre style="max-width: 625px; margin-bottom: 0">{{ value|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+        </div>
+    </div>
+{% endblock %}

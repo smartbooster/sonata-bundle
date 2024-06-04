@@ -1,0 +1,14 @@
+{% if value >= 500 %}
+    {% set status_class = 'danger' %}
+{% elseif value >= 400 %}
+    {% set status_class = 'warning' %}
+{% elseif value >= 300 %}
+    {% set status_class = 'default' %}
+{% elseif value >= 200 %}
+    {% set status_class = 'success' %}
+{% else %} {# 100 #}
+    {% set status_class = 'info' %}
+{% endif %}
+<span class="label label-{{ status_class }}">
+    {{ value }}
+</span>
