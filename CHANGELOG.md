@@ -1,6 +1,6 @@
 CHANGELOG
 ===================
-## v2.2.0 - (2024-04-22)
+## v2.2.0 - (2024-06-04)
 ### Changed
 - `AbstractAdmin::__construct` params are now all optionnal as we must configure it through tags from what's ask on the next v5 of Sonata Admin
 - Update minimal smartbooster/core-bundle requirements to have ProcessMonitor and ApiCallMonitor services
@@ -15,6 +15,9 @@ CHANGELOG
 
 ### Fixed
 - `ParameterAdmin` fix remove useless translations options on the type enum field
+
+### Removed
+- Remove allowing version `^3.3` for `yokai/enum-bundle` bundle because `ParameterTypeEnum` extends `TranslatedEnum` and this is not present in version `^3.3`
 
 ## v2.1.1 - (2024-03-28)
 
