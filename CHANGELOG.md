@@ -6,7 +6,8 @@ CHANGELOG
 - Update minimal smartbooster/core-bundle requirements to have ProcessMonitor and ApiCallMonitor services
 
 ### Added
-- Sonata admin template for generic fields such as :
+- Sonata abstract monitoring admin for CRON and ApiCall 
+- Sonata admin template for generic fields :
   - `list_nl2br.html.twig`
   - `show_json.html.twig`
   - `show_process_logs.html.twig`
