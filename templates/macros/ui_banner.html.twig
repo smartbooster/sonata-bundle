@@ -1,0 +1,36 @@
+{% trans_default_domain 'messages' %}
+
+{% macro env_banner(absolute = false) %}
+    {% if smart_server_environment is defined and smart_server_environment is not null and smart_server_environment != 'production' %}
+        {% set display_smart_env_banner = true %}
+    {% else %}
+        {% set display_smart_env_banner = false %}
+    {% endif %}
+
+    {% if display_smart_env_banner %}
+        {% if smart_server_environment == 'developpement'
+            or smart_server_environment == 'development'
+            or smart_server_environment == 'dev'
+            or smart_server_environment == 'integration'
+        %}
+            {% set env_banner_class = 'bg-blue-600 text-white' %}
+        {% elseif smart_server_environment == 'recette' %}
+            {% set env_banner_class = 'bg-yellow-400 text-neutral-darker' %}
+        {% else %}
+            {% set env_banner_class = 'bg-danger text-white' %}
+            {% set env_banner_message_not_found = '<b>' ~ smart_server_environment ~ '</b>' ~ ('env_banner_message.unknown')|trans %}
+        {% endif %}
+        <div class="sb-tailwind">
+            <div {% if absolute %}class="absolute w-full"{% endif %}>
+                <div class="text-center text-xs leading-6 p-0.5 {{ env_banner_class }}">
+                    {% if env_banner_message_not_found is defined %}
+                        {{ env_banner_message_not_found|raw  }}
+                    {% else %}
+                        {{ ('env_banner_message.' ~ smart_server_environment)|trans|raw }}
+                    {% endif %}
+                </div>
+                <div class="h-px bg-slate-700"></div>
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}

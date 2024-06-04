@@ -1,4 +1,5 @@
 {% extends "@SonataAdmin/empty_layout.html.twig" %}
+{% import '@SmartSonata/macros/ui_banner.html.twig' as ui_banner %}
 
 {% block html_attributes %}class="login"{% endblock %}
 
@@ -15,4 +16,9 @@
 
 {% block javascripts %}
     {# disable javascript on empty_layout to prevent loading jquery #}
+{% endblock %}
+
+{% block sonata_wrapper %}
+    {{ ui_banner.env_banner(true) }}
+    {{ parent() }}
 {% endblock %}

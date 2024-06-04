@@ -2,6 +2,11 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="by">
+                <source>by</source>
+                <target> by </target>
+            </trans-unit>
+
             <!-- Lists Action -->
             <trans-unit id="list.label__actions">
                 <source>list.label__actions</source>
@@ -18,6 +23,10 @@
             <trans-unit id="list.action_view">
                 <source>list.action_view</source>
                 <target>Show</target>
+            </trans-unit>
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>#</target>
             </trans-unit>
 
             <!--  Dashboard & navigation -->
@@ -37,6 +46,10 @@
                 <source>dashboard.label_parameter</source>
                 <target>Parameters</target>
             </trans-unit>
+            <trans-unit id="dashboard.label_batch_log">
+                <source>dashboard.label_batch_log</source>
+                <target>Batch log</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_parameter_list">
                 <source>breadcrumb.link_parameter_list</source>
                 <target>Parameter list</target>
@@ -44,6 +57,10 @@
             <trans-unit id="breadcrumb.link_parameter_create">
                 <source>breadcrumb.link_parameter_create</source>
                 <target>Creating a parameter</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_batch_log_list">
+                <source>breadcrumb.link_batch_log_list</source>
+                <target>Logs list</target>
             </trans-unit>
 
             <trans-unit id="fieldset.label_general">
@@ -118,6 +135,72 @@
             <trans-unit id="form.label_password_confirmation">
                 <source>form.label_password_confirmation</source>
                 <target>Password Confirmation</target>
+            </trans-unit>
+            <trans-unit id="field.label_name">
+                <source>field.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="field.label_context">
+                <source>field.label_context</source>
+                <target>Context</target>
+            </trans-unit>
+            <trans-unit id="field.label_date">
+                <source>field.label_date</source>
+                <target>Date</target>
+            </trans-unit>
+            <trans-unit id="field.label_success">
+                <source>field.label_success</source>
+                <target>Success</target>
+            </trans-unit>
+            <trans-unit id="field.label_summary">
+                <source>field.label_summary</source>
+                <target>Summary</target>
+            </trans-unit>
+            <trans-unit id="field.label_comment">
+                <source>field.label_comment</source>
+                <target>Comment</target>
+            </trans-unit>
+            <trans-unit id="field.label_data">
+                <source>field.label_data</source>
+                <target>Data</target>
+            </trans-unit>
+
+            <!-- History -->
+            <trans-unit id="history.none">
+                <source>history.none</source>
+                <target>No history available.</target>
+            </trans-unit>
+            <trans-unit id="history.email.sent">
+                <source>history.email.sent</source>
+                <target>Email sent : </target>
+            </trans-unit>
+            <trans-unit id="history.entity.created">
+                <source>history.entity.created</source>
+                <target>Entity created</target>
+            </trans-unit>
+            <trans-unit id="history.entity.updated">
+                <source>history.entity.updated</source>
+                <target>Entity updated</target>
+            </trans-unit>
+            <trans-unit id="history.entity.archived">
+                <source>history.entity.archived</source>
+                <target>Entity archived</target>
+            </trans-unit>
+            <trans-unit id="history.error">
+                <source>history.error</source>
+                <target>Error : </target>
+            </trans-unit>
+            <trans-unit id="history.external">
+                <source>history.external</source>
+                <target>External event : </target>
+            </trans-unit>
+            <trans-unit id="history.interne">
+                <source>history.interne</source>
+                <target>Internal process : </target>
+            </trans-unit>
+            <trans-unit id="history.timeline_context">
+                <source>history.timeline_context</source>
+                <target> [context %context%]</target>
             </trans-unit>
 
             <!-- Action -->

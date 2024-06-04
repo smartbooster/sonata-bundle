@@ -1,8 +1,25 @@
 {% extends "@SonataAdmin/standard_layout.html.twig" %}
+{% import '@SmartSonata/macros/ui_banner.html.twig' as ui_banner %}
 
 {# Disable sonata link and search bar #}
 {% block side_bar_after_nav %}{% endblock %}
 {% block sonata_sidebar_search %}{% endblock %}
+
+{% block sonata_header_noscript_warning %}
+    {{ ui_banner.env_banner }}
+    {{ parent() }}
+{% endblock %}
+
+{% block sonata_left_side %}
+    {% if smart_server_environment is defined and smart_server_environment is not null and smart_server_environment != 'production' %}
+        {# MDT extra div class to increase the padding-top of the sidebar if we have a banner #}
+        <div class="main-sidebar-under-banner">
+            {{ parent() }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
 
 {% block side_bar_before_nav %}
     {% if app.user and is_granted('ROLE_SONATA_ADMIN') %}
