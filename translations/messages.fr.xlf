@@ -55,6 +55,32 @@
                 <source>enum.process_status.error</source>
                 <target>Erreur</target>
             </trans-unit>
+
+            <!-- Env Banner -->
+            <trans-unit id="env_banner_message.developpement">
+                <source>env_banner_message.developpement</source>
+                <target><![CDATA[<b>Développement</b> - Poste du développeur]]></target>
+            </trans-unit>
+            <trans-unit id="env_banner_message.development">
+                <source>env_banner_message.development</source>
+                <target><![CDATA[<b>Développement</b> - Poste du développeur]]></target>
+            </trans-unit>
+            <trans-unit id="env_banner_message.dev">
+                <source>env_banner_message.dev</source>
+                <target><![CDATA[<b>Développement</b> - Poste du développeur]]></target>
+            </trans-unit>
+            <trans-unit id="env_banner_message.integration">
+                <source>env_banner_message.integration</source>
+                <target><![CDATA[<b>Intégration</b> - Environnement de validation interne]]></target>
+            </trans-unit>
+            <trans-unit id="env_banner_message.recette">
+                <source>env_banner_message.recette</source>
+                <target><![CDATA[<b>Recette</b> - Environnement de validation client]]></target>
+            </trans-unit>
+            <trans-unit id="env_banner_message.unknown">
+                <source>env_banner_message.unknown</source>
+                <target> - Environnement inconnu</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

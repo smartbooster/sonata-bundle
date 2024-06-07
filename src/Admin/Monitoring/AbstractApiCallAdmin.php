@@ -37,9 +37,13 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('origin', null, [
+            ->add('origin', ChoiceFilter::class, [
                 'label' => 'label.origin',
                 'show_filter' => true,
+                'field_type' => ChoiceType::class,
+                'field_options' => [
+                    'choices' => $this->getOriginChoices(),
+                ],
             ])
             ->add('status', ChoiceFilter::class, [
                 'label' => 'label.result',
@@ -82,7 +86,10 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
         $list
             ->add('id', null, ['label' => 'field.label_id'])
             ->add('startedAt', null, ['label' => 'label.started_at'])
-            ->add('origin', null, ['label' => 'label.origin'])
+            ->add('origin', FieldDescriptionInterface::TYPE_CHOICE, [
+                'label' => 'label.origin',
+                'choices' => array_flip($this->getOriginChoices()),
+            ])
             ->add('statusCode', null, [
                 'label' => 'label.result',
                 'template' => '@SmartSonata/admin/base_field/list_api_call_status_code.html.twig',
@@ -107,7 +114,6 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
                 ->add('type', FieldDescriptionInterface::TYPE_CHOICE, [
                     'label' => 'label.route',
                     'choices' => array_flip($this->getRouteChoices()),
-                    'choice_translation_domain' => 'admin',
                 ])
                 ->add('startedAt', null, ['label' => 'label.started_at'])
                 ->add('endedAt', null, ['label' => 'label.ended_at'])
@@ -119,7 +125,10 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
                 ->add('summary', null, ['label' => 'label.summary'])
             ->end()
             ->with('api_params', ['label' => 'label.api_params', 'class' => 'col-md-8'])
-                ->add('origin', null, ['label' => 'label.origin'])
+                ->add('origin', FieldDescriptionInterface::TYPE_CHOICE, [
+                    'label' => 'label.origin',
+                    'choices' => array_flip($this->getOriginChoices()),
+                ])
                 ->add('statusCode', null, [
                     'label' => 'label.result',
                     'template' => '@SmartSonata/admin/base_field/show_api_call_status_code.html.twig',
@@ -158,4 +167,6 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
     }
 
     abstract protected function getRouteChoices(): array;
+
+    abstract protected function getOriginChoices(): array;
 }

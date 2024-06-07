@@ -154,7 +154,7 @@
             </trans-unit>
             <trans-unit id="field.label_summary">
                 <source>field.label_summary</source>
-                <target>Résumer</target>
+                <target>Résumé</target>
             </trans-unit>
             <trans-unit id="field.label_comment">
                 <source>field.label_comment</source>

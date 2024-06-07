@@ -1,5 +1,14 @@
 CHANGELOG
 ===================
+## v2.3.0 - (2024-06-07)
+### Added
+- `ui_banner.html.twig` macro to prompt a tailwind banner for usefull info (current environment, ...)
+- `AbstractApiCallAdmin::getOriginChoices` for api call origin filter
+- `empty_layout.html.twig` add `ui_banner` on the **sonata_wrapper** block to show current server environment
+- `standard_layout.html.twig` add `ui_banner` on the **sonata_header_noscript_warning** block to show current server environment
+  - to unlock it add the following to your `twig.globals` config : `smart_server_environment: '%env(default::ENVIRONMENT)%'`
+- `admin.en.xlf` add missing english translations
+
 ## v2.2.0 - (2024-06-04)
 ### Changed
 - `AbstractAdmin::__construct` params are now all optionnal as we must configure it through tags from what's ask on the next v5 of Sonata Admin
