@@ -6,6 +6,7 @@ namespace Smart\SonataBundle\Admin\Monitoring;
 
 use Smart\CoreBundle\Entity\ApiCallInterface;
 use Smart\CoreBundle\Enum\ProcessStatusEnum;
+use Smart\CoreBundle\Monitoring\ApiCallMonitor;
 use Smart\SonataBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -20,12 +21,15 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 abstract class AbstractApiCallAdmin extends AbstractAdmin
 {
+    private ApiCallMonitor $apiCallMonitor;
+
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         parent::configureRoutes($collection);
         $collection->remove('create');
         $collection->remove('edit');
         $collection->remove('delete');
+        $collection->add('restartApiCall', $this->getRouterIdParameter() . '/restart-api-call');
     }
 
     protected function configureDefaultSortValues(array &$sortValues): void
@@ -122,6 +126,11 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
                     'label' => 'label.status',
                     'choices' => array_flip($this->getStatusChoices()),
                 ])
+        ;
+        if ($subject->getRestartedAt()) {
+            $show->add('restartedAt', null, ['label' => 'label.restarted_at']);
+        }
+        $show
                 ->add('summary', null, ['label' => 'label.summary'])
             ->end()
             ->with('api_params', ['label' => 'label.api_params', 'class' => 'col-md-8'])
@@ -137,6 +146,10 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
                 ->add('routeUrl', null, ['label' => 'label.route_url'])
                 ->add('inputData', null, [
                     'label' => 'label.input_data',
+                    'template' => '@SmartSonata/admin/base_field/show_json.html.twig',
+                ])
+                ->add('headers', null, [
+                    'label' => 'label.headers',
                     'template' => '@SmartSonata/admin/base_field/show_json.html.twig',
                 ])
                 ->add(
@@ -164,6 +177,16 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
     private function getStatusChoices(): array
     {
         return ProcessStatusEnum::casesByTrans($this->getTranslator(), true, 'messages');
+    }
+
+    public function setApiCallMonitor(ApiCallMonitor $apiCallMonitor): void
+    {
+        $this->apiCallMonitor = $apiCallMonitor;
+    }
+
+    public function getApiRestartAllowedRoutes(): array
+    {
+        return $this->apiCallMonitor->getRestartAllowedRoutes();
     }
 
     abstract protected function getRouteChoices(): array;

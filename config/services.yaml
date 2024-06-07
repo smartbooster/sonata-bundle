@@ -35,6 +35,12 @@ services:
       - 'send_account_creation_email'
     tags:
       - { name: sonata.admin.extension }
+  admin.extension.action_restart_api_call:
+    class: Smart\SonataBundle\Admin\Extension\ActionExtension
+    arguments:
+      - 'restart_api_call'
+    tags:
+      - {name: sonata.admin.extension}
   Smart\SonataBundle\Mailer\EmailProvider:
     arguments:
       - '@request_stack'

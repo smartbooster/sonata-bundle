@@ -11,6 +11,9 @@ sonata_admin:
     security:
         handler:   Smart\SonataBundle\Security\Handler\SmartSecurityHandler
     extensions:
+        admin.extension.action_restart_api_call:
+            implements:
+                - Smart\CoreBundle\Entity\ApiCallInterface
         admin.extension.encode_password:
             uses:
                 - Smart\SonataBundle\Entity\User\UserTrait

@@ -27,7 +27,7 @@
     "yokai/security-token-bundle": "^3.3",
     "sentry/sentry-symfony": "^4.1",
     "symfony/expression-language": "^4.4 || ^5.4 || ^6.0",
-    "smartbooster/core-bundle": "^v1.4.1",
+    "smartbooster/core-bundle": "^1.5",
     "yokai/enum-bundle": "^4.1"
   },
   "require-dev": {

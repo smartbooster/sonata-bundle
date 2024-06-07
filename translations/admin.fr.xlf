@@ -216,6 +216,10 @@
                 <source>send_account_creation_email.success</source>
                 <target>Email de création de compte envoyé à {email}</target>
             </trans-unit>
+            <trans-unit id="action.restart_process">
+                <source>action.restart_process</source>
+                <target>Relancer</target>
+            </trans-unit>
 
             <!-- Process -->
             <trans-unit id="process.no_logs">
@@ -225,6 +229,20 @@
             <trans-unit id="process.nb_logs_lines">
                 <source>process.nb_logs_lines</source>
                 <target>lignes de logs au total.</target>
+            </trans-unit>
+
+            <!-- Monitoring -->
+            <trans-unit id="monitoring.restart_api_call.success">
+                <source>monitoring.restart_api_call.success</source>
+                <target>Traitement relancé.</target>
+            </trans-unit>
+            <trans-unit id="monitoring.restart_api_call.error">
+                <source>monitoring.restart_api_call.error</source>
+                <target>Erreur pendant la relance du traitement : </target>
+            </trans-unit>
+            <trans-unit id="monitoring.restart_api_call.onclick_confirm">
+                <source>monitoring.restart_api_call.onclick_confirm</source>
+                <target>Êtes-vous sûr de vouloir relancer le traitement ?</target>
             </trans-unit>
         </body>
     </file>
