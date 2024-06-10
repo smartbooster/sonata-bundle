@@ -9,6 +9,18 @@
 {% else %} {# 100 #}
     {% set status_class = 'info' %}
 {% endif %}
-<span class="label label-{{ status_class }}">
-    {{ value }}
-</span>
+
+<div class="text-left">
+    <span class="label label-{{ status_class }}">
+        {{ value }}
+    </span>
+    {% if object.restartedAt is not null %}
+        <i
+            class="fa fa-refresh"
+            style="color: gray;
+            margin-left: 10px;
+            font-size: 12px;"
+            title="Relancé le {{ object.restartedAt|date('d/m/Y à H:i:s') }}"
+        ></i>
+    {% endif %}
+</div>

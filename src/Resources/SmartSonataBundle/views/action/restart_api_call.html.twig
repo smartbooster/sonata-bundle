@@ -1,0 +1,12 @@
+{% trans_default_domain 'admin' %}
+
+{% if is_granted('ROLE_MONITORING_RESTART_API_CALL') and object.canRestart and object.type in admin.apiRestartAllowedRoutes %}
+    <a
+        href="{{ admin.generateObjectUrl('restartApiCall', object) }}"
+        class="btn btn-xs btn-default"
+        title="{{ 'action.restart_process'|trans({}, 'admin') }}"
+        onclick="return confirm('{{ 'monitoring.restart_api_call.onclick_confirm'|trans }}')"
+    >
+        <i class="fa fa-refresh"></i>
+    </a>
+{% endif %}

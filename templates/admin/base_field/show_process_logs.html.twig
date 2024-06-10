@@ -37,17 +37,19 @@
                     padding: 0 0.25rem; white-space: nowrap;
                 ">{{ formattedRow }}</li>
             {% endfor %}
-            <li
-                class="text-white"
-                style="
-                    margin-top: 1rem;
-                    padding: 0.5rem 0.25rem;
-                    white-space: nowrap;
-                    background-color: {% if isSuccess %}#15803d;{% else %}#b91c1c;{% endif %};
-                "
-            >
-                {% if isSuccess %}[OK]{% else %}[ERROR]{% endif %} {{ object.summary }}
-            </li>
+            {% if object.summary %}
+                <li
+                    class="text-white"
+                    style="
+                        margin-top: 1rem;
+                        padding: 0.5rem 0.25rem;
+                        white-space: nowrap;
+                        background-color: {% if isSuccess %}#15803d;{% else %}#b91c1c;{% endif %};
+                    "
+                >
+                    {% if isSuccess %}[OK]{% else %}[ERROR]{% endif %} {{ object.summary }}
+                </li>
+            {% endif %}
         </ul>
         <i class="text-muted">{{ object.logs|length + (object.summary ? 1 : 0) }} {{ 'process.nb_logs_lines'|trans }}</i>
     {% endif %}

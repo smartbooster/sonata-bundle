@@ -216,6 +216,10 @@
                 <source>send_account_creation_email.success</source>
                 <target>Account creation email sent to {email}</target>
             </trans-unit>
+            <trans-unit id="action.restart_process">
+                <source>action.restart_process</source>
+                <target>Restart</target>
+            </trans-unit>
 
             <!-- Process -->
             <trans-unit id="process.no_logs">
@@ -225,6 +229,20 @@
             <trans-unit id="process.nb_logs_lines">
                 <source>process.nb_logs_lines</source>
                 <target>log lines in total.</target>
+            </trans-unit>
+
+            <!-- Monitoring -->
+            <trans-unit id="monitoring.restart_api_call.success">
+                <source>monitoring.restart_api_call.success</source>
+                <target>Process restarted.</target>
+            </trans-unit>
+            <trans-unit id="monitoring.restart_api_call.error">
+                <source>monitoring.restart_api_call.error</source>
+                <target>Error during process restart: </target>
+            </trans-unit>
+            <trans-unit id="monitoring.restart_api_call.onclick_confirm">
+                <source>monitoring.restart_api_call.onclick_confirm</source>
+                <target>Are you sure you want to restart this process ?</target>
             </trans-unit>
         </body>
     </file>
