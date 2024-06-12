@@ -1,6 +1,0 @@
-smart_sonata_documentation_email:
-  path: '/documentation/email'
-  controller: Smart\SonataBundle\Controller\Admin\DocumentationController::email
-  methods: ['GET', 'POST']
-  options:
-    expose: true

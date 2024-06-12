@@ -1,0 +1,22 @@
+{% extends "@SmartSonata/admin/documentation/documentation_layout.html.twig" %}
+
+{% block title %}{{ 'dashboard.label_documentation_projet'|trans({}, 'admin') }}{% endblock %}
+
+{% block content %}
+    <div class="sb-tailwind">
+        <div class="bg-white rounded-md shadow px-6">
+            <article id="markdown-content" class="sb-documentation mt-6"></article>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="application/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        const content = {{ markdown_content|json_encode|raw }}
+        document.getElementById('markdown-content').innerHTML = marked.parse(content)
+      });
+    </script>
+{% endblock %}

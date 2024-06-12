@@ -10,8 +10,14 @@
     {{ parent() }}
 {% endblock %}
 
+{% if smart_server_environment is defined and smart_server_environment is not null and smart_server_environment != 'production' %}
+    {% set display_smart_env_banner = true %}
+{% else %}
+    {% set display_smart_env_banner = false %}
+{% endif %}
+
 {% block sonata_left_side %}
-    {% if smart_server_environment is defined and smart_server_environment is not null and smart_server_environment != 'production' %}
+    {% if display_smart_env_banner %}
         {# MDT extra div class to increase the padding-top of the sidebar if we have a banner #}
         <div class="main-sidebar-under-banner">
             {{ parent() }}
@@ -19,6 +25,14 @@
     {% else %}
         {{ parent() }}
     {% endif %}
+{% endblock %}
+
+{% block sonata_page_content_header %}
+    {# MDT fix content shift due to env_banner #}
+    {% if display_smart_env_banner %}
+        <div style="height: 29px;"></div>
+    {% endif %}
+    {{ parent() }}
 {% endblock %}
 
 {% block side_bar_before_nav %}

@@ -2,6 +2,7 @@
 
 namespace Smart\SonataBundle;
 
+use Smart\SonataBundle\DependencyInjection\Compiler\RouteCompilerPass;
 use Smart\SonataBundle\DependencyInjection\Compiler\AdminCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -21,5 +22,6 @@ class SmartSonataBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new AdminCompilerPass());
+        $container->addCompilerPass(new RouteCompilerPass());
     }
 }
