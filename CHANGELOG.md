@@ -8,7 +8,7 @@ CHANGELOG
 - `_documentation.scss` **.sb-documentation** class based on **@tailwindcss/typography** plugin
 
 ### Changed
-- `services.yaml` reorder services decleration by alphabetical namespace subject
+- `services.yaml` reorder services declaration by alphabetical namespace subject
 
 ### Fixed
 - `DocumentationController::email` use twig injected service to render the response content so no extra controller extending DocumentationController is
