@@ -1,4 +1,7 @@
 # Fixture config with empty parameters config
+parameters:
+    kernel.project_dir: /test
+
 smart_sonata:
     parameters:
     sender:

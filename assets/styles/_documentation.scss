@@ -1,3 +1,4 @@
+// Legacy doc kept for now
 .documentation {
   h3 {
     font-weight: bold;
@@ -11,5 +12,29 @@
   }
   .test-form {
     font-size: 12px;
+  }
+}
+
+// Tailwind custom Smartbooster prose styles
+.sb-documentation {
+  @apply prose prose-a:text-info prose-a:no-underline hover:prose-a:underline hover:prose-a:text-info max-w-none inline-block;
+  h1, h2, h3, h4 {
+    a {
+      @apply text-inherit;
+    }
+    a:hover {
+      @apply no-underline;
+      @apply text-inherit;
+    }
+  }
+  h1, h2 {
+    a {
+      @apply font-bold;
+    }
+  }
+  h3, h4 {
+    a {
+      @apply font-semibold;
+    }
   }
 }

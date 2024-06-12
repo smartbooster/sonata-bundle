@@ -1,4 +1,25 @@
 services:
+  # Admin
+  admin.batch_log:
+    class: Smart\SonataBundle\Admin\BatchLogAdmin
+    arguments:
+      - ~
+      - Smart\SonataBundle\Entity\Log\BatchLog
+      - ~
+    tags:
+      - {name: sonata.admin, manager_type: orm, label: dashboard.label_batch_log}
+  admin.parameter:
+    class: Smart\SonataBundle\Admin\ParameterAdmin
+    arguments:
+      - ~
+      - Smart\SonataBundle\Entity\Parameter
+      - ~
+      - '@Smart\SonataBundle\Enum\ParameterTypeEnum'
+      - '@Smart\SonataBundle\Logger\HistoryLogger'
+    tags:
+      - {name: sonata.admin, manager_type: orm, label: dashboard.label_parameter}
+
+  # Admin Extensions
   admin.extension.action_delete:
     class: Smart\SonataBundle\Admin\Extension\ActionExtension
     arguments:
@@ -11,94 +32,66 @@ services:
       - edit
     tags:
       - { name: sonata.admin.extension, global: true }
-  admin.extension.action_show:
-    class: Smart\SonataBundle\Admin\Extension\ActionExtension
-    arguments:
-      - show
-    tags:
-      - { name: sonata.admin.extension, global: true }
-  admin.extension.encode_password:
-    class: Smart\SonataBundle\Admin\Extension\EncodePasswordExtension
-    arguments:
-      - '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface'
-    tags:
-      - { name: sonata.admin.extension }
   admin.extension.action_impersonate:
     class: Smart\SonataBundle\Admin\Extension\ActionExtension
     arguments:
       - 'impersonate'
     tags:
-      - { name: sonata.admin.extension }
-  admin.extension.action_send_account_creation_email:
-    class: Smart\SonataBundle\Admin\Extension\ActionExtension
-    arguments:
-      - 'send_account_creation_email'
-    tags:
-      - { name: sonata.admin.extension }
+      - {name: sonata.admin.extension}
   admin.extension.action_restart_api_call:
     class: Smart\SonataBundle\Admin\Extension\ActionExtension
     arguments:
       - 'restart_api_call'
     tags:
       - {name: sonata.admin.extension}
-  Smart\SonataBundle\Mailer\EmailProvider:
+  admin.extension.action_send_account_creation_email:
+    class: Smart\SonataBundle\Admin\Extension\ActionExtension
     arguments:
-      - '@request_stack'
-  Smart\SonataBundle\Mailer\BaseMailer:
+      - 'send_account_creation_email'
+    tags:
+      - { name: sonata.admin.extension }
+  admin.extension.action_show:
+    class: Smart\SonataBundle\Admin\Extension\ActionExtension
     arguments:
-      - '@Symfony\Component\Mailer\MailerInterface'
-      - '@Smart\SonataBundle\Mailer\EmailProvider'
-      - '@Symfony\Contracts\Translation\TranslatorInterface'
-      - '@Smart\SonataBundle\Logger\HistoryLogger'
-  Smart\SonataBundle\Controller\Admin\DocumentationController:
-    tags: ['controller.service_arguments']
-  Smart\SonataBundle\Controller\AbstractSecurityController:
-    tags: [ 'controller.service_arguments' ]
+      - show
+    tags:
+      - {name: sonata.admin.extension, global: true}
+  admin.extension.encode_password:
+    class: Smart\SonataBundle\Admin\Extension\EncodePasswordExtension
     arguments:
-      [ '@yokai_security_token.default_token_manager', '@Smart\SonataBundle\Mailer\BaseMailer', '@translator', '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface', '@Sonata\AdminBundle\Templating\TemplateRegistry', '@Doctrine\ORM\EntityManagerInterface' ]
+      - '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface'
+    tags:
+      - {name: sonata.admin.extension}
 
-  smart_sonata.parameter_provider:
-    class: Smart\SonataBundle\Provider\ParameterProvider
-    public: true
-    arguments:
-      - '@Doctrine\ORM\EntityManagerInterface'
-
-  Smart\SonataBundle\Provider\ParameterProvider:
-    public: false
-    alias: smart_sonata.parameter_provider
-
-  smart_sonata.parameter_loader:
-    class: Smart\SonataBundle\Loader\ParameterLoader
-    public: true
-    arguments:
-      - '@Doctrine\ORM\EntityManagerInterface'
-
-  Smart\SonataBundle\Loader\ParameterLoader:
-    public: false
-    alias: smart_sonata.parameter_loader
-
+  # Command
   smart_sonata.parameter_load_command:
     class: Smart\SonataBundle\Command\ParameterLoadCommand
     public: true
     arguments:
       - '@smart_sonata.parameter_loader'
     tags: [ 'console.command' ]
-
   Smart\SonataBundle\Command\ParameterLoadCommand:
     public: false
     alias: smart_sonata.parameter_load_command
 
-  admin.parameter:
-    class: Smart\SonataBundle\Admin\ParameterAdmin
+  # Config
+  Smart\SonataBundle\Config\IniOverrideConfig:
     arguments:
-      - ~
-      - Smart\SonataBundle\Entity\Parameter
-      - ~
-      - '@Smart\SonataBundle\Enum\ParameterTypeEnum'
-      - '@Smart\SonataBundle\Logger\HistoryLogger'
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: dashboard.label_parameter }
+      - '%env(default::PLATFORM_BATCH_MEMORY)%'
 
+  # Controller
+  Smart\SonataBundle\Controller\AbstractSecurityController:
+    tags: [ 'controller.service_arguments' ]
+    arguments:
+      [ '@yokai_security_token.default_token_manager', '@Smart\SonataBundle\Mailer\BaseMailer', '@translator', '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface', '@Sonata\AdminBundle\Templating\TemplateRegistry', '@Doctrine\ORM\EntityManagerInterface' ]
+  Smart\SonataBundle\Controller\Admin\DocumentationController:
+    calls:
+      -   setContainer: [ '@service_container' ]
+      -   setProjectDir: [ "%kernel.project_dir%" ]
+      -   setTwig: [ '@twig' ]
+    tags: [ 'controller.service_arguments' ]
+
+  # DataFixtures
   fixture.processor.password:
     class: Smart\SonataBundle\DataFixtures\Processor\UserProcessor
     arguments:
@@ -106,60 +99,7 @@ services:
     tags:
       - { name: fidry_alice_data_fixtures.processor }
 
-  security.processor.last_login:
-    class: Smart\SonataBundle\Security\Processor\LastLoginProcessor
-    arguments:
-      - '@doctrine.orm.entity_manager'
-
-  security.subscriber:
-    class: Smart\SonataBundle\Security\EventSubscriber\SecuritySubscriber
-    arguments:
-      - '@security.processor.last_login'
-      - '@translator'
-    tags:
-      - { name: kernel.event_subscriber }
-
-  Sonata\AdminBundle\Templating\TemplateRegistry:
-    alias: 'sonata.admin.global_template_registry'
-
-  Smart\SonataBundle\Security\Handler\SmartSecurityHandler:
-    arguments:
-      - '@sonata.admin.security.handler.role'
-
-  admin.batch_log:
-    class: Smart\SonataBundle\Admin\BatchLogAdmin
-    arguments:
-      - ~
-      - Smart\SonataBundle\Entity\Log\BatchLog
-      - ~
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: dashboard.label_batch_log }
-
-  smart_sonata.batch_logger:
-    class: Smart\SonataBundle\Logger\BatchLogger
-    public: true
-    arguments:
-      - '@Doctrine\ORM\EntityManagerInterface'
-      - '@Sentry\ClientInterface'
-
-  Smart\SonataBundle\Logger\BatchLogger:
-    public: false
-    alias: smart_sonata.batch_logger
-
-  smart_sonata.history_logger:
-    class: Smart\SonataBundle\Logger\HistoryLogger
-    public: true
-    arguments:
-      - '@Doctrine\ORM\EntityManagerInterface'
-
-  Smart\SonataBundle\Logger\HistoryLogger:
-    public: false
-    alias: smart_sonata.history_logger
-
-  Smart\SonataBundle\Config\IniOverrideConfig:
-    arguments:
-      - '%env(default::PLATFORM_BATCH_MEMORY)%'
-
+  # DependencyInjection
   # The "Symfony\Component\DependencyInjection\ContainerInterface" autowiring alias is deprecated. Define it explicitly in your app if you want to keep using it.
   # It's not a good way, but it's practical for the moment. It's used in AbstractAdmin::get. Need to replace all get call by injection
   Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
@@ -170,3 +110,78 @@ services:
       - '@translator'
     tags:
       - {name: yokai_enum.enum}
+
+  # Loader
+  smart_sonata.parameter_loader:
+    class: Smart\SonataBundle\Loader\ParameterLoader
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+  Smart\SonataBundle\Loader\ParameterLoader:
+    public: false
+    alias: smart_sonata.parameter_loader
+
+  # Logger
+  smart_sonata.batch_logger:
+    class: Smart\SonataBundle\Logger\BatchLogger
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+      - '@Sentry\ClientInterface'
+  Smart\SonataBundle\Logger\BatchLogger:
+    public: false
+    alias: smart_sonata.batch_logger
+  smart_sonata.history_logger:
+    class: Smart\SonataBundle\Logger\HistoryLogger
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+  Smart\SonataBundle\Logger\HistoryLogger:
+    public: false
+    alias: smart_sonata.history_logger
+
+  # Mailer
+  Smart\SonataBundle\Mailer\BaseMailer:
+    arguments:
+      - '@Symfony\Component\Mailer\MailerInterface'
+      - '@Smart\SonataBundle\Mailer\EmailProvider'
+      - '@Symfony\Contracts\Translation\TranslatorInterface'
+      - '@Smart\SonataBundle\Logger\HistoryLogger'
+  Smart\SonataBundle\Mailer\EmailProvider:
+    arguments:
+      - '@request_stack'
+
+  # Provider
+  smart_sonata.parameter_provider:
+    class: Smart\SonataBundle\Provider\ParameterProvider
+    public: true
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+  Smart\SonataBundle\Provider\ParameterProvider:
+    public: false
+    alias: smart_sonata.parameter_provider
+
+  # Route
+  Smart\SonataBundle\Route\RouteLoader:
+    tags:
+      - {name: routing.loader}
+
+  # Security
+  security.processor.last_login:
+    class: Smart\SonataBundle\Security\Processor\LastLoginProcessor
+    arguments:
+      - '@doctrine.orm.entity_manager'
+  security.subscriber:
+    class: Smart\SonataBundle\Security\EventSubscriber\SecuritySubscriber
+    arguments:
+      - '@security.processor.last_login'
+      - '@translator'
+    tags:
+      - { name: kernel.event_subscriber }
+  Smart\SonataBundle\Security\Handler\SmartSecurityHandler:
+    arguments:
+      - '@sonata.admin.security.handler.role'
+
+  # Templating
+  Sonata\AdminBundle\Templating\TemplateRegistry:
+    alias: 'sonata.admin.global_template_registry'

@@ -1,4 +1,7 @@
 # Empty config
+parameters:
+  kernel.project_dir: /test
+
 smart_sonata:
   sender:
     address: 'test@test.test'

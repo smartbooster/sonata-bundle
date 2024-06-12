@@ -1,4 +1,7 @@
 # Full config fixture
+parameters:
+    kernel.project_dir: /test
+
 smart_sonata:
     parameters:
         # Textual parameter

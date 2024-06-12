@@ -1,5 +1,25 @@
 CHANGELOG
 ===================
+## v2.4.0 - (2024-06-12)
+### Added
+- `DocumentationController::renderMarkdown` action to render markdown documentation files stored in the **/documentation** directory
+  - `RouteLoader` + `RouteCompilerPass` to auto generate routing for each markdown files
+  - `markdown.html.twig` template to render the markdown content as html
+- `_documentation.scss` **.sb-documentation** class based on **@tailwindcss/typography** plugin
+- `_tailwind.scss` dedicated smartbooster tailwind override or missing class from unalign tailwind version 
+
+### Changed
+- `services.yaml` reorder services declaration by alphabetical namespace subject
+
+### Fixed
+- `DocumentationController::email` use twig injected service to render the response content so no extra controller extending DocumentationController is
+needed.
+- `standard_layout.html.twig` add missing extra padding on **sonata_page_content_header** when there is an env_banner
+
+### Removed
+- `/config/routing.yaml` deleted in favor of route being available through the `RouteLoader` (so when updating to this version you no longer need to
+import it)
+
 ## v2.3.0 - (2024-06-10)
 ### Added
 - `AbstractApiCallAdmin::getOriginChoices` for api call origin filter
