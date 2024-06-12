@@ -1,4 +1,7 @@
 # Fixture config with undefined parameter value
+parameters:
+    kernel.project_dir: /test
+
 smart_sonata:
     parameters:
         parameter_without_value:

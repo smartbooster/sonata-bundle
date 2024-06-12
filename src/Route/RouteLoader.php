@@ -12,6 +12,8 @@ use function Symfony\Component\String\u;
 
 final class RouteLoader extends Loader
 {
+    public const SMART_DOCUMENTATION_ROUTE_PREFIX = 'smart_sonata_documentation_md_';
+
     private ?string $projectDir;
 
     public function __construct(?string $projectDir = null)
@@ -37,7 +39,7 @@ final class RouteLoader extends Loader
         $collection = new RouteCollection();
 
         // MDT Dynamic routes generation foreach markdown files
-        $docNamePrefix = 'smart_sonata_documentation_md_';
+        $docNamePrefix = self::SMART_DOCUMENTATION_ROUTE_PREFIX;
         $docPathPrefix = '/documentation/';
         $docControllerPath = 'Smart\SonataBundle\Controller\Admin\DocumentationController::renderMarkdown';
         $filesystem = new Filesystem();

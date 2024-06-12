@@ -1,0 +1,18 @@
+.sb-tailwind {
+  .ps-0 {
+    padding-inline-start: 0px;
+  }
+  .container-full {
+    @apply mx-auto w-full;
+  }
+  .container-large {
+    @apply mx-auto w-full;
+    max-width: 1729px /* Corresponds to full width on a 1920px screen with the vertical scrollbar */
+  }
+  .container-medium {
+    @apply mx-auto w-full max-w-screen-xl; /* 1280px */
+  }
+  .container-small {
+    @apply mx-auto w-full max-w-screen-md; /* 768px */
+  }
+}

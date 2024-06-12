@@ -50,6 +50,10 @@
                 <source>dashboard.label_batch_log</source>
                 <target>Batch log</target>
             </trans-unit>
+            <trans-unit id="dashboard.label_documentation_projet">
+                <source>dashboard.label_documentation_projet</source>
+                <target>Project documentation</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_parameter_list">
                 <source>breadcrumb.link_parameter_list</source>
                 <target>Parameter list</target>
@@ -243,6 +247,20 @@
             <trans-unit id="monitoring.restart_api_call.onclick_confirm">
                 <source>monitoring.restart_api_call.onclick_confirm</source>
                 <target>Are you sure you want to restart this process ?</target>
+            </trans-unit>
+
+            <!-- Documentation -->
+            <trans-unit id="documentation_markdown.no_content_error">
+                <source>documentation_markdown.no_content_error</source>
+                <target><![CDATA[
+                    <p class="text-danger">/!\ The contents of the .md file on the documentation page could not be loaded correctly.</p>
+                    <p>Check the following:</p>
+                    <ul>
+                        <li>The file is located in the /documentation/%categorie% directory.</li>
+                        <li>The file name respects the format <b>00-file_name.md</b> (without special characters or spaces).</li>
+                        <li>The symfony cache was successfully regenerated after updating filename or directory name using <code>make cc</code></li>
+                    </ul>
+                ]]></target>
             </trans-unit>
         </body>
     </file>

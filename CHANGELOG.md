@@ -6,6 +6,7 @@ CHANGELOG
   - `RouteLoader` + `RouteCompilerPass` to auto generate routing for each markdown files
   - `markdown.html.twig` template to render the markdown content as html
 - `_documentation.scss` **.sb-documentation** class based on **@tailwindcss/typography** plugin
+- `_tailwind.scss` dedicated smartbooster tailwind override or missing class from unalign tailwind version 
 
 ### Changed
 - `services.yaml` reorder services declaration by alphabetical namespace subject
