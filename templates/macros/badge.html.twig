@@ -1,0 +1,5 @@
+{% macro badge(value, bg_class, text_class = 'text-white') %}
+    <span class="p-1 text-xs rounded {{ 'bg-' ~ bg_class }} {{ text_class }}">
+        {{ value }}
+    </span>
+{% endmacro %}

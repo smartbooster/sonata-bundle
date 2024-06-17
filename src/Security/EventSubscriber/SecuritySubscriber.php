@@ -2,10 +2,10 @@
 
 namespace Smart\SonataBundle\Security\EventSubscriber;
 
+use Smart\CoreBundle\EventListener\HistoryDoctrineListener;
 use Smart\SonataBundle\Security\LastLoginInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\Event\SwitchUserEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
@@ -27,13 +27,16 @@ class SecuritySubscriber implements EventSubscriberInterface
      */
     private $translator;
 
+    private HistoryDoctrineListener $historyListener;
+
     /**
      * @param LastLoginProcessor $lastLoginProcessor
      */
-    public function __construct(LastLoginProcessor $lastLoginProcessor, TranslatorInterface $translator)
+    public function __construct(LastLoginProcessor $lastLoginProcessor, TranslatorInterface $translator, HistoryDoctrineListener $historyListener)
     {
         $this->lastLoginProcessor = $lastLoginProcessor;
         $this->translator = $translator;
+        $this->historyListener = $historyListener;
     }
 
     /**
@@ -67,6 +70,7 @@ class SecuritySubscriber implements EventSubscriberInterface
             return;
         }
 
+        $this->historyListener->disable();
         $this->lastLoginProcessor->process($user);
     }
 

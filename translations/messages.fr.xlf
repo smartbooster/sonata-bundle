@@ -56,6 +56,56 @@
                 <target>Erreur</target>
             </trans-unit>
 
+            <!-- Email dernier statut -->
+            <trans-unit id="enum.email_status.smtp">
+                <source>enum.email_status.smtp</source>
+                <target>SMTP envoyé</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.ongoing">
+                <source>enum.email_status.ongoing</source>
+                <target>En cours</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.smtp_error">
+                <source>enum.email_status.smtp_error</source>
+                <target>Erreur SMTP</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.error">
+                <source>enum.email_status.error</source>
+                <target>Erreur</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.rejected">
+                <source>enum.email_status.rejected</source>
+                <target>Rejeté</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.softbounced">
+                <source>enum.email_status.softbounced</source>
+                <target>Softbounce</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.hardbounced">
+                <source>enum.email_status.hardbounced</source>
+                <target>Hardbounce</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.delivered">
+                <source>enum.email_status.delivered</source>
+                <target>Délivré</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.opened">
+                <source>enum.email_status.opened</source>
+                <target>Ouvert</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.clicked">
+                <source>enum.email_status.clicked</source>
+                <target>Cliqué</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.unsubscribed">
+                <source>enum.email_status.unsubscribed</source>
+                <target> Désabonné</target>
+            </trans-unit>
+            <trans-unit id="enum.email_status.complaint">
+                <source>enum.email_status.complaint</source>
+                <target>Indésirable</target>
+            </trans-unit>
+
             <!-- Env Banner -->
             <trans-unit id="env_banner_message.developpement">
                 <source>env_banner_message.developpement</source>

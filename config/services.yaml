@@ -176,6 +176,7 @@ services:
     arguments:
       - '@security.processor.last_login'
       - '@translator'
+      - '@Smart\CoreBundle\EventListener\HistoryDoctrineListener'
     tags:
       - { name: kernel.event_subscriber }
   Smart\SonataBundle\Security\Handler\SmartSecurityHandler:
@@ -185,3 +186,11 @@ services:
   # Templating
   Sonata\AdminBundle\Templating\TemplateRegistry:
     alias: 'sonata.admin.global_template_registry'
+
+  # Twig
+  Smart\SonataBundle\Twig\Extension\FormatExtension:
+    tags: [ 'twig.extension' ]
+  Smart\SonataBundle\Twig\Extension\HistoryExtension:
+    calls:
+      - setTranslator: [ '@translator' ]
+    tags: ['twig.extension']

@@ -14,7 +14,7 @@
     <span class="label label-{{ status_class }}">
         {{ value }}
     </span>
-    {% if object.restartedAt is not null %}
+    {% if object is defined and object.restartedAt is defined and object.restartedAt is not null %}
         <i
             class="fa fa-refresh"
             style="color: gray;
