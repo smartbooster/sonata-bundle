@@ -49,7 +49,7 @@
                             {{ history_get_row_title(row) }}
                             {% if row.ctxt is defined %}
                                 <span class="text-info">
-                                  [{{ ('history.context.' ~ row.ctxt)|trans }}{% if row.orgn is defined %}<span v-if="orgn"> : {{ row.orgn|trans }}</span>{% endif %}]
+                                  [{{ ('history.context.' ~ row.ctxt)|trans }}{% if row.orgn is defined %}<span v-if="orgn"> : {{ row.orgn|trans({}, 'messages') }}</span>{% endif %}]
                                 </span>
                             {% endif %}
                         </div>
@@ -63,7 +63,7 @@
                     <!-- Partie droite : date + changement de status -->
                     <div class="grow">
                         <div class="text-gray-500 !text-xs !mb-0.5 flex justify-end">
-                            {% if row.status_code is defined %}
+                            {% if row.status_code is defined and row.status_code is not null %}
                                 <div class="mr-2">
                                     {% include '@SmartSonata/admin/base_field/api_call_status_code.html.twig' with {value: row.status_code} %}
                                 </div>
@@ -87,6 +87,18 @@
                         {% endblock %}
                     </div>
                 </div>
+
+                {# Monitoring spécifique #}
+                {% if row.api_id is defined %}
+                    <a href="{{ path('admin_app_monitoring_apicall_show', {id: row.api_id}) }}" target="_blank">
+                        API #{{ row.api_id }}
+                    </a>
+                {% endif %}
+                {% if row.cron_id is defined %}
+                    <a href="{{ path('admin_app_monitoring_cron_show', {id: row.cron_id}) }}" target="_blank">
+                        Cron #{{ row.cron_id }}
+                    </a>
+                {% endif %}
 
                 <!-- Email spécifique -->
                 {% if row.recipient is defined %}

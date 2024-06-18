@@ -1,6 +1,6 @@
 CHANGELOG
 ===================
-## v2.5.0 - (2024-06-18)
+## v2.5.0 - (2024-06-19)
 
 ### Added
 - `show_history_field.html.twig` based on tailwind class + Twig `HistoryExtension` required to autocomplete some data of the history rows 
@@ -14,6 +14,9 @@ CHANGELOG
 his history.
   - You must add the `MailableInterface` to your User entity for `BaseMailer::setRecipientToEmail` to work properly
 - `BaseMailer::setRecipientToEmail` advanced scenario to init the **to**, **cc** and **bcc** of the email based on the recipient type
+- **BC Break** `AbstractApiCallAdmin` and `AbstractCronAdmin` now use **messages** for `choice_translation_domain` for their **type** properties
+  - You must move your cron.my_command.label translations on the **messages.%lang%.%format%** file instead of using the **admin.%lang%.%format%** 
+- `api_call_status.html.twig` now display null status code as "Ongoing" placeholder text
 
 ### Flag as deprecated
 

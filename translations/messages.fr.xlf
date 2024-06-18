@@ -131,6 +131,28 @@
                 <source>env_banner_message.unknown</source>
                 <target> - Environnement inconnu</target>
             </trans-unit>
+
+            <!-- History Origin short syntax -->
+            <trans-unit id="h.crt_f">
+                <source>h.crt_f</source>
+                <target>Formulaire de création</target>
+            </trans-unit>
+            <trans-unit id="h.upd_f">
+                <source>h.upd_f</source>
+                <target>Formulaire d'édition</target>
+            </trans-unit>
+            <trans-unit id="h.prf_f">
+                <source>h.prf_f</source>
+                <target>Formulaire mon profil</target>
+            </trans-unit>
+            <trans-unit id="h.imp_f">
+                <source>h.imp_f</source>
+                <target>Formulaire d'import</target>
+            </trans-unit>
+            <trans-unit id="h.arc_a">
+                <source>h.arc_a</source>
+                <target>Action d'archivage</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

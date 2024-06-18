@@ -86,7 +86,6 @@ class HistoryExtension extends AbstractExtension
         switch ($row['code']) {
             case 'email.sent':
             case 'import':
-            case 'cron':
                 $toReturn = $codeTitle . ($toReturn !== null ? (' : ' . $toReturn) : '');
                 break;
             case 'crt':
