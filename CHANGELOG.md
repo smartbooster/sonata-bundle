@@ -1,5 +1,31 @@
 CHANGELOG
 ===================
+## v2.5.0 - (2024-06-18)
+
+### Added
+- `show_history_field.html.twig` based on tailwind class + Twig `HistoryExtension` required to autocomplete some data of the history rows 
+- `HistoryExtension` to automaticaly add the mentioned above template on the show view of every entity that implement the `Smart\CoreBundle\Entity\HistoryInterface`
+- iconify cdn to use **iconify-icon Web Component** in `standard_layout.html.twig` and `empty_layout.html.twig `
+- Twig `FormatExtension` to detect data type base on string value
+- `templates/macros/badge.html.twig` to use in tailwind block
+
+### Changed
+- **BC Break** `SendAccountCreationEmailTrait::sendAccountCreationEmailAction` the user subject is now entirely passed to the `BaseMailer` to log the email sent in
+his history.
+  - You must add the `MailableInterface` to your User entity for `BaseMailer::setRecipientToEmail` to work properly
+- `BaseMailer::setRecipientToEmail` advanced scenario to init the **to**, **cc** and **bcc** of the email based on the recipient type
+
+### Flag as deprecated
+
+In anticipation for the v3.0.0 (cf. [UPGRADE-3.0.md](UPGRADE-3.0.md)) we mark the following classes as deprecated :
+
+- `Smart\SonataBundle\Entity\Log\BatchLog`
+- `Smart\SonataBundle\Entity\Log\HistorizableInterface`
+- `Smart\SonataBundle\Entity\Log\HistorizableTrait`
+- `Smart\SonataBundle\Logger\BatchLogger`
+- `Smart\SonataBundle\Logger\HistoryLogger`
+- `templates\admin\base_field\timeline_history_field.html.twig`
+
 ## v2.4.0 - (2024-06-12)
 ### Added
 - `DocumentationController::renderMarkdown` action to render markdown documentation files stored in the **/documentation** directory

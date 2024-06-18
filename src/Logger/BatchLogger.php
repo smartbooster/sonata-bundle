@@ -6,6 +6,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sentry\ClientInterface;
 use Smart\SonataBundle\Entity\Log\BatchLog;
 
+/**
+ * @deprecated use Smart\CoreBundle\Monitor\ProcessMonitor instead
+ *
+ * @author Louis Fortunier <louis.fortunier@smartbooster.io>
+ */
 class BatchLogger
 {
     private EntityManagerInterface $entityManager;

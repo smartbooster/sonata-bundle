@@ -99,7 +99,7 @@
             </trans-unit>
             <trans-unit id="enum.email_status.unsubscribed">
                 <source>enum.email_status.unsubscribed</source>
-                <target> Désabonné</target>
+                <target>Désabonné</target>
             </trans-unit>
             <trans-unit id="enum.email_status.complaint">
                 <source>enum.email_status.complaint</source>

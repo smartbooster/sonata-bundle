@@ -174,10 +174,6 @@
                 <source>history.none</source>
                 <target>No history available.</target>
             </trans-unit>
-            <trans-unit id="history.email.sent">
-                <source>history.email.sent</source>
-                <target>Email sent : </target>
-            </trans-unit>
             <trans-unit id="history.entity.created">
                 <source>history.entity.created</source>
                 <target>Entity created</target>
@@ -205,6 +201,99 @@
             <trans-unit id="history.timeline_context">
                 <source>history.timeline_context</source>
                 <target> [context %context%]</target>
+            </trans-unit>
+            <!-- History v2 -->
+            <trans-unit id="label.history">
+                <source>label.history</source>
+                <target>History</target>
+            </trans-unit>
+            <trans-unit id="label.empty">
+                <source>label.empty</source>
+                <target>empty</target>
+            </trans-unit>
+            <trans-unit id="history.email.sent">
+                <source>history.email.sent</source>
+                <target>Email sent</target>
+            </trans-unit>
+            <trans-unit id="history.crt">
+                <source>history.crt</source>
+                <target>Created</target>
+            </trans-unit>
+            <trans-unit id="history.upd">
+                <source>history.upd</source>
+                <target>Updated</target>
+            </trans-unit>
+            <trans-unit id="history.arc">
+                <source>history.arc</source>
+                <target>Archived</target>
+            </trans-unit>
+            <trans-unit id="history.import">
+                <source>history.import</source>
+                <target>Imported</target>
+            </trans-unit>
+            <trans-unit id="history.cron">
+                <source>history.cron</source>
+                <target>Cron</target>
+            </trans-unit>
+            <trans-unit id="history.context.admin">
+                <source>history.context.admin</source>
+                <target>Admin</target>
+            </trans-unit>
+            <trans-unit id="history.context.app">
+                <source>history.context.app</source>
+                <target>Client interface</target>
+            </trans-unit>
+            <trans-unit id="history.context.api">
+                <source>history.context.api</source>
+                <target>API</target>
+            </trans-unit>
+            <trans-unit id="h.crt_f">
+                <source>h.crt_f</source>
+                <target>Creation form</target>
+            </trans-unit>
+            <trans-unit id="h.upd_f">
+                <source>h.upd_f</source>
+                <target>Edit form</target>
+            </trans-unit>
+            <trans-unit id="h.prf_f">
+                <source>h.prf_f</source>
+                <target>My profile form</target>
+            </trans-unit>
+            <trans-unit id="h.imp_f">
+                <source>h.imp_f</source>
+                <target>Import form</target>
+            </trans-unit>
+            <trans-unit id="h.arc_a">
+                <source>h.arc_a</source>
+                <target>Archive action</target>
+            </trans-unit>
+            <trans-unit id="label.by">
+                <source>label.by</source>
+                <target>By</target>
+            </trans-unit>
+            <trans-unit id="label.profile">
+                <source>label.profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="label.administrator">
+                <source>label.administrator</source>
+                <target>Administrator</target>
+            </trans-unit>
+            <trans-unit id="label.email_status_last">
+                <source>label.email_status_last</source>
+                <target>Last email status</target>
+            </trans-unit>
+            <trans-unit id="label.email_status_history">
+                <source>label.email_status_history</source>
+                <target>Email status history</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="label.last_login">
+                <source>label.last_login</source>
+                <target>Last login</target>
             </trans-unit>
 
             <!-- Action -->

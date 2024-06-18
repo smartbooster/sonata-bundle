@@ -7,6 +7,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @deprecated use Smart\CoreBundle\Entity\ProcessTrait and Smart\CoreBundle\Entity\ProcessInterface instead
+ *
  * @author Louis Fortunier <louis.fortunier@smartbooster.io>
  *
  * @ORM\Table(name="batch_log")

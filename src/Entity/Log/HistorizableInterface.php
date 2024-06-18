@@ -3,6 +3,8 @@
 namespace Smart\SonataBundle\Entity\Log;
 
 /**
+ * @deprecated use Smart\CoreBundle\Entity\Log\HistorizableInterface instead
+ *
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
 interface HistorizableInterface
