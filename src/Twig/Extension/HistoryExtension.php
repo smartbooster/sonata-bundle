@@ -17,6 +17,8 @@ class HistoryExtension extends AbstractExtension
     {
         return [
             new TwigFunction('history_get_row_icon_name', [$this, 'getRowIconName']),
+            new TwigFunction('history_get_row_icon_class', [$this, 'getRowIconClass']),
+            new TwigFunction('history_get_row_icon_prefix', [$this, 'getRowIconPrefix']),
             new TwigFunction('history_get_row_title', [$this, 'getRowTitle']),
         ];
     }
@@ -30,13 +32,39 @@ class HistoryExtension extends AbstractExtension
         return match ($row['code']) {
             'email.sent' => 'envelope',
             'crt' => 'plus',
-            'upd' => 'update',
-            'arc' => 'archive',
+            'upd' => 'pencil',
+            'arc' => 'archive-box',
             'stripe' => 'stripe',
             'api' => 'abbr-api',
-            'import' => 'import',
+            'import' => 'arrow-up-tray',
             'cron' => 'cog',
             default => null,
+        };
+    }
+
+    public function getRowIconClass(array $row): string
+    {
+        if (isset($row['success'])) {
+            return 'bg-success';
+        }
+
+        return match ($row['code']) {
+            'email.sent', 'upd', 'int' => 'bg-info',
+            'crt', 'import' => 'bg-success',
+            'arc' => 'bg-warning',
+            'ext' => 'bg-neutral',
+            'err' => 'bg-danger',
+            'stripe' => 'bg-indigo-500',
+            default => 'bg-neutral-light',
+        };
+    }
+
+    public function getRowIconPrefix(array $row): string
+    {
+        return match ($row['code']) {
+            'stripe' => 'bxl',
+            'api' => 'gravity-ui',
+            default => 'heroicons',
         };
     }
 

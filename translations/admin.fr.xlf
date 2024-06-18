@@ -207,6 +207,10 @@
                 <source>label.history</source>
                 <target>Historique</target>
             </trans-unit>
+            <trans-unit id="label.empty">
+                <source>label.empty</source>
+                <target>vide</target>
+            </trans-unit>
             <trans-unit id="history.email.sent">
                 <source>history.email.sent</source>
                 <target>Email envoyé</target>

@@ -6,8 +6,10 @@
         {{ value|date('d/m/Y') }}
     {% elseif is_iso8601_datetime(value) and value|date('H:i') != '00:00' %}
         {{ value|date('d/m/Y H:i') }}
+    {% elseif value is null %}
+        ({{ 'label.empty'|trans }})
     {% else %}
-        {{ value }}
+        {{ value|nl2br }}
     {% endif %}
 {% endmacro %}
 
@@ -32,13 +34,9 @@
                         <div class="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
                     </div>
                 {% else %}
-                    {# todo config iconify #}
-                    <div class="flex h-6 w-6 flex-none items-center justify-center bg-white">
-                        <div class="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
+                    <div class="{{ history_get_row_icon_class(row) }} h-6 w-6 flex items-center justify-center rounded-full">
+                        <iconify-icon icon="{{ history_get_row_icon_prefix(row) ~ ':' ~ icon_name }}" width="12" class="text-white"></iconify-icon>
                     </div>
-{#                    <div :class="[iconClass, 'h-6 w-6 flex items-center justify-center rounded-full']">#}
-{#                        <UiIcon :prefix="iconPrefix" :name="iconName" class="h-3 w-3 text-white"/>#}
-{#                    </div>#}
                 {% endif %}
             </div>
             <div class="grow">
@@ -77,8 +75,7 @@
                                         {{ badge((object.statusPrefixLabel ~ row.status.f)|trans({}, 'messages'), row.status.f) }}
                                     {% endif %}
                                     {% if row.status.f is not null and row.status.t is not null %}
-{#                                         <UiIcon v-if="status.f && status.t" name="arrow-long-right" class="h-4 w-4"/> todo iconify  #}
-                                        >
+                                        <iconify-icon icon="heroicons:arrow-long-right" width="16" class="align-middle mx-0.5"></iconify-icon>
                                     {% endif %}
                                     {% if row.status.t is not null %}
                                         {{ badge((object.statusPrefixLabel ~ row.status.t)|trans({}, 'messages'), row.status.t) }}
@@ -130,7 +127,7 @@
                     <ul class="list-disc list-inside mb-0 pl-2">
                         {% for field, field_data in row.diff %}
                             <li>
-                                {{ ('label.' ~ field|u.snake)|trans }} :
+                                <span>{{ ('label.' ~ field|u.snake)|trans }} :</span>
                                 {% if field_data.c_u is defined and field_data.c_u is not empty %}
                                     <ul class="list-disc list-inside ml-5 mb-0">
                                         {% for item in field_data.c_u %}
@@ -141,8 +138,7 @@
                                     {% block render_diff_from_value %}
                                         <span class="text-gray-500">{{ _self.render_diff_value(field_data.f) }}</span>
                                     {% endblock %}
-                                    {# <UiIcon name="arrow-long-right" class="h-4 w-4 inline mx-0.5"/> todo iconify #}
-                                    →
+                                    <iconify-icon icon="heroicons:arrow-long-right" width="16" class="align-middle mx-0.5"></iconify-icon>
                                     {% block render_diff_to_value %}
                                         {{ _self.render_diff_value(field_data.t) }}
                                     {% endblock %}

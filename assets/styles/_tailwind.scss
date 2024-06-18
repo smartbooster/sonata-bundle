@@ -1,4 +1,7 @@
 .sb-tailwind {
+  // Additional overhead to have an ISO rendering with our platform-bundle
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
   .ps-0 {
     padding-inline-start: 0px;
   }
