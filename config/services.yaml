@@ -146,7 +146,7 @@ services:
       - '@Symfony\Component\Mailer\MailerInterface'
       - '@Smart\SonataBundle\Mailer\EmailProvider'
       - '@Symfony\Contracts\Translation\TranslatorInterface'
-      - '@Smart\SonataBundle\Logger\HistoryLogger'
+      - '@Smart\CoreBundle\Logger\HistoryLogger'
   Smart\SonataBundle\Mailer\EmailProvider:
     arguments:
       - '@request_stack'

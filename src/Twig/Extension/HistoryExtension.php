@@ -77,9 +77,7 @@ class HistoryExtension extends AbstractExtension
             case 'email.sent':
             case 'import':
             case 'cron':
-                if (!empty($row['prefixCodeTitle'])) {
-                    $toReturn = $codeTitle . ($toReturn !== null ? (' : ' . $toReturn) : '');
-                }
+                $toReturn = $codeTitle . ($toReturn !== null ? (' : ' . $toReturn) : '');
                 break;
             case 'crt':
             case 'upd':

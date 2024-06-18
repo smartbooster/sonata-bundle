@@ -30,7 +30,7 @@ trait SendAccountCreationEmailTrait
             'security_reset_password_route' => $context . '_security_reset_password',
             'token' => $token->getValue(),
         ]);
-        $mailer->send($email, $subject->getEmail());
+        $mailer->send($email, $subject);
 
         $this->addFlash('success', $translator->trans('send_account_creation_email.success', [
             '{email}' => $subject->getEmail()
