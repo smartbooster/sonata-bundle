@@ -27,6 +27,8 @@ class HistoryExtension extends AbstractExtension
     {
         if (isset($row['success'])) {
             return 'check';
+        } elseif (!isset($row['code'])) {
+            return null;
         }
 
         return match ($row['code']) {
@@ -59,8 +61,12 @@ class HistoryExtension extends AbstractExtension
         };
     }
 
-    public function getRowIconPrefix(array $row): string
+    public function getRowIconPrefix(array $row): ?string
     {
+        if (!isset($row['code'])) {
+            return 'heroicons';
+        }
+
         return match ($row['code']) {
             'stripe' => 'bxl',
             'api' => 'gravity-ui',
@@ -70,8 +76,12 @@ class HistoryExtension extends AbstractExtension
 
     public function getRowTitle(array $row, string $domain = 'admin'): ?string
     {
-        $codeTitle = $this->translator->trans('history.' . $row['code'], [], $domain);
+        $codeTitle = $this->translator->trans('history.' . ($row['code'] ?? null), [], $domain);
         $toReturn = $row['title'] ?? null;
+
+        if (!isset($row['code'])) {
+            return $toReturn;
+        }
 
         switch ($row['code']) {
             case 'email.sent':

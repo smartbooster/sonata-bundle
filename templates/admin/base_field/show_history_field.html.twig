@@ -29,15 +29,17 @@
             {% endif %}
             {% set icon_name = history_get_row_icon_name(row) %}
             <div class="relative mt-2">
-                {% if icon_name == null %}
-                    <div class="flex h-6 w-6 flex-none items-center justify-center bg-white">
-                        <div class="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
-                    </div>
-                {% else %}
-                    <div class="{{ history_get_row_icon_class(row) }} h-6 w-6 flex items-center justify-center rounded-full">
-                        <iconify-icon icon="{{ history_get_row_icon_prefix(row) ~ ':' ~ icon_name }}" width="12" class="text-white"></iconify-icon>
-                    </div>
-                {% endif %}
+                {% block icon %}
+                    {% if icon_name == null %}
+                        <div class="flex h-6 w-6 flex-none items-center justify-center bg-white">
+                            <div class="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
+                        </div>
+                    {% else %}
+                        <div class="{{ history_get_row_icon_class(row) }} h-6 w-6 flex items-center justify-center rounded-full">
+                            <iconify-icon icon="{{ history_get_row_icon_prefix(row) ~ ':' ~ icon_name }}" width="12" class="text-white"></iconify-icon>
+                        </div>
+                    {% endif %}
+                {% endblock %}
             </div>
             <div class="grow">
                 <div class="flex items-top gap-x-1 justify-between {% if row.user is not defined %}mt-2.5{% endif %}">
