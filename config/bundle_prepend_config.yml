@@ -17,6 +17,9 @@ sonata_admin:
         admin.extension.encode_password:
             uses:
                 - Smart\SonataBundle\Entity\User\UserTrait
+        admin.extension.history:
+            implements:
+                - Smart\CoreBundle\Entity\HistoryInterface
 
 # Global Timezone Config
 # https://stackoverflow.com/a/26469662

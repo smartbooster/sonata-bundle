@@ -62,6 +62,10 @@ services:
       - '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface'
     tags:
       - {name: sonata.admin.extension}
+  admin.extension.history:
+    class: Smart\SonataBundle\Admin\Extension\HistoryExtension
+    tags:
+      - {name: sonata.admin.extension, global: true}
 
   # Command
   smart_sonata.parameter_load_command:
