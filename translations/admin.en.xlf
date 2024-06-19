@@ -215,42 +215,6 @@
                 <source>label.empty</source>
                 <target>empty</target>
             </trans-unit>
-            <trans-unit id="history.email.sent">
-                <source>history.email.sent</source>
-                <target>Email sent</target>
-            </trans-unit>
-            <trans-unit id="history.crt">
-                <source>history.crt</source>
-                <target>Created</target>
-            </trans-unit>
-            <trans-unit id="history.upd">
-                <source>history.upd</source>
-                <target>Updated</target>
-            </trans-unit>
-            <trans-unit id="history.arc">
-                <source>history.arc</source>
-                <target>Archived</target>
-            </trans-unit>
-            <trans-unit id="history.import">
-                <source>history.import</source>
-                <target>Imported</target>
-            </trans-unit>
-            <trans-unit id="history.cron">
-                <source>history.cron</source>
-                <target>Cron</target>
-            </trans-unit>
-            <trans-unit id="history.context.admin">
-                <source>history.context.admin</source>
-                <target>Admin</target>
-            </trans-unit>
-            <trans-unit id="history.context.app">
-                <source>history.context.app</source>
-                <target>Client interface</target>
-            </trans-unit>
-            <trans-unit id="history.context.api">
-                <source>history.context.api</source>
-                <target>API</target>
-            </trans-unit>
             <trans-unit id="label.by">
                 <source>label.by</source>
                 <target>By</target>

@@ -50,7 +50,7 @@
                         </div>
                     {% else %}
                         <div class="{{ history_get_row_icon_class(row) }} h-6 w-6 flex items-center justify-center rounded-full">
-                            <iconify-icon icon="{{ history_get_row_icon_prefix(row) ~ ':' ~ icon_name }}" width="12" class="text-white"></iconify-icon>
+                            <iconify-icon icon="{{ history_get_row_icon_prefix(row) ~ ':' ~ icon_name }}" width="14" class="text-white"></iconify-icon>
                         </div>
                     {% endif %}
                 {% endblock %}
@@ -63,7 +63,7 @@
                             {{ history_get_row_title(row) }}
                             {% if row.ctxt is defined %}
                                 <span class="text-info">
-                                  [{{ ('history.context.' ~ row.ctxt)|trans }}{% if row.orgn is defined %}<span v-if="orgn"> : {{ row.orgn|trans({}, 'messages') }}</span>{% endif %}]
+                                  [{{ ('history.context.' ~ row.ctxt)|trans({}, 'messages') }}{% if row.orgn is defined %}<span v-if="orgn"> : {{ row.orgn|trans({}, 'messages') }}</span>{% endif %}]
                                 </span>
                             {% endif %}
                         </div>
@@ -143,10 +143,10 @@
 
                 <!-- Description + Commentaire + Block custom_content -->
                 {% if row.desc is defined %}
-                    <div class="mt-1">{{ row.desc|raw }}</div>
+                    <div class="mt-1">{{ row.desc|raw|nl2br }}</div>
                 {% endif %}
                 {% if row.comment is defined %}
-                    <div class="sb-history-comment">{{ row.comment|raw }}</div>
+                    <div class="sb-history-comment">{{ row.comment|raw|nl2br }}</div>
                 {% endif %}
                 {% block custom_content %}{% endblock %}
 

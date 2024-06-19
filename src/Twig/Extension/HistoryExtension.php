@@ -74,7 +74,7 @@ class HistoryExtension extends AbstractExtension
         };
     }
 
-    public function getRowTitle(array $row, string $domain = 'admin'): ?string
+    public function getRowTitle(array $row, string $domain = 'messages'): ?string
     {
         $codeTitle = $this->translator->trans('history.' . ($row['code'] ?? null), [], $domain);
         $toReturn = $row['title'] ?? null;

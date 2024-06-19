@@ -132,6 +132,47 @@
                 <target> - Environnement inconnu</target>
             </trans-unit>
 
+            <!-- History context & code -->
+            <trans-unit id="history.context.admin">
+                <source>history.context.admin</source>
+                <target>Admin</target>
+            </trans-unit>
+            <trans-unit id="history.context.app">
+                <source>history.context.app</source>
+                <target>Interface client</target>
+            </trans-unit>
+            <trans-unit id="history.context.api">
+                <source>history.context.api</source>
+                <target>API</target>
+            </trans-unit>
+            <trans-unit id="history.context.cron">
+                <source>history.context.cron</source>
+                <target>Cron</target>
+            </trans-unit>
+            <trans-unit id="history.email.sent">
+                <source>history.email.sent</source>
+                <target>Email envoyé</target>
+            </trans-unit>
+            <trans-unit id="history.crt">
+                <source>history.crt</source>
+                <target>Création</target>
+            </trans-unit>
+            <trans-unit id="history.upd">
+                <source>history.upd</source>
+                <target>Mise à jour</target>
+            </trans-unit>
+            <trans-unit id="history.arc">
+                <source>history.arc</source>
+                <target>Archivage</target>
+            </trans-unit>
+            <trans-unit id="history.import">
+                <source>history.import</source>
+                <target>Import</target>
+            </trans-unit>
+            <trans-unit id="history.cron">
+                <source>history.cron</source>
+                <target>Cron</target>
+            </trans-unit>
             <!-- History Origin short syntax -->
             <trans-unit id="h.crt_f">
                 <source>h.crt_f</source>

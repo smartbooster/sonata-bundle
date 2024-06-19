@@ -19,6 +19,7 @@ class BaseMailer
     protected EmailProvider $provider;
     protected TranslatorInterface $translator;
     protected HistoryLogger $historyLogger;
+    protected bool $flushLog = true;
 
     public function __construct(
         MailerInterface $mailer,
@@ -80,8 +81,10 @@ class BaseMailer
                 HistoryLogger::RECIPIENT_PROPERTY => $this->recipientToString,
             ];
 
-            $this->historyLogger->setFlushLog(true);
-            $this->historyLogger->log($recipient, HistoryLogger::EMAIL_SENT_CODE, $historyData);
+            $this->historyLogger
+                ->setFlushLog($this->flushLog)
+                ->log($recipient, HistoryLogger::EMAIL_SENT_CODE, $historyData)
+            ;
         }
     }
 
@@ -135,5 +138,10 @@ class BaseMailer
         }
 
         return $toReturn;
+    }
+
+    public function setFlushLog(bool $flushLog): void
+    {
+        $this->flushLog = $flushLog;
     }
 }
