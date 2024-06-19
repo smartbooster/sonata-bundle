@@ -3,9 +3,9 @@
 
 {% macro render_diff_value(value) %}
     {% if is_iso8601_datetime(value) and value|date('H:i') == '00:00' %}
-        {{ value|date('d/m/Y') }}
+        {{ value|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATE_FR')) }}
     {% elseif is_iso8601_datetime(value) and value|date('H:i') != '00:00' %}
-        {{ value|date('d/m/Y H:i') }}
+        {{ value|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}
     {% elseif value is null %}
         ({{ 'label.empty'|trans }})
     {% else %}
@@ -68,7 +68,7 @@
                                     {% include '@SmartSonata/admin/base_field/api_call_status_code.html.twig' with {value: row.status_code} %}
                                 </div>
                             {% endif %}
-                            {{ row.date|date('d/m/Y à H:i') }}
+                            {{ row.date|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}
                         </div>
                         {% block status_update %}
                             {% if row.status is defined and row.status is not null %}
@@ -109,7 +109,7 @@
                         <div>
                             <b>{{ 'label.email_status_last'|trans }} :&nbsp;</b>
                             <span class="rounded bg-info text-white p-1 text-xs">{{ ('enum.email_status.' ~ row.email_last_status)|trans({}, 'messages') }}</span>
-                            <span class="text-xs">le {{ row.email_last_status_at|date('d/m/Y à H:i') }}</span>
+                            <span class="text-xs">le {{ row.email_last_status_at|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}</span>
                         </div>
                         {% if row.email_status_history is defined and row.email_status_history|length > 1 %}
                             <div class="mt-1" v-if="email_status_history.length > 1">
@@ -118,7 +118,7 @@
                                     {% for status_history in row.email_status_history %}
                                         <li class="text-xs mt-2">
                                             <span class="rounded bg-info text-white p-1">{{ ('enum.email_status.' ~ status_history.status)|trans({}, 'messages') }}</span>
-                                            <span>le {{ status_history.status_at|date('d/m/Y à H:i') }}</span>
+                                            <span>le {{ status_history.status_at|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}</span>
                                         </li>
                                     {% endfor %}
                                 </ul>

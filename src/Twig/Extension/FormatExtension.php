@@ -24,7 +24,7 @@ class FormatExtension extends AbstractExtension
                 return false;
             }
             $dt = new \DateTime($date);
-            return $dt->format(\DateTime::ATOM) === $date;
+            return $dt->format(\DateTimeInterface::ATOM) === $date;
         } catch (\Exception $e) {
             return false;
         }

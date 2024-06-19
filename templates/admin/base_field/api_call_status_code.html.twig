@@ -24,7 +24,7 @@
             style="color: gray;
             margin-left: 10px;
             font-size: 12px;"
-            title="Relancé le {{ object.restartedAt|date('d/m/Y à H:i:s') }}"
+            title="Relancé le {{ object.restartedAt|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_WITH_SECONDS_FR')) }}"
         ></i>
     {% endif %}
 </div>
