@@ -87,6 +87,10 @@
                 <source>fieldset.label_history</source>
                 <target>History</target>
             </trans-unit>
+            <trans-unit id="show.group_default">
+                <source>show.group_default</source>
+                <target>General informations</target>
+            </trans-unit>
 
             <trans-unit id="field.label_id">
                 <source>field.label_id</source>

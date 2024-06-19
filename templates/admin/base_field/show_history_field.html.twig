@@ -1,6 +1,16 @@
 {% trans_default_domain 'admin' %}
 {% from '@SmartSonata/macros/badge.html.twig' import badge as badge %}
 
+{% macro render_diff_label(field) %}
+    {% set diff_label_key = ('label.' ~ field|u.snake) %}
+    {% set translated_diff_label = diff_label_key|trans %}
+    {% if diff_label_key == translated_diff_label %}
+        {{ ('field.label_' ~ field|u.snake)|trans }}
+    {% else %}
+        {{ translated_diff_label }}
+    {% endif %}
+{% endmacro %}
+
 {% macro render_diff_value(value) %}
     {% if is_iso8601_datetime(value) and value|date('H:i') == '00:00' %}
         {{ value|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATE_FR')) }}
@@ -8,8 +18,12 @@
         {{ value|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}
     {% elseif value is null %}
         ({{ 'label.empty'|trans }})
+    {% elseif value is same as(true) %}
+        <span class="label label-success">{{ 'label_type_yes'|trans({}, 'SonataAdminBundle') }}</span>
+    {% elseif value is same as(false) %}
+        <span class="label label-danger">{{ 'label_type_no'|trans({}, 'SonataAdminBundle') }}</span>
     {% else %}
-        {{ value|nl2br }}
+        {{ value|raw|nl2br }}
     {% endif %}
 {% endmacro %}
 
@@ -141,7 +155,7 @@
                     <ul class="list-disc list-inside mb-0 pl-2">
                         {% for field, field_data in row.diff %}
                             <li>
-                                <span>{{ ('label.' ~ field|u.snake)|trans }} :</span>
+                                <span>{{ _self.render_diff_label(field) }} :</span>
                                 {% if field_data.c_u is defined and field_data.c_u is not empty %}
                                     <ul class="list-disc list-inside ml-5 mb-0">
                                         {% for item in field_data.c_u %}
@@ -149,9 +163,11 @@
                                         {% endfor %}
                                     </ul>
                                 {% elseif field_data.f is not null or field_data.t is not null%}
-                                    {% block render_diff_from_value %}
-                                        <span class="text-gray-500">{{ _self.render_diff_value(field_data.f) }}</span>
-                                    {% endblock %}
+                                    <span class="text-gray-500">
+                                        {% block render_diff_from_value %}
+                                            {{ _self.render_diff_value(field_data.f) }}
+                                        {% endblock %}
+                                    </span>
                                     <iconify-icon icon="heroicons:arrow-long-right" width="16" class="align-middle mx-0.5"></iconify-icon>
                                     {% block render_diff_to_value %}
                                         {{ _self.render_diff_value(field_data.t) }}

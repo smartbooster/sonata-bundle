@@ -23,6 +23,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin imp
     /** @var ContainerInterface $container */
     private $container;
     private TokenStorageInterface $tokenStorage;
+    public ?string $showHistoryTemplate = null;
 
     public function __construct(?string $code = null, ?string $class = null, ?string $baseControllerName = null)
     {

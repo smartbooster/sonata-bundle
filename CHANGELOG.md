@@ -8,6 +8,7 @@ CHANGELOG
 - iconify cdn to use **iconify-icon Web Component** in `standard_layout.html.twig` and `empty_layout.html.twig `
 - Twig `FormatExtension` to detect data type base on string value
 - `templates/macros/badge.html.twig` to use in tailwind block
+- `AbstractAdmin::showHistoryTemplate` property to ease the override of the show_history_template.html.twig per admin 
 
 ### Changed
 - **BC Break** `SendAccountCreationEmailTrait::sendAccountCreationEmailAction` the user subject is now entirely passed to the `BaseMailer` to log the email sent in
@@ -17,6 +18,40 @@ his history.
 - **BC Break** `AbstractApiCallAdmin` and `AbstractCronAdmin` now use **messages** for `choice_translation_domain` for their **type** properties
   - You must move your cron.my_command.label translations on the **messages.%lang%.%format%** file instead of using the **admin.%lang%.%format%** 
 - `api_call_status.html.twig` now display null status code as "Ongoing" placeholder text
+- `Parameter` entity now use `HistorizableInterface` from core-bundle
+  - Impact on `ParameterAdmin` : HistoryLogger DI removed + all previous log mention removed  
+  - No more need to declare the `list_value.html.twig` and `timeline_history_field.html.twig` on the project as they are handle by the Sonata-Bundle
+  - **BC Break** database migration require to keep old history legacy :
+  ```php
+  <?php
+  
+  declare(strict_types=1);
+  
+  namespace DoctrineMigrations;
+  
+  use Doctrine\DBAL\Schema\Schema;
+  use Doctrine\Migrations\AbstractMigration;
+  
+  final class Version20240619081425 extends AbstractMigration
+  {
+      public function getDescription(): string
+      {
+          return "Rename history field to historyLegacy for conversion and add new history field which is saved from the core-bundle";
+      }
+  
+      public function up(Schema $schema): void
+      {
+          $this->addSql('ALTER TABLE smart_parameter CHANGE history history_legacy JSON DEFAULT NULL');
+          $this->addSql('ALTER TABLE smart_parameter ADD history JSON DEFAULT NULL');
+      }
+  
+      public function down(Schema $schema): void
+      {
+          $this->addSql('ALTER TABLE smart_parameter DROP history');
+          $this->addSql('ALTER TABLE smart_parameter CHANGE history_legacy history JSON DEFAULT NULL');
+      }
+  }
+  ```
 
 ### Flag as deprecated
 

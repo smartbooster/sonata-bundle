@@ -2,7 +2,7 @@
 
 namespace Smart\SonataBundle\Entity;
 
-use Smart\SonataBundle\Entity\Log\HistorizableInterface;
+use Smart\CoreBundle\Entity\Log\HistorizableInterface;
 
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
