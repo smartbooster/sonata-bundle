@@ -22,6 +22,10 @@
         <span class="label label-success">{{ 'label_type_yes'|trans({}, 'SonataAdminBundle') }}</span>
     {% elseif value is same as(false) %}
         <span class="label label-danger">{{ 'label_type_no'|trans({}, 'SonataAdminBundle') }}</span>
+    {% elseif value is iterable %}
+        {% for item in value %}
+            {{ item }}
+        {% endfor %}
     {% else %}
         {{ value|raw|nl2br }}
     {% endif %}

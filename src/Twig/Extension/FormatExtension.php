@@ -17,10 +17,10 @@ class FormatExtension extends AbstractExtension
         ];
     }
 
-    public function isIso8601Datetime(?string $date): bool
+    public function isIso8601Datetime(array|string|null $date): bool
     {
         try {
-            if ($date == null) {
+            if ($date == null || is_array($date)) {
                 return false;
             }
             $dt = new \DateTime($date);
