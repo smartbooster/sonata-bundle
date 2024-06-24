@@ -67,9 +67,9 @@ class Parameter implements ParameterInterface
     private ?string $regex = null;
 
     /**
-     * @ORM\Column(nullable=true)
+     * @ORM\Column(name="history_legacy", nullable=true)
      */
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(name: 'history_legacy', nullable: true)]
     protected ?array $historyLegacy = null;
 
     /**
