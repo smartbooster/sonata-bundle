@@ -30,9 +30,12 @@
 {% block sonata_page_content_header %}
     {# MDT fix content shift due to env_banner #}
     {% if display_smart_env_banner %}
-        <div style="height: 29px;"></div>
+        <div class="content-header-under-banner">
+            {{ parent() }}
+        </div>
+    {% else %}
+        {{ parent() }}
     {% endif %}
-    {{ parent() }}
 {% endblock %}
 
 {% block side_bar_before_nav %}
