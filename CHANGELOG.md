@@ -1,6 +1,6 @@
 CHANGELOG
 ===================
-## v2.5.0 - (2024-06-19)
+## v2.5.0 - (2024-06-25)
 
 ### Added
 - `show_history_field.html.twig` based on tailwind class + Twig `HistoryExtension` required to autocomplete some data of the history rows 
