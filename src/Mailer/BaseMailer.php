@@ -2,8 +2,9 @@
 
 namespace Smart\SonataBundle\Mailer;
 
-use Smart\SonataBundle\Entity\Log\HistorizableInterface;
-use Smart\SonataBundle\Logger\HistoryLogger;
+use Smart\CoreBundle\Entity\Log\HistorizableInterface;
+use Smart\CoreBundle\Entity\MailableInterface;
+use Smart\CoreBundle\Logger\HistoryLogger;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -13,17 +14,23 @@ class BaseMailer
 {
     private string $senderAddress;
     private string $senderName = '';
+    protected ?string $recipientToString = null;
     protected MailerInterface $mailer;
     protected EmailProvider $provider;
     protected TranslatorInterface $translator;
-    protected HistoryLogger $logger;
+    protected HistoryLogger $historyLogger;
+    protected bool $flushLog = true;
 
-    public function __construct(MailerInterface $mailer, EmailProvider $provider, TranslatorInterface $translator, HistoryLogger $logger)
-    {
+    public function __construct(
+        MailerInterface $mailer,
+        EmailProvider $provider,
+        TranslatorInterface $translator,
+        HistoryLogger $historyLogger
+    ) {
         $this->mailer = $mailer;
         $this->provider = $provider;
         $this->translator = $translator;
-        $this->logger = $logger;
+        $this->historyLogger = $historyLogger;
     }
 
     /**
@@ -69,10 +76,15 @@ class BaseMailer
         $this->mailer->send($email);
 
         if ($recipient instanceof HistorizableInterface) {
-            $this->logger->log($recipient, HistoryLogger::EMAIL_SENT_CODE, [
-                'title' => $email->getSubject(),
-                'email_code' => $email->getCode(),
-            ]);
+            $historyData = [
+                HistoryLogger::TITLE_PROPERTY => $email->getSubject(),
+                HistoryLogger::RECIPIENT_PROPERTY => $this->recipientToString,
+            ];
+
+            $this->historyLogger
+                ->setFlushLog($this->flushLog)
+                ->log($recipient, HistoryLogger::EMAIL_SENT_CODE, $historyData)
+            ;
         }
     }
 
@@ -82,12 +94,54 @@ class BaseMailer
      */
     protected function setRecipientToEmail(TemplatedEmail $email, $recipient = null): void
     {
-        if ($recipient == null) {
+        if (
+            ($recipient instanceof MailableInterface && $recipient->getRecipientEmail() === null)
+            || (is_array($recipient) && empty($recipient))
+            || $recipient == null
+        ) {
             throw new \InvalidArgumentException($this->translator->trans('smart.email.empty_recipient_error', [
                 '%code%' => $email->getCode()
             ], 'email'));
         }
 
-        $email->to($recipient);
+        if ($recipient instanceof MailableInterface) {
+            $this->recipientToString = $recipient->getRecipientEmail();
+            $email->addTo(...$this->extractEmailFromString($recipient->getRecipientEmail()));
+            $email->addCc(...$this->extractEmailFromString($recipient->getCc()));
+            $email->addBcc(...$this->extractEmailFromString($recipient->getCci()));
+        } elseif (is_array($recipient)) {
+            $this->recipientToString = implode(', ', $recipient);
+            $email->addTo(...$recipient);
+        } else {
+            $this->recipientToString = $recipient;
+            $email->to(...$this->extractEmailFromString($recipient));
+        }
+    }
+
+    private function extractEmailFromString(?string $string): array
+    {
+        if (null == $string) {
+            return [];
+        }
+
+        if (str_contains($string, ',')) {
+            $separator = ',';
+        } elseif (str_contains($string, ';')) {
+            $separator = ';';
+        }
+        if (!empty($separator)) {
+            $toReturn = array_map(function ($elem) {
+                return trim($elem);
+            }, explode($separator, $string));
+        } else {
+            $toReturn = [$string];
+        }
+
+        return $toReturn;
+    }
+
+    public function setFlushLog(bool $flushLog): void
+    {
+        $this->flushLog = $flushLog;
     }
 }

@@ -3,6 +3,7 @@
 namespace Smart\SonataBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Smart\CoreBundle\EventListener\HistoryDoctrineListener;
 use Smart\SonataBundle\Form\Type\Security\ForgotPasswordType;
 use Smart\SonataBundle\Mailer\BaseMailer;
 use Smart\SonataBundle\Security\Form\Type\ResetPasswordType;
@@ -128,7 +129,7 @@ class AbstractSecurityController extends AbstractController
      *
      * @return Response
      */
-    public function resetPassword(Request $request)
+    public function resetPassword(Request $request, HistoryDoctrineListener $historyListener)
     {
         if ($this->getUser()) {
             return $this->redirectToRoute($this->context . '_dashboard');
@@ -172,6 +173,7 @@ class AbstractSecurityController extends AbstractController
 
         try {
             if (null !== $user->getPlainPassword()) {
+                $historyListener->disable();
                 $this->updateUser($user);
                 $this->tokenManager->consume($token);
             }

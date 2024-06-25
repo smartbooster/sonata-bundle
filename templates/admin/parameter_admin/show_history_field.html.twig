@@ -1,0 +1,13 @@
+{% extends '@SmartSonata/admin/base_field/show_history_field.html.twig' %}
+
+{% block render_diff_from_value %}
+    {% include '@SmartSonata/admin/parameter_admin/render_value.html.twig' with {
+        value: field_data.f
+    } %}
+{% endblock %}
+
+{% block render_diff_to_value %}
+    {% include '@SmartSonata/admin/parameter_admin/render_value.html.twig' with {
+        value: field_data.t
+    } %}
+{% endblock %}

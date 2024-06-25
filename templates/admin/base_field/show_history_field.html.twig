@@ -1,0 +1,191 @@
+{% trans_default_domain 'admin' %}
+{% from '@SmartSonata/macros/badge.html.twig' import badge as badge %}
+
+{% macro render_diff_label(field) %}
+    {% set diff_label_key = ('label.' ~ field|u.snake) %}
+    {% set translated_diff_label = diff_label_key|trans %}
+    {% if diff_label_key == translated_diff_label %}
+        {{ ('field.label_' ~ field|u.snake)|trans }}
+    {% else %}
+        {{ translated_diff_label }}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_diff_value(value) %}
+    {% if is_iso8601_datetime(value) and value|date('H:i') == '00:00' %}
+        {{ value|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATE_FR')) }}
+    {% elseif is_iso8601_datetime(value) and value|date('H:i') != '00:00' %}
+        {{ value|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}
+    {% elseif value is null %}
+        ({{ 'label.empty'|trans }})
+    {% elseif value is same as(true) %}
+        <span class="label label-success">{{ 'label_type_yes'|trans({}, 'SonataAdminBundle') }}</span>
+    {% elseif value is same as(false) %}
+        <span class="label label-danger">{{ 'label_type_no'|trans({}, 'SonataAdminBundle') }}</span>
+    {% elseif value is iterable %}
+        {% for item in value %}
+            {{ item }}
+        {% endfor %}
+    {% else %}
+        {{ value|raw|nl2br }}
+    {% endif %}
+{% endmacro %}
+
+<div class="sb-tailwind">
+    {% if value is empty %}
+        <div class="px-6 py-4">
+            Aucun historique
+        </div>
+    {% else %}
+    <div role="list" class="space-y-6 mb-2 px-6">
+        {% for row in value %}
+        <div class="relative flex gap-x-3">
+            {% if not loop.last %}
+                <div  class="absolute left-0 top-0 flex w-6 justify-center -bottom-6">
+                    <div class="w-px bg-gray-200"></div>
+                </div>
+            {% endif %}
+            {% set icon_name = history_get_row_icon_name(row) %}
+            <div class="relative mt-2">
+                {% block icon %}
+                    {% if icon_name == null %}
+                        <div class="flex h-6 w-6 flex-none items-center justify-center bg-white">
+                            <div class="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
+                        </div>
+                    {% else %}
+                        <div class="{{ history_get_row_icon_class(row) }} h-6 w-6 flex items-center justify-center rounded-full">
+                            <iconify-icon icon="{{ history_get_row_icon_prefix(row) ~ ':' ~ icon_name }}" width="14" class="text-white"></iconify-icon>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            </div>
+            <div class="grow">
+                <div class="flex items-top gap-x-1 justify-between {% if row.user is not defined %}mt-2.5{% endif %}">
+                    <!-- Partie gauche : titre + user -->
+                    <div>
+                        <div class="text-sm">
+                            {{ history_get_row_title(row) }}
+                            {% if row.ctxt is defined %}
+                                <span class="text-info">
+                                  [{{ ('history.context.' ~ row.ctxt)|trans({}, 'messages') }}{% if row.orgn is defined %}<span v-if="orgn"> : {{ row.orgn|trans({}, 'messages') }}</span>{% endif %}]
+                                </span>
+                            {% endif %}
+                        </div>
+                        {% if row.user is defined %}
+                            <div v-if="user" class="text-gray-500">
+                                {{ 'label.by'|trans }} {{ row.user }}
+                                {% if row.user_prf is defined %}({{ 'label.profile'|trans }} {{ ('label.' ~ row.user_prf)|trans }}){% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <!-- Partie droite : date + changement de status -->
+                    <div class="grow">
+                        <div class="text-gray-500 !text-xs !mb-0.5 flex justify-end">
+                            {% if row.status_code is defined and row.status_code is not null %}
+                                <div class="mr-2">
+                                    {% include '@SmartSonata/admin/base_field/api_call_status_code.html.twig' with {value: row.status_code} %}
+                                </div>
+                            {% endif %}
+                            {{ row.date|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}
+                        </div>
+                        {% block status_update %}
+                            {% if row.status is defined and row.status is not null %}
+                                <div class="flex items-center justify-end gap-x-1">
+                                    {% if row.status.f is not null %}
+                                        {{ badge((object.statusPrefixLabel ~ row.status.f)|trans({}, 'messages'), row.status.f) }}
+                                    {% endif %}
+                                    {% if row.status.f is not null and row.status.t is not null %}
+                                        <iconify-icon icon="heroicons:arrow-long-right" width="16" class="align-middle mx-0.5"></iconify-icon>
+                                    {% endif %}
+                                    {% if row.status.t is not null %}
+                                        {{ badge((object.statusPrefixLabel ~ row.status.t)|trans({}, 'messages'), row.status.t) }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+                {# Monitoring spécifique #}
+                {% if row.api_id is defined %}
+                    <a href="{{ path('admin_app_monitoring_apicall_show', {id: row.api_id}) }}" target="_blank">
+                        API #{{ row.api_id }}
+                    </a>
+                {% endif %}
+                {% if row.cron_id is defined %}
+                    <a href="{{ path('admin_app_monitoring_cron_show', {id: row.cron_id}) }}" target="_blank">
+                        Cron #{{ row.cron_id }}
+                    </a>
+                {% endif %}
+
+                <!-- Email spécifique -->
+                {% if row.recipient is defined %}
+                    <div class="text-gray-500" ><b>Destinataire de l'email :&nbsp;</b>{{ row.recipient }}</div>
+                {% endif %}
+                {% if row.email_last_status is defined %}
+                    <div class="text-sm text-gray-500">
+                        <div>
+                            <b>{{ 'label.email_status_last'|trans }} :&nbsp;</b>
+                            <span class="rounded bg-info text-white p-1 text-xs">{{ ('enum.email_status.' ~ row.email_last_status)|trans({}, 'messages') }}</span>
+                            <span class="text-xs">le {{ row.email_last_status_at|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}</span>
+                        </div>
+                        {% if row.email_status_history is defined and row.email_status_history|length > 1 %}
+                            <div class="mt-1" v-if="email_status_history.length > 1">
+                                <b>{{ 'label.email_status_history'|trans }} :</b>
+                                <ul class="list-disc list-inside mb-0 pl-2">
+                                    {% for status_history in row.email_status_history %}
+                                        <li class="text-xs mt-2">
+                                            <span class="rounded bg-info text-white p-1">{{ ('enum.email_status.' ~ status_history.status)|trans({}, 'messages') }}</span>
+                                            <span>le {{ status_history.status_at|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_FR')) }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <!-- Description + Commentaire + Block custom_content -->
+                {% if row.desc is defined %}
+                    <div class="mt-1">{{ row.desc|raw|nl2br }}</div>
+                {% endif %}
+                {% if row.comment is defined %}
+                    <div class="sb-history-comment">{{ row.comment|raw|nl2br }}</div>
+                {% endif %}
+                {% block custom_content %}{% endblock %}
+
+                <!-- Changement des variables interne à l'entité -->
+                {% if row.diff is defined %}
+                    <ul class="list-disc list-inside mb-0 pl-2">
+                        {% for field, field_data in row.diff %}
+                            <li>
+                                <span>{{ _self.render_diff_label(field) }} :</span>
+                                {% if field_data.c_u is defined and field_data.c_u is not empty %}
+                                    <ul class="list-disc list-inside ml-5 mb-0">
+                                        {% for item in field_data.c_u %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% elseif field_data.f is not null or field_data.t is not null%}
+                                    <span class="text-gray-500">
+                                        {% block render_diff_from_value %}
+                                            {{ _self.render_diff_value(field_data.f) }}
+                                        {% endblock %}
+                                    </span>
+                                    <iconify-icon icon="heroicons:arrow-long-right" width="16" class="align-middle mx-0.5"></iconify-icon>
+                                    {% block render_diff_to_value %}
+                                        {{ _self.render_diff_value(field_data.t) }}
+                                    {% endblock %}
+                                {% else %} <!-- Cas collection vide -->
+                                    <span class="text-gray-500">({{ field_data|trans }})</span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>

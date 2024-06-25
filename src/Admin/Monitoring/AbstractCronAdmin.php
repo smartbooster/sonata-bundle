@@ -46,7 +46,7 @@ abstract class AbstractCronAdmin extends AbstractAdmin
                 'field_type' => ChoiceType::class,
                 'field_options' => [
                     'choices' => $this->commandPoolHelper->getCronChoices(),
-                    'choice_translation_domain' => 'admin',
+                    'choice_translation_domain' => 'messages',
                 ],
             ])
             ->add('status', ChoiceFilter::class, [
@@ -77,7 +77,7 @@ abstract class AbstractCronAdmin extends AbstractAdmin
             ->addIdentifier('type', FieldDescriptionInterface::TYPE_CHOICE, [
                 'label' => 'label.type',
                 'choices' => array_flip($this->commandPoolHelper->getCronChoices()),
-                'choice_translation_domain' => 'admin',
+                'choice_translation_domain' => 'messages',
                 'sortable' => false,
             ])
             ->add('startedAt', null, ['label' => 'label.started_at'])
@@ -101,7 +101,7 @@ abstract class AbstractCronAdmin extends AbstractAdmin
                 ->add('type', FieldDescriptionInterface::TYPE_CHOICE, [
                     'label' => 'label.type',
                     'choices' => array_flip($this->commandPoolHelper->getCronChoices()),
-                    'choice_translation_domain' => 'admin',
+                    'choice_translation_domain' => 'messages',
                 ])
                 ->add('startedAt', null, ['label' => 'label.started_at'])
                 ->add('endedAt', null, ['label' => 'label.ended_at'])

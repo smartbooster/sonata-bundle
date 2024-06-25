@@ -4,6 +4,16 @@
       padding-top: 79px;
     }
   }
+  .content-header:has(.content-header-under-banner) {
+    margin-top: 29px;
+  }
+  .content-header-under-banner {
+    .sticky-wrapper {
+      .navbar.navbar-default.stuck {
+        margin-top: 29px;
+      }
+    }
+  }
   .main-sidebar {
     hr {
      margin-bottom: 0;

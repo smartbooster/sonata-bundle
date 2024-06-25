@@ -30,9 +30,12 @@
 {% block sonata_page_content_header %}
     {# MDT fix content shift due to env_banner #}
     {% if display_smart_env_banner %}
-        <div style="height: 29px;"></div>
+        <div class="content-header-under-banner">
+            {{ parent() }}
+        </div>
+    {% else %}
+        {{ parent() }}
     {% endif %}
-    {{ parent() }}
 {% endblock %}
 
 {% block side_bar_before_nav %}
@@ -69,4 +72,11 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('build/admin/main.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {# https://iconify.design/docs/iconify-icon/#registering-the-web-component #}
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 {% endblock %}

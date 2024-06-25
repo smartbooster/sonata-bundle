@@ -12,15 +12,19 @@
 
 <div class="text-left">
     <span class="label label-{{ status_class }}">
-        {{ value }}
+        {% if value is null %}
+            {{ 'enum.process_status.ongoing'|trans({}, 'messages') }}
+        {% else %}
+            {{ value }}
+        {% endif %}
     </span>
-    {% if object.restartedAt is not null %}
+    {% if object is defined and object.restartedAt is defined and object.restartedAt is not null %}
         <i
             class="fa fa-refresh"
             style="color: gray;
             margin-left: 10px;
             font-size: 12px;"
-            title="Relancé le {{ object.restartedAt|date('d/m/Y à H:i:s') }}"
+            title="Relancé le {{ object.restartedAt|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_WITH_SECONDS_FR')) }}"
         ></i>
     {% endif %}
 </div>

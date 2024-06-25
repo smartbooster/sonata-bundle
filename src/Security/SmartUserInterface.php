@@ -7,6 +7,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Add methods for resetting password
+ *
+ * todo in v3 extends the MailableInterface and UserProfileInterface
  */
 interface SmartUserInterface extends PasswordAuthenticatedUserInterface, UserInterface
 {

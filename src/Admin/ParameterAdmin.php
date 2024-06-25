@@ -2,12 +2,9 @@
 
 namespace Smart\SonataBundle\Admin;
 
-use Doctrine\ORM\UnitOfWork;
 use Smart\CoreBundle\Validator\Constraints\EmailChain;
-use Smart\SonataBundle\Entity\Log\HistorizableInterface;
 use Smart\SonataBundle\Entity\ParameterInterface;
 use Smart\SonataBundle\Enum\ParameterTypeEnum;
-use Smart\SonataBundle\Logger\HistoryLogger;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
@@ -29,19 +26,16 @@ use Yokai\EnumBundle\Form\Type\EnumType;
 class ParameterAdmin extends AbstractAdmin
 {
     private ParameterTypeEnum $typeEnum;
-    private HistoryLogger $historyLogger;
-    private array $updateInitialData = [];
+    public ?string $showHistoryTemplate = '@SmartSonata/admin/parameter_admin/show_history_field.html.twig';
 
     public function __construct(
         string $code,
         ?string $class,
         string $baseControllerName,
         ParameterTypeEnum $typeEnum,
-        HistoryLogger $historyLogger,
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->typeEnum = $typeEnum;
-        $this->historyLogger = $historyLogger;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -65,7 +59,7 @@ class ParameterAdmin extends AbstractAdmin
             ->add('help', null, ['label' => 'field.label_help'])
             ->add('value', null, [
                 'label' => 'field.label_value',
-                'template' => 'admin/parameter_admin/list_value.html.twig'
+                'template' => '@SmartSonata/admin/parameter_admin/list_value.html.twig'
             ])
         ;
     }
@@ -118,7 +112,7 @@ class ParameterAdmin extends AbstractAdmin
                 ->add('value', $valueType, ['label' => 'field.label_value'])
             ->end()
             ->with('fieldset.label_history', ['class' => 'col-md-12', 'label' => 'fieldset.label_history'])
-                ->add('history', null, ['template' => 'admin/parameter_admin/timeline_history_field.html.twig'])
+                ->add('historyLegacy', null, ['template' => '@SmartSonata/admin/parameter_admin/timeline_history_field.html.twig'])
             ->end()
         ;
     }
@@ -196,22 +190,5 @@ class ParameterAdmin extends AbstractAdmin
             $this->trans('field.label_value') => 'value',
             $this->trans('field.label_help') => 'help',
         ];
-    }
-
-    protected function preUpdate(object $object): void
-    {
-        /** @var UnitOfWork $uow @phpstan-ignore-next-line */
-        $uow = $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork();
-        $this->updateInitialData = [
-            'value' => $uow->getOriginalEntityData($object)['value'],
-        ];
-    }
-
-    protected function postUpdate(object $object): void
-    {
-        /** @var HistorizableInterface $object */
-        $this->historyLogger->logDiff($object, $this->updateInitialData, [
-            'author' => $this->getUser()->getFullName(), // @phpstan-ignore-line
-        ]);
     }
 }

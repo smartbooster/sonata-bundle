@@ -1,3 +1,4 @@
+{# @deprecated use show_history_field.html.twig instead #}
 {% trans_default_domain 'admin' %}
 
 {% if value is null or value is empty %}
@@ -47,7 +48,7 @@
                     <i class="fa {{ icon }}"></i>
                 {% endif %}
                 <div class="timeline-item">
-                    <span class="time">{{ row.date|date('d/m/Y à H:i:s') }}</span>
+                    <span class="time">{{ row.date|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATETIME_WITH_SECONDS_FR')) }}</span>
                     <h3 class="timeline-header">
                         {% if row.data is defined %}
                             <button type="button" class="btn btn-box-tool no-padding" data-toggle="collapse" data-target="#timeline-body-{{ index }}"

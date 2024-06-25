@@ -87,6 +87,10 @@
                 <source>fieldset.label_history</source>
                 <target>Historique</target>
             </trans-unit>
+            <trans-unit id="show.group_default">
+                <source>show.group_default</source>
+                <target>Informations générales</target>
+            </trans-unit>
 
             <trans-unit id="field.label_id">
                 <source>field.label_id</source>
@@ -174,10 +178,6 @@
                 <source>history.none</source>
                 <target>Pas d'historique disponible.</target>
             </trans-unit>
-            <trans-unit id="history.email.sent">
-                <source>history.email.sent</source>
-                <target>Email envoyé : </target>
-            </trans-unit>
             <trans-unit id="history.entity.created">
                 <source>history.entity.created</source>
                 <target>Entité créée</target>
@@ -205,6 +205,43 @@
             <trans-unit id="history.timeline_context">
                 <source>history.timeline_context</source>
                 <target> [context %context%]</target>
+            </trans-unit>
+            <!-- History v2 -->
+            <trans-unit id="label.history">
+                <source>label.history</source>
+                <target>Historique</target>
+            </trans-unit>
+            <trans-unit id="label.empty">
+                <source>label.empty</source>
+                <target>vide</target>
+            </trans-unit>
+            <trans-unit id="label.by">
+                <source>label.by</source>
+                <target>Par</target>
+            </trans-unit>
+            <trans-unit id="label.profile">
+                <source>label.profile</source>
+                <target>Profil</target>
+            </trans-unit>
+            <trans-unit id="label.administrator">
+                <source>label.administrator</source>
+                <target>Administrateur</target>
+            </trans-unit>
+            <trans-unit id="label.email_status_last">
+                <source>label.email_status_last</source>
+                <target>Dernier statut de l'email</target>
+            </trans-unit>
+            <trans-unit id="label.email_status_history">
+                <source>label.email_status_history</source>
+                <target>Historique des statuts de l'email</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="label.last_login">
+                <source>label.last_login</source>
+                <target>Dernière connexion</target>
             </trans-unit>
 
             <!-- Action -->

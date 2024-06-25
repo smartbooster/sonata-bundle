@@ -15,7 +15,10 @@
 {% endblock %}
 
 {% block javascripts %}
-    {# disable javascript on empty_layout to prevent loading jquery #}
+    {# no parent() to disable javascript on empty_layout to prevent loading jquery #}
+
+    {# https://iconify.design/docs/iconify-icon/#registering-the-web-component #}
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 {% endblock %}
 
 {% block sonata_wrapper %}

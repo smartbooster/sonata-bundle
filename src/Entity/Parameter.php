@@ -4,8 +4,8 @@ namespace Smart\SonataBundle\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Smart\CoreBundle\Entity\Log\HistorizableTrait;
 use Smart\CoreBundle\Utils\ArrayUtils;
-use Smart\SonataBundle\Entity\Log\HistorizableTrait;
 use Smart\SonataBundle\Enum\ParameterTypeEnum;
 use Sonata\Exporter\Exception\InvalidMethodCallException;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -65,6 +65,12 @@ class Parameter implements ParameterInterface
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\Length(max: 100)]
     private ?string $regex = null;
+
+    /**
+     * @ORM\Column(name="history_legacy", nullable=true)
+     */
+    #[ORM\Column(name: 'history_legacy', nullable: true)]
+    protected ?array $historyLegacy = null;
 
     /**
      * @param mixed $payload
@@ -250,5 +256,10 @@ class Parameter implements ParameterInterface
     public function setRegex(?string $regex): void
     {
         $this->regex = $regex;
+    }
+
+    public function getHistoryLegacy(): ?array
+    {
+        return $this->historyLegacy;
     }
 }

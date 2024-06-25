@@ -7,6 +7,8 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
+ * @deprecated use Smart\CoreBundle\Entity\Log\HistorizableTrait instead
+ *
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
 trait HistorizableTrait

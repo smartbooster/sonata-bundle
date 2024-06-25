@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Smart\SonataBundle\Entity\Log\HistorizableInterface;
 
 /**
+ * @deprecated use the Smart\CoreBundle\Logger\HistoryLogger instead
+ *
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  */
 class HistoryLogger

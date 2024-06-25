@@ -118,6 +118,7 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
                 ->add('type', FieldDescriptionInterface::TYPE_CHOICE, [
                     'label' => 'label.route',
                     'choices' => array_flip($this->getRouteChoices()),
+                    'choice_translation_domain' => 'messages',
                 ])
                 ->add('startedAt', null, ['label' => 'label.started_at'])
                 ->add('endedAt', null, ['label' => 'label.ended_at'])
