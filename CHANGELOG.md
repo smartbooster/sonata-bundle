@@ -1,7 +1,10 @@
 CHANGELOG
 ===================
-## v2.5.0 - (2024-06-25)
+## v2.6.0 - (2024-06-27)
+### Added
+- add vich_uploader translations
 
+## v2.5.0 - (2024-06-25)
 ### Added
 - `show_history_field.html.twig` based on tailwind class + Twig `HistoryExtension` required to autocomplete some data of the history rows 
 - `HistoryExtension` to automaticaly add the mentioned above template on the show view of every entity that implement the `Smart\CoreBundle\Entity\HistoryInterface`

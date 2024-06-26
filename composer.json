@@ -27,7 +27,7 @@
     "yokai/security-token-bundle": "^3.3",
     "sentry/sentry-symfony": "^4.1",
     "symfony/expression-language": "^4.4 || ^5.4 || ^6.0",
-    "smartbooster/core-bundle": "^1.8",
+    "smartbooster/core-bundle": "dev-add_imageable_and_pdf_interface",
     "yokai/enum-bundle": "^4.1"
   },
   "require-dev": {
