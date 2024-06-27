@@ -185,6 +185,26 @@
                 <source>label.pdf_file</source>
                 <target>Fichier PDF</target>
             </trans-unit>
+            <trans-unit id="label.image_updated_at">
+                <source>label.image_updated_at</source>
+                <target>Image mise à jour le</target>
+            </trans-unit>
+            <trans-unit id="label.image_original_name">
+                <source>label.image_original_name</source>
+                <target>Nom du fichier image</target>
+            </trans-unit>
+            <trans-unit id="label.pdf_updated_at">
+                <source>label.pdf_updated_at</source>
+                <target>PDF mise à jour le</target>
+            </trans-unit>
+            <trans-unit id="label.pdf_original_name">
+                <source>label.pdf_original_name</source>
+                <target>Nom du fichier PDF</target>
+            </trans-unit>
+            <trans-unit id="label.uuid">
+                <source>label.uuid</source>
+                <target>Identifiant technique UUID</target>
+            </trans-unit>
 
             <!-- History -->
             <trans-unit id="history.none">

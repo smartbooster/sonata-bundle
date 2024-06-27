@@ -1,8 +1,9 @@
 CHANGELOG
 ===================
-## v2.6.0 - (2024-06-27)
+## v2.6.0 - (2024-06-XX)
 ### Added
 - add vich_uploader translations
+- add sonata templates for logo and vich download file
 
 ## v2.5.0 - (2024-06-25)
 ### Added
