@@ -4,6 +4,7 @@ CHANGELOG
 ### Added
 - add vich_uploader translations
 - add sonata templates for logo and vich download file
+- `sonata_helper.html.twig` macro to centralize crud action rendering
 
 ## v2.5.0 - (2024-06-25)
 ### Added
