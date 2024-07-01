@@ -172,6 +172,43 @@
                 <source>field.label_data</source>
                 <target>Data</target>
             </trans-unit>
+            <!-- Label -->
+            <trans-unit id="label.files">
+                <source>label.files</source>
+                <target>Fichiers</target>
+            </trans-unit>
+            <trans-unit id="label.logo">
+                <source>label.logo</source>
+                <target>Logo</target>
+            </trans-unit>
+            <trans-unit id="label.pdf_file">
+                <source>label.pdf_file</source>
+                <target>Fichier PDF</target>
+            </trans-unit>
+            <trans-unit id="label.image">
+                <source>label.image</source>
+                <target>Image</target>
+            </trans-unit>
+            <trans-unit id="label.image_updated_at">
+                <source>label.image_updated_at</source>
+                <target>Image mise à jour le</target>
+            </trans-unit>
+            <trans-unit id="label.image_original_name">
+                <source>label.image_original_name</source>
+                <target>Nom du fichier image</target>
+            </trans-unit>
+            <trans-unit id="label.pdf_updated_at">
+                <source>label.pdf_updated_at</source>
+                <target>PDF mise à jour le</target>
+            </trans-unit>
+            <trans-unit id="label.pdf_original_name">
+                <source>label.pdf_original_name</source>
+                <target>Nom du fichier PDF</target>
+            </trans-unit>
+            <trans-unit id="label.uuid">
+                <source>label.uuid</source>
+                <target>Identifiant technique UUID</target>
+            </trans-unit>
 
             <!-- History -->
             <trans-unit id="history.none">
@@ -298,6 +335,20 @@
                         <li>Le cache symfony a bien été regénéré après changement du nom du fichier/dossier <code>make cc</code></li>
                     </ul>
                 ]]></target>
+            </trans-unit>
+
+            <!-- VichUploaderBundle (nécessaire si utilisé dans un context Symfony formulaire hors Sonata) -->
+            <trans-unit id="vich_uploader.link.download">
+                <source>vich_uploader.link.download</source>
+                <target>Télécharger</target>
+            </trans-unit>
+            <trans-unit id="vich_uploader.delete_confirm.image">
+                <source>vich_uploader.delete_confirm.image</source>
+                <target>Cocher pour supprimer l'image.</target>
+            </trans-unit>
+            <trans-unit id="vich_uploader.delete_confirm.pdf">
+                <source>vich_uploader.delete_confirm.pdf</source>
+                <target>Cocher pour supprimer le fichier pdf.</target>
             </trans-unit>
         </body>
     </file>

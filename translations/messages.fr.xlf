@@ -194,6 +194,16 @@
                 <source>h.arc_a</source>
                 <target>Action d'archivage</target>
             </trans-unit>
+
+            <!-- VichUploaderBundle -->
+            <trans-unit id="vich_uploader.delete_confirm.image">
+                <source>vich_uploader.delete_confirm.image</source>
+                <target>Cocher pour supprimer l'image.</target>
+            </trans-unit>
+            <trans-unit id="vich_uploader.delete_confirm.pdf">
+                <source>vich_uploader.delete_confirm.pdf</source>
+                <target>Cocher pour supprimer le fichier pdf.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

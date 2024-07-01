@@ -1,0 +1,8 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+    {% set fileNameValue = attribute(object, field_description.fieldName ~ 'Name') %}
+    {% if fileNameValue is not null %}
+        <a href="{{ vich_uploader_asset(object, field_description.fieldName ~ 'File') }}">{{ 'vich_uploader.link.download'|trans }}</a>
+    {% endif %}
+{% endblock %}

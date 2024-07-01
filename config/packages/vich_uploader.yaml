@@ -1,0 +1,3 @@
+# Required for the QA lint-twig to work
+vich_uploader:
+    db_driver: orm

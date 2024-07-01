@@ -1,0 +1,14 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+    {% set fileNameValue = attribute(object, field_description.fieldName ~ 'Name') %}
+    {% if fileNameValue is null %}
+        {% set url = asset('bundles/smartsonata/images/placeholders/128x128.png') %}
+        {% set alt = 'logo' %}
+    {% else %}
+        {% set url = vich_uploader_asset(object, field_description.fieldName ~ 'File') %}
+        {% set alt = attribute(object, field_description.fieldName ~ 'OriginalName') %}
+    {% endif %}
+
+    <img class="img-bordered-sm" src="{{ url }}" alt="{{ alt }}" width="100"/>
+{% endblock %}
