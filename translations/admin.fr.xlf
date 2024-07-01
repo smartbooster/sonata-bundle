@@ -185,6 +185,10 @@
                 <source>label.pdf_file</source>
                 <target>Fichier PDF</target>
             </trans-unit>
+            <trans-unit id="label.image">
+                <source>label.image</source>
+                <target>Image</target>
+            </trans-unit>
             <trans-unit id="label.image_updated_at">
                 <source>label.image_updated_at</source>
                 <target>Image mise à jour le</target>
