@@ -1,0 +1,17 @@
+{% trans_default_domain 'admin' %}
+
+{% macro crud_action(object, action, icon) %}
+    {% set url = admin.generateObjectUrl(action, object) %}
+    {% set label = ('action.' ~ action|u.snake)|trans %}
+    {% if admin.isCurrentRoute('list') %}
+        <a href="{{ url }}" class="btn btn-xs btn-default"  title="{{ label }}">
+            <i class="{{ icon }}"></i>
+        </a>
+    {% else %}
+        <li>
+            <a class="sonata-action-element" href="{{ url }}">
+                <i class="{{ icon }}"></i> {{ label }}
+            </a>
+        </li>
+    {% endif %}
+{% endmacro %}

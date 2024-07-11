@@ -1,0 +1,16 @@
+{# MDT Use this template if you want to display image from Smart\CoreBundle\Entity\EmbeddedFile #}
+
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+    {% set fileNameValue = value.name %}
+    {% if fileNameValue is null %}
+        {% set url = asset('bundles/smartsonata/images/placeholders/128x128.png') %}
+        {% set alt = 'logo' %}
+    {% else %}
+        {% set url = vich_uploader_asset(object.files, field_description.fieldName ~ 'File') %}
+        {% set alt = value.originalName %}
+    {% endif %}
+
+    <img class="img-bordered-sm" src="{{ url }}" alt="{{ alt }}"/>
+{% endblock %}
