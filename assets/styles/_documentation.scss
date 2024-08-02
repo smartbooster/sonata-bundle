@@ -17,6 +17,7 @@
 
 // Tailwind custom Smartbooster prose styles
 .sb-documentation {
+  max-width: 100%;
   @apply prose prose-a:text-info prose-a:no-underline hover:prose-a:underline hover:prose-a:text-info max-w-none inline-block;
   h1, h2, h3, h4 {
     a {
@@ -40,6 +41,22 @@
   p {
     img {
       @apply block;
+    }
+  }
+  table {
+    @apply border-collapse border border-slate-400 border-solid;
+  }
+  thead th {
+    @apply bg-slate-100 font-semibold;
+  }
+  th, td {
+    @apply px-2 py-2 border border-slate-300 border-solid;
+  }
+  img {
+    height: auto;
+    max-width: 100%;
+    &:hover {
+      transform: scale(1.25);
     }
   }
 }
