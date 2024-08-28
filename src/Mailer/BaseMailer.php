@@ -64,7 +64,7 @@ class BaseMailer
     /**
      * @param mixed $recipient
      */
-    public function send(TemplatedEmail $email, $recipient = null): void
+    public function send(TemplatedEmail $email, mixed $recipient = null): void
     {
         $email->subject($this->translator->trans($email->getSubject(), $email->getSubjectParameters(), 'email'));
 
@@ -92,17 +92,22 @@ class BaseMailer
      * Protected method to allow ease extend and put custom logic based on the recipient
      * @param mixed $recipient
      */
-    protected function setRecipientToEmail(TemplatedEmail $email, $recipient = null): void
+    protected function setRecipientToEmail(TemplatedEmail $email, mixed $recipient = null): void
     {
         if (
             ($recipient instanceof MailableInterface && $recipient->getRecipientEmail() === null)
             || (is_array($recipient) && empty($recipient))
-            || $recipient == null
+            || $recipient === null
         ) {
             throw new \InvalidArgumentException($this->translator->trans('smart.email.empty_recipient_error', [
                 '%code%' => $email->getCode()
             ], 'email'));
         }
+
+        // Recipients reset in case of successive calls with the same email param
+        $email->to();
+        $email->cc();
+        $email->Bcc();
 
         if ($recipient instanceof MailableInterface) {
             $this->recipientToString = $recipient->getRecipientEmail();

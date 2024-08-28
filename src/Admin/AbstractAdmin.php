@@ -160,4 +160,11 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin imp
             $this->setBaseControllerName($baseControllerName);
         }
     }
+
+    public function getHistoryConfig(): array
+    {
+        return [
+            'fields' => [], // Indexed array which contains display options for each field
+        ];
+    }
 }

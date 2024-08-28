@@ -1,5 +1,20 @@
 CHANGELOG
 ===================
+## v2.7.0 - (2024-08-28)
+### Added
+- `docs/tailwind.md` documentation
+- `AbstractAdmin::getHistoryConfig` new method to impact on show_history_field rendering
+- `show_history_field.html.twig` Add `render_diff` and `render_diff_label` block to ease template override
+- Add common translations used on ApiCallAdmin and CronAdmin + history.context.sso
+
+### Changed
+- `show_history_field.html.twig` Adjust the template to translate when history config fields has the enum_prefix_label option
+- `docs/mailer.md` update documentation on doc route import, documentation_help block, MailableInterface use and how to extend the BaseMailer
+
+### Fixed
+- `_documentation.scss` Fix tailwind sb-documentation style : max-width + table and image max-width/transform
+- `BaseMailer::setRecipientToEmail` recipients reset for successive calls on the send method
+
 ## v2.6.0 - (2024-07-11)
 ### Added
 - add vich_uploader translations

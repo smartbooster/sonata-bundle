@@ -54,6 +54,18 @@
                 <source>dashboard.label_documentation_projet</source>
                 <target>Documentation Projet</target>
             </trans-unit>
+            <trans-unit id="dashboard.label_monitoring">
+                <source>dashboard.label_monitoring</source>
+                <target>Monitoring</target>
+            </trans-unit>
+            <trans-unit id="dashboard.label_crons">
+                <source>dashboard.label_crons</source>
+                <target>Crons</target>
+            </trans-unit>
+            <trans-unit id="dashboard.label_api_call">
+                <source>dashboard.label_api_call</source>
+                <target>API</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_parameter_list">
                 <source>breadcrumb.link_parameter_list</source>
                 <target>Liste des paramètres</target>
@@ -65,6 +77,14 @@
             <trans-unit id="breadcrumb.link_batch_log_list">
                 <source>breadcrumb.link_batch_log_list</source>
                 <target>Liste des logs</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_cron_list">
+                <source>breadcrumb.link_cron_list</source>
+                <target>Liste des crons</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_api_call_list">
+                <source>breadcrumb.link_api_call_list</source>
+                <target>Liste des appels API</target>
             </trans-unit>
 
             <trans-unit id="fieldset.label_general">
@@ -208,6 +228,82 @@
             <trans-unit id="label.uuid">
                 <source>label.uuid</source>
                 <target>Identifiant technique UUID</target>
+            </trans-unit>
+            <trans-unit id="label.type">
+                <source>label.type</source>
+                <target>Type</target>
+            </trans-unit>
+            <trans-unit id="label.started_at">
+                <source>label.started_at</source>
+                <target>Date de début</target>
+            </trans-unit>
+            <trans-unit id="label.ended_at">
+                <source>label.ended_at</source>
+                <target>Date de fin</target>
+            </trans-unit>
+            <trans-unit id="label.duration">
+                <source>label.duration</source>
+                <target>Durée</target>
+            </trans-unit>
+            <trans-unit id="label.status">
+                <source>label.status</source>
+                <target>Statut</target>
+            </trans-unit>
+            <trans-unit id="label.summary">
+                <source>label.summary</source>
+                <target>Résumé</target>
+            </trans-unit>
+            <trans-unit id="label.logs">
+                <source>label.logs</source>
+                <target>Logs</target>
+            </trans-unit>
+            <trans-unit id="label.process_data">
+                <source>label.process_data</source>
+                <target>Détail du traitement</target>
+            </trans-unit>
+            <trans-unit id="label.process_json_data">
+                <source>label.process_json_data</source>
+                <target>Données interne du traitement</target>
+            </trans-unit>
+            <trans-unit id="label.origin">
+                <source>label.origin</source>
+                <target>Origine</target>
+            </trans-unit>
+            <trans-unit id="label.status_code">
+                <source>label.status_code</source>
+                <target>Code HTTP</target>
+            </trans-unit>
+            <trans-unit id="label.route_url">
+                <source>label.route_url</source>
+                <target>URL</target>
+            </trans-unit>
+            <trans-unit id="label.route">
+                <source>label.route</source>
+                <target>Route</target>
+            </trans-unit>
+            <trans-unit id="label.result">
+                <source>label.result</source>
+                <target>Résultat</target>
+            </trans-unit>
+            <trans-unit id="label.method">
+                <source>label.method</source>
+                <target>Méthode</target>
+            </trans-unit>
+            <trans-unit id="label.api_params">
+                <source>label.api_params</source>
+                <target>Paramètres API</target>
+            </trans-unit>
+            <trans-unit id="label.input_data">
+                <source>label.input_data</source>
+                <target>Paramètres d'entrée</target>
+            </trans-unit>
+            <trans-unit id="label.output_response">
+                <source>label.output_response</source>
+                <target>Réponse en sortie</target>
+            </trans-unit>
+            <trans-unit id="label.headers">
+                <source>label.headers</source>
+                <target>Headers</target>
             </trans-unit>
 
             <!-- History -->
