@@ -53,6 +53,10 @@ return [
     @import "variables";
     @import 'smartbooster/sonata-bundle/assets/styles/main';
 
+### Tailwind 
+
+Check the [Tailwind documentation](docs/tailwind.md) to enable it and use our tailwind templates.
+
 ## What's inside !
 
 - Default styles for sonata admin
