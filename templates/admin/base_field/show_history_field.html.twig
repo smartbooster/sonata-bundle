@@ -11,7 +11,7 @@
     {% endif %}
 {% endmacro %}
 
-{% macro render_diff_value(value) %}
+{% macro render_diff_value(field, value) %}
     {% if is_iso8601_datetime(value) and value|date('H:i') == '00:00' %}
         {{ value|date(constant('Smart\\CoreBundle\\Formatter\\PhpFormatter::DATE_FR')) }}
     {% elseif is_iso8601_datetime(value) and value|date('H:i') != '00:00' %}
@@ -26,6 +26,8 @@
         {% for item in value %}
             {{ item }}
         {% endfor %}
+    {% elseif admin.historyConfig.fields[field].enum_prefix_label ?? null is not null %}
+        {{ (admin.historyConfig.fields[field].enum_prefix_label ~ value)|trans({}, 'messages') }}
     {% else %}
         {{ value|raw|nl2br }}
     {% endif %}
@@ -158,28 +160,30 @@
                 {% if row.diff is defined %}
                     <ul class="list-disc list-inside mb-0 pl-2">
                         {% for field, field_data in row.diff %}
-                            <li>
-                                <span>{{ _self.render_diff_label(field) }} :</span>
-                                {% if field_data.c_u is defined and field_data.c_u is not empty %}
-                                    <ul class="list-disc list-inside ml-5 mb-0">
-                                        {% for item in field_data.c_u %}
-                                            <li>{{ item }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% elseif field_data.f is not null or field_data.t is not null%}
-                                    <span class="text-gray-500">
-                                        {% block render_diff_from_value %}
-                                            {{ _self.render_diff_value(field_data.f) }}
+                            {% block render_diff %}
+                                <li>
+                                    {% block render_diff_label %}<span>{{ _self.render_diff_label(field) }} :</span>{% endblock %}
+                                    {% if field_data.c_u is defined and field_data.c_u is not empty %}
+                                        <ul class="list-disc list-inside ml-5 mb-0">
+                                            {% for item in field_data.c_u %}
+                                                <li>{{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% elseif field_data.f is not null or field_data.t is not null%}
+                                        <span class="text-gray-500">
+                                            {% block render_diff_from_value %}
+                                                {{ _self.render_diff_value(field, field_data.f) }}
+                                            {% endblock %}
+                                        </span>
+                                        <iconify-icon icon="heroicons:arrow-long-right" width="16" class="align-middle mx-0.5"></iconify-icon>
+                                        {% block render_diff_to_value %}
+                                            {{ _self.render_diff_value(field, field_data.t) }}
                                         {% endblock %}
-                                    </span>
-                                    <iconify-icon icon="heroicons:arrow-long-right" width="16" class="align-middle mx-0.5"></iconify-icon>
-                                    {% block render_diff_to_value %}
-                                        {{ _self.render_diff_value(field_data.t) }}
-                                    {% endblock %}
-                                {% else %} <!-- Cas collection vide -->
-                                    <span class="text-gray-500">({{ field_data|trans }})</span>
-                                {% endif %}
-                            </li>
+                                    {% else %} <!-- Cas collection vide -->
+                                        <span class="text-gray-500">({{ field_data|trans }})</span>
+                                    {% endif %}
+                                </li>
+                            {% endblock %}
                         {% endfor %}
                     </ul>
                 {% endif %}
