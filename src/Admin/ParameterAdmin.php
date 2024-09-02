@@ -111,9 +111,6 @@ class ParameterAdmin extends AbstractAdmin
         $show
                 ->add('value', $valueType, ['label' => 'field.label_value'])
             ->end()
-            ->with('fieldset.label_history', ['class' => 'col-md-12', 'label' => 'fieldset.label_history'])
-                ->add('historyLegacy', null, ['template' => '@SmartSonata/admin/parameter_admin/timeline_history_field.html.twig'])
-            ->end()
         ;
     }
 
