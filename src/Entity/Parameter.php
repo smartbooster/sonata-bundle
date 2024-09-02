@@ -67,12 +67,6 @@ class Parameter implements ParameterInterface
     private ?string $regex = null;
 
     /**
-     * @ORM\Column(name="history_legacy", nullable=true)
-     */
-    #[ORM\Column(name: 'history_legacy', nullable: true)]
-    protected ?array $historyLegacy = null;
-
-    /**
      * @param mixed $payload
      * @Assert\Callback
      */
@@ -256,10 +250,5 @@ class Parameter implements ParameterInterface
     public function setRegex(?string $regex): void
     {
         $this->regex = $regex;
-    }
-
-    public function getHistoryLegacy(): ?array
-    {
-        return $this->historyLegacy;
     }
 }

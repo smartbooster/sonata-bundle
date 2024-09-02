@@ -1,5 +1,9 @@
 CHANGELOG
 ===================
+## v2.8.0 - (2024-09-02)
+### Removed
+- Dropped support on `Parameter::historyLegacy` and also remove it from the `ParameterAdmin`
+
 ## v2.7.0 - (2024-08-28)
 ### Added
 - `docs/tailwind.md` documentation
