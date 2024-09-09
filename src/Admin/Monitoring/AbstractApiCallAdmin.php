@@ -99,7 +99,10 @@ abstract class AbstractApiCallAdmin extends AbstractAdmin
                 'template' => '@SmartSonata/admin/base_field/list_api_call_status_code.html.twig',
             ])
             ->add('method', null, ['label' => 'label.method'])
-            ->add('routeUrl', null, ['label' => 'label.route_url'])
+            ->add('routeUrl', null, [
+                'label' => 'label.route_url',
+                'template' => '@SmartSonata/admin/base_field/list_api_call_route_url.html.twig',
+            ])
             ->add('durationAsString', null, ['label' => 'label.duration'])
             ->add('summary', null, [
                 'label' => 'label.summary',
