@@ -1,5 +1,12 @@
 CHANGELOG
 ===================
+## v2.8.1 - (2024-09-24)
+### Added
+- `list_api_call_route_url.html.twig` template to reduce the size of the url on `AbstractApiCallAdmin`
+
+### Fixed
+- `show_history_field.html.twig` fix error "Impossible to access an attribute ("f") on a string variable ("label.empty")." on display empty collections history
+
 ## v2.8.0 - (2024-09-02)
 ### Removed
 - Dropped support on `Parameter::historyLegacy` and also remove it from the `ParameterAdmin`

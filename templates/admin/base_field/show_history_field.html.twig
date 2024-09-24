@@ -169,7 +169,7 @@
                                                 <li>{{ item }}</li>
                                             {% endfor %}
                                         </ul>
-                                    {% elseif field_data.f is not null or field_data.t is not null%}
+                                    {% elseif (field_data.f is defined and field_data.f is not null) or (field_data.t is defined and field_data.t is not null) %}
                                         <span class="text-gray-500">
                                             {% block render_diff_from_value %}
                                                 {{ _self.render_diff_value(field, field_data.f) }}
