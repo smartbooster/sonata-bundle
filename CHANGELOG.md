@@ -1,5 +1,9 @@
 CHANGELOG
 ===================
+## v2.8.2 - (2024-10-09)
+### Fixed
+- `bundle_prepend_config.yml` add `default_admin_services.security_handler: Smart\SonataBundle\Security\Handler\SmartSecurityHandler` option because `security.handler` don't work
+
 ## v2.8.1 - (2024-09-24)
 ### Added
 - `list_api_call_route_url.html.twig` template to reduce the size of the url on `AbstractApiCallAdmin`

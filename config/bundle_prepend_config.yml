@@ -8,8 +8,10 @@ sonata_admin:
         default_translation_domain: 'admin'
     default_admin_services:
         label_translator_strategy: 'sonata.admin.label.strategy.underscore'
+        # added because security.handler don't work. if there is "No entity manager defined" error, check if your smartIsGranted function work properly
+        security_handler: Smart\SonataBundle\Security\Handler\SmartSecurityHandler
     security:
-        handler:   Smart\SonataBundle\Security\Handler\SmartSecurityHandler
+        handler: Smart\SonataBundle\Security\Handler\SmartSecurityHandler
     extensions:
         admin.extension.action_restart_api_call:
             implements:
