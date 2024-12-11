@@ -100,7 +100,7 @@ class DocumentationController extends AbstractController
         }
 
         return new Response($this->twig->render('@SmartSonata/admin/documentation/markdown.html.twig', [
-            'markdown_content' => $markdownContent,
+            'markdown_content' => $this->twig->createTemplate($markdownContent)->render(),
             'markdown_nav' => $markdownNav,
         ]));
     }
