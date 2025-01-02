@@ -19,8 +19,9 @@ use function Symfony\Component\String\u;
 
 class DocumentationController extends AbstractController
 {
-    private string $projectDir;
-    private Environment $twig;
+    protected ?string $projectDir = null;
+    protected Environment $twig;
+    protected ?string $markdownContent = null;
 
     public function email(
         Request $request,
@@ -91,7 +92,7 @@ class DocumentationController extends AbstractController
                 $markdownNav[$snakeDirectoryName][$filename] = $routeNamePrefix . $snakeDirectoryName . '_' . $filename;
 
                 if (str_ends_with($directoryName, $directoryParam) && $filename === $filenameParam) {
-                    $markdownContent = $this->transformMarkdown(
+                    $this->markdownContent = $this->transformMarkdown(
                         $file->getContents(),
                         $request->getSchemeAndHttpHost() . $request->getRequestUri()
                     );
@@ -100,7 +101,7 @@ class DocumentationController extends AbstractController
         }
 
         return new Response($this->twig->render('@SmartSonata/admin/documentation/markdown.html.twig', [
-            'markdown_content' => $markdownContent,
+            'markdown_content' => $this->getMarkdownContent(),
             'markdown_nav' => $markdownNav,
         ]));
     }
@@ -115,8 +116,13 @@ class DocumentationController extends AbstractController
         $this->twig = $twig;
     }
 
-    private function transformMarkdown(string $content, string $baseUrl): string
+    protected function transformMarkdown(string $content, string $baseUrl): string
     {
         return MarkdownUtils::addAnchorToHeadings($content, $baseUrl);
+    }
+
+    protected function getMarkdownContent(): string
+    {
+        return $this->markdownContent;
     }
 }
