@@ -9,7 +9,7 @@ use Smart\StandardBundle\AbstractWebTestCase;
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  *
- * vendor/bin/phpunit tests/Provider/ParameterProviderTest.php
+ * vendor/bin/simple-phpunit tests/Provider/ParameterProviderTest.php
  */
 class ParameterProviderTest extends AbstractWebTestCase
 {
@@ -27,7 +27,7 @@ class ParameterProviderTest extends AbstractWebTestCase
      */
     public function test(): void
     {
-        $this->assertTrue(true);
+        $this->assertTrue(true); // @phpstan-ignore-line
     }
 
     // Test with base don't work

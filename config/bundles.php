@@ -23,4 +23,5 @@ return [
     Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
     Yokai\EnumBundle\YokaiEnumBundle::class => ['all' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
+    Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
 ];

@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  *
- * vendor/bin/phpunit tests/DependencyInjection/DependencyInjectionTest.php
+ * vendor/bin/simple-phpunit tests/DependencyInjection/DependencyInjectionTest.php
  */
 class DependencyInjectionTest extends TestCase
 {
@@ -44,16 +44,16 @@ class DependencyInjectionTest extends TestCase
         $this->container->compile();
     }
 
-    public function invalidConfigurationProvider(): array
+    public static function invalidConfigurationProvider(): array
     {
         return [
             'invalid_no_parameter_defined' => [
-                'ressource' => 'invalid_no_parameter_defined',
-                'message' => 'The path "smart_sonata.parameters" should have at least 1 element(s) defined.',
+                'invalid_no_parameter_defined',
+                'The path "smart_sonata.parameters" should have at least 1 element(s) defined.',
             ],
             'invalid_missing_parameter_value' => [
-                'ressource' => 'invalid_missing_parameter_value',
-                'message' => 'The child config "value" under "smart_sonata.parameters.parameter_without_value" must be configured.',
+                'invalid_missing_parameter_value',
+                'The child config "value" under "smart_sonata.parameters.parameter_without_value" must be configured.',
             ],
         ];
     }
@@ -67,10 +67,10 @@ class DependencyInjectionTest extends TestCase
         $loader->load($resource . ".yml");
         $this->container->compile();
         // This assertion is already true with the setUp but it valid the fact that the container did compile with the given configuration
-        $this->assertNotNull($this->container->getExtension("smart_sonata"));
+        $this->assertNotNull($this->container->getExtension("smart_sonata")); // @phpstan-ignore-line
     }
 
-    public function configurationProvider(): array
+    public static function configurationProvider(): array
     {
         return [
             'full' => ['full'],

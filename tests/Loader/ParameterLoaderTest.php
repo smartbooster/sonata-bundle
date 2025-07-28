@@ -10,7 +10,7 @@ use Smart\StandardBundle\AbstractWebTestCase;
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  *
- * vendor/bin/phpunit tests/Loader/ParameterLoaderTest.php
+ * vendor/bin/simple-phpunit tests/Loader/ParameterLoaderTest.php
  */
 class ParameterLoaderTest extends AbstractWebTestCase
 {
@@ -28,7 +28,7 @@ class ParameterLoaderTest extends AbstractWebTestCase
      */
     public function test(): void
     {
-        $this->assertTrue(true);
+        $this->assertTrue(true); // @phpstan-ignore-line
     }
 
     // Test with base don't work

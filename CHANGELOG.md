@@ -1,5 +1,9 @@
 CHANGELOG
 ===================
+## v2.9.0 - (2025-07-28)
+### Added
+- `composer.json` Allow sentry/sentry-symfony ^5.1 for PHP 8.4 support
+
 ## v2.8.1 - (2024-09-24)
 ### Added
 - `list_api_call_route_url.html.twig` template to reduce the size of the url on `AbstractApiCallAdmin`

@@ -20,7 +20,7 @@ interface SmartAdminInterface
      */
     public function setTokenManager(TokenStorageInterface $tokenStorage): void;
 
-    public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null): string;
+    public function trans(string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string;
 
     /**
      * @param mixed $attributes
