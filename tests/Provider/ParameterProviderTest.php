@@ -9,7 +9,7 @@ use Smart\StandardBundle\AbstractWebTestCase;
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  *
- * vendor/bin/phpunit tests/Provider/ParameterProviderTest.php
+ * vendor/bin/simple-phpunit tests/Provider/ParameterProviderTest.php
  */
 class ParameterProviderTest extends AbstractWebTestCase
 {

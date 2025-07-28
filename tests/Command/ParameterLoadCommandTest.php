@@ -12,7 +12,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @author Mathieu Ducrot <mathieu.ducrot@smartbooster.io>
  *
- * vendor/bin/phpunit tests/Command/ParameterLoadCommandTest.php
+ * vendor/bin/simple-phpunit tests/Command/ParameterLoadCommandTest.php
  */
 class ParameterLoadCommandTest extends AbstractWebTestCase
 {

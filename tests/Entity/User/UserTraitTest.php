@@ -5,7 +5,7 @@ namespace Smart\SonataBundle\Tests\Entity\User;
 use PHPUnit\Framework\TestCase;
 
 /**
- * vendor/bin/phpunit tests/Entity/User/UserTraitTest.php
+ * vendor/bin/simple-phpunit tests/Entity/User/UserTraitTest.php
  *
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
  */
