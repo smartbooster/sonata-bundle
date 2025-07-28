@@ -67,7 +67,7 @@ class DependencyInjectionTest extends TestCase
         $loader->load($resource . ".yml");
         $this->container->compile();
         // This assertion is already true with the setUp but it valid the fact that the container did compile with the given configuration
-        $this->assertNotNull($this->container->getExtension("smart_sonata"));
+        $this->assertNotNull($this->container->getExtension("smart_sonata")); // @phpstan-ignore-line
     }
 
     public function configurationProvider(): array

@@ -21,7 +21,7 @@ class ParameterLoadCommandTest extends AbstractWebTestCase
      */
     public function test(): void
     {
-        $this->assertTrue(true);
+        $this->assertTrue(true); // @phpstan-ignore-line
     }
 
     // Test with base don't work

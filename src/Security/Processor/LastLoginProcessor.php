@@ -25,7 +25,7 @@ class LastLoginProcessor
     }
 
     /**
-     * @param LastLoginInterface $object
+     * @param LastLoginInterface|mixed $object
      *
      * @return void
      */

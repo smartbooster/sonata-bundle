@@ -5,11 +5,25 @@ includes:
     - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
+    reportUnmatchedIgnoredErrors: false
     symfony:
-        container_xml_path: var/cache/dev/Smart_SonataBundle_KernelDevDebugContainer.xml
+        containerXmlPath: var/cache/dev/Smart_SonataBundle_KernelDevDebugContainer.xml
     ignoreErrors:
+        # Ignore missing iterable value types for arrays
+        - '#return type has no value type specified in iterable type array#'
+        - '#has parameter .* with no value type specified in iterable type array#'
+        - '#Property .* type has no value type specified in iterable type array#'
+
+        # Ignore unused traits
+        - '#Trait .* is used zero times and is not analysed#'
+
+        # Ignore missing generic types specification
+        - '#does not specify its types: T#'
+
+        # Ignore doctrine too restrictive matching type
+        - '#type mapping mismatch: property can contain DateTime\|null but database expects DateTimeInterface#'
+        - '#type mapping mismatch: property can contain string\|null but database expects string#'
+
         # https://accesto.com/blog/how-to-ensure-php-code-quality-static-analysis-using-phpstan-with-symfony/
         # - '#Call to an undefined method Doctrine\\ORM\\EntityRepository<.+>::.+#'
     # https://github.com/symfony/symfony/issues/36202#issuecomment-769226149

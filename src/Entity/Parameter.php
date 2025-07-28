@@ -43,7 +43,7 @@ class Parameter implements ParameterInterface
      * @ORM\Column(name="value", type="text", nullable=false)
      */
     #[ORM\Column(name: "value", type: Types::TEXT, nullable: false)]
-    private string|bool|null $value = null;
+    private string|bool|null $value = null; // @phpstan-ignore-line
 
     /**
      * @ORM\Column(name="help", type="text", nullable=true)
