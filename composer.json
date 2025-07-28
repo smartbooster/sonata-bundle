@@ -25,9 +25,9 @@
     "symfony/security-core": "^5.4 || ^6.4",
     "nelmio/security-bundle": "^2.8 || ^3.0",
     "yokai/security-token-bundle": "^3.3",
-    "sentry/sentry-symfony": "^4.1",
+    "sentry/sentry-symfony": "^4.1 || ^5.1",
     "symfony/expression-language": "^4.4 || ^5.4 || ^6.0",
-    "smartbooster/core-bundle": "^1.9.0",
+    "smartbooster/core-bundle": "^1.16.0",
     "vich/uploader-bundle": "^1.19 || ^2.3",
     "yokai/enum-bundle": "^4.1"
   },

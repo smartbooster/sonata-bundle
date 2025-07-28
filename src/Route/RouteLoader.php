@@ -29,12 +29,12 @@ final class RouteLoader extends Loader
      *     type:     smart_sonata
      *     host:     "admin.%domain%"
      */
-    public function supports(mixed $resource, string $type = null): bool
+    public function supports(mixed $resource, ?string $type = null): bool
     {
         return 'smart_sonata' === $type;
     }
 
-    public function load(mixed $resource, string $type = null): RouteCollection
+    public function load(mixed $resource, ?string $type = null): RouteCollection
     {
         $collection = new RouteCollection();
 

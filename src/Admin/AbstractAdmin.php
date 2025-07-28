@@ -95,7 +95,7 @@ abstract class AbstractAdmin extends \Sonata\AdminBundle\Admin\AbstractAdmin imp
         return !$this->getSubject() || null === $this->getSubject()->getId(); // @phpstan-ignore-line
     }
 
-    public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null): string
+    public function trans(string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string
     {
         $domain = $domain ?: $this->getTranslationDomain();
 
