@@ -1,5 +1,9 @@
 CHANGELOG
 ===================
+## v2.8.2 - (2025-07-29)
+### Added
+- `show_history_field.html.twig` add support for HTML rendering in history titles
+
 ## v2.8.1 - (2024-09-24)
 ### Added
 - `list_api_call_route_url.html.twig` template to reduce the size of the url on `AbstractApiCallAdmin`
