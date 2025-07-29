@@ -66,7 +66,7 @@
                     <!-- Partie gauche : titre + user -->
                     <div>
                         <div class="text-sm">
-                            {{ history_get_row_title(row) }}
+                            {{ history_get_row_title(row)|raw }}
                             {% if row.ctxt is defined %}
                                 <span class="text-info">
                                   [{{ ('history.context.' ~ row.ctxt)|trans({}, 'messages') }}{% if row.orgn is defined %}<span v-if="orgn"> : {{ row.orgn|trans({}, 'messages') }}</span>{% endif %}]

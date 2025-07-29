@@ -9,3 +9,10 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'Smart\SonataBundle\Entity'
 
+when@test:
+    doctrine:
+        dbal:
+            default_connection: default
+            connections:
+                default:
+                    use_savepoints: true
