@@ -1,5 +1,12 @@
 CHANGELOG
 ===================
+## v2.9.1 - (2025-07-29)
+### Added
+- `show_history_field.html.twig` add support for HTML rendering in history titles
+
+### Fixed
+- `confid/doctrine.yaml` add config to fix `LogicException: This bundle relies on savepoints for nested database transactions. You need to enable "use_savepoints" on the Doctrine DBAL config for connection "default".`
+
 ## v2.9.0 - (2025-07-28)
 ### Added
 - `composer.json` Allow sentry/sentry-symfony ^5.1 for PHP 8.4 support
