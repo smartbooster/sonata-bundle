@@ -208,6 +208,48 @@
                 <source>vich_uploader.delete_confirm.pdf</source>
                 <target>Cocher pour supprimer le fichier pdf.</target>
             </trans-unit>
+
+            <!-- Monitoring -->
+            <trans-unit id="monitoring.severity_scale.critical">
+                <source>monitoring.severity_scale.critical</source>
+                <target>Critique</target>
+            </trans-unit>
+            <trans-unit id="monitoring.severity_scale.high">
+                <source>monitoring.severity_scale.high</source>
+                <target>Haute</target>
+            </trans-unit>
+            <trans-unit id="monitoring.severity_scale.moderate">
+                <source>monitoring.severity_scale.moderate</source>
+                <target>Moyenne</target>
+            </trans-unit>
+            <trans-unit id="monitoring.severity_scale.medium">
+                <source>monitoring.severity_scale.medium</source>
+                <target>Moyenne</target>
+            </trans-unit>
+            <trans-unit id="monitoring.severity_scale.low">
+                <source>monitoring.severity_scale.low</source>
+                <target>Faible</target>
+            </trans-unit>
+            <trans-unit id="monitoring.severity_scale.unknown">
+                <source>monitoring.severity_scale.unknown</source>
+                <target>Inconnu</target>
+            </trans-unit>
+            <trans-unit id="monitoring.health_check.php.no_cve.help">
+                <source>monitoring.health_check.php.no_cve.help</source>
+                <target><![CDATA[
+                    Nous vérifions quotidiennement la publication de nouvelle faille de sécurité avec la commande :
+                    <a target="_blank" href="https://getcomposer.org/doc/03-cli.md#audit">composer audit</a> qui utilise les bases
+                    <a target="_blank" href="https://github.com/FriendsOfPHP/security-advisories">PHP security advisories</a> et
+                    <a target="_blank" href="https://github.com/advisories">GitHub Advisory Database</a>.
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="monitoring.health_check.js.no_cve.help">
+                <source>monitoring.health_check.js.no_cve.help</source>
+                <target><![CDATA[
+                    Nous vérifions quotidiennement la publication de nouvelle faille de sécurité avec la commande d'audit officielle de Yarn :
+                    <a target="_blank" href="https://yarnpkg.com/features/security#audits">yarn audit</a>.
+                ]]></target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

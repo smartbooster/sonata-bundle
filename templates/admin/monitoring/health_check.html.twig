@@ -1,0 +1,305 @@
+{% extends 'admin/layout.html.twig' %}
+{% from '@SmartSonata/macros/badge.html.twig' import badge as badge %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-home"></i></a></li>
+    <li class="active"><span>État de santé</span></li>
+{% endblock %}
+
+{% block content %}
+<div class="sb-tailwind">
+    <div class="bg-white rounded-t-md">
+        <table class="table table-bordered" x-data="{ phpVulnerabilitiesOpen: false, jsVulnerabilitiesOpen: false }">
+            <tbody>
+            <!-- PHP CVE -->
+            {% if phpVulnerabilities.error is defined %}
+                <tr>
+                    <td colspan="4" class="!p-0">
+                        <div class="px-6 py-4">
+                            <div class="flex gap-2 items-center justify-between mb-4 !mb-0">
+                                <div class="flex gap-x-2 items-center">
+                                    <div>
+                                        <div class="text-lg font-medium leading-6 text-gray-900">PHP : Erreur lors de la récupération des CVE</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="!p-0 prose text-xs">
+                        <pre>{{ phpVulnerabilities.error }}</pre>
+                    </td>
+                </tr>
+            {% elseif phpVulnerabilities.details|length == 0 %}
+                <tr>
+                    <td colspan="4" class="!p-0">
+                        <div class="px-6 py-4">
+                            <div class="flex gap-2 items-center justify-between mb-4 !mb-0">
+                                <div class="flex gap-x-2 items-center">
+                                    <div class="rounded-full bg-green-100 text-green-600 p-2">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-lg font-medium leading-6 text-gray-900">PHP : Aucun CVE détecté</div>
+                                        <div class="text-sm text-gray-500">{{ 'monitoring.health_check.php.no_cve.help'|trans|raw }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr @click="phpVulnerabilitiesOpen = !phpVulnerabilitiesOpen" class="cursor-pointer">
+                    <td colspan="4" class="!p-0">
+                        <div class="px-6 py-4">
+                            <div class="flex gap-2 items-center justify-between mb-4 !mb-0">
+                                <div class="flex gap-x-2 items-center">
+                                    <div class="rounded-full bg-orange-100 text-orange-600 p-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="h-5 w-5 iconify iconify--heroicons" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0zM12 15.75h.007v.008H12z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <div class="text-lg font-medium leading-6 text-gray-900">PHP : CVE à corriger</div>
+                                        <div class="mt-1 space-x-2">
+                                            {% for row in phpVulnerabilities.severityCount %}
+                                                {% if row.count > 0 %}
+                                                    <span class="label {% if 'bg-warning' in row.class %}bg-orange-500{% else %}{{ row.class }}{% endif %} py-1">
+                                                        {{ row.prefix|trans }}
+                                                        <span class="bg-white px-1 py-0.5 rounded-md">{{ row.count }}</span>
+                                                    </span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="fa" :class="phpVulnerabilitiesOpen ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="bg-slate-100" x-show="phpVulnerabilitiesOpen" x-cloak>
+                    <th class="p-2 lg:px-3 lg:py-2.5 text-left text-sm font-semibold text-slate-700">Criticité</th>
+                    <th class="p-2 lg:px-3 lg:py-2.5 text-left text-sm font-semibold text-slate-700">CVE</th>
+                    <th class="p-2 lg:px-3 lg:py-2.5 text-left text-sm font-semibold text-slate-700">Cible</th>
+                    <th class="p-2 lg:px-3 lg:py-2.5 text-left text-sm font-semibold text-slate-700">Documentation</th>
+                </tr>
+                {% for row in phpVulnerabilities.details %}
+                    <tr x-show="phpVulnerabilitiesOpen" x-cloak>
+                        <td>
+                            <span class="label {% if 'bg-warning' in row.severity.class %}bg-orange-500{% else %}{{ row.severity.class }}{% endif %} py-1">
+                                {{ row.severity.label|trans }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="whitespace-pre-line">{{ row.title }}</div>
+                            <div class="text-xs">#{{ row.cve }}</div>
+                        </td>
+                        <td>
+                            <div><a href="https://packagist.org/packages/{{ row.package }}#v{{ row.version }}" target="_blank">{{ row.package }}</a></div>
+                            <div class="text-xs">Version courante affecté : {{ row.version }}</div>
+                        </td>
+                        <td><a target="_blank" href="{{ row.link }}">Voir le rapport</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+
+            <!-- JS CVE -->
+            {% if jsVulnerabilities is defined %}
+                {% if jsVulnerabilities.error is defined %}
+                    <tr>
+                        <td colspan="4" class="!p-0">
+                            <div class="px-6 py-4">
+                                <div class="flex gap-2 items-center justify-between mb-4 !mb-0">
+                                    <div class="flex gap-x-2 items-center">
+                                        <div class="rounded-full bg-orange-100 text-orange-600 p-2">
+                                            <i class="fa fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-lg font-medium leading-6 text-gray-900">Javascript : Erreur lors de la récupération des CVE</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="!p-0 prose text-xs">
+                            <pre>{{ jsVulnerabilities.error }}</pre>
+                        </td>
+                    </tr>
+                {% elseif jsVulnerabilities.details|length == 0 %}
+                    <tr>
+                        <td colspan="4" class="!p-0">
+                            <div class="px-6 py-4">
+                                <div class="flex gap-2 items-center justify-between mb-4 !mb-0">
+                                    <div class="flex gap-x-2 items-center">
+                                        <div class="rounded-full bg-green-100 text-green-600 p-2">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-lg font-medium leading-6 text-gray-900">Javascript : Aucun CVE détecté</div>
+                                            <div class="text-sm text-gray-500">{{ 'monitoring.health_check.js.no_cve.help'|trans|raw }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr @click="jsVulnerabilitiesOpen = !jsVulnerabilitiesOpen" class="cursor-pointer">
+                        <td colspan="4" class="!p-0">
+                            <div class="px-6 py-4">
+                                <div class="flex gap-2 items-center justify-between mb-4 !mb-0">
+                                    <div class="flex gap-x-2 items-center">
+                                        <div class="rounded-full bg-orange-100 text-orange-600 p-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="h-5 w-5 iconify iconify--heroicons" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0zM12 15.75h.007v.008H12z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-lg font-medium leading-6 text-gray-900">Javascript : CVE à corriger</div>
+                                            <div class="mt-1 space-x-2">
+                                                {% for row in jsVulnerabilities.severityCount %}
+                                                    {% if row.count > 0 %}
+                                                        <span class="label {% if 'bg-warning' in row.class %}bg-orange-500{% else %}{{ row.class }}{% endif %} py-1">
+                                                        {{ row.prefix|trans }}
+                                                        <span class="bg-white px-1 py-0.5 rounded-md text-slate-800">{{ row.count }}</span>
+                                                    </span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i class="fa" :class="jsVulnerabilitiesOpen ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="bg-slate-100" x-show="jsVulnerabilitiesOpen" x-cloak>
+                        <th class="p-2 lg:px-3 lg:py-2.5 text-left text-sm font-semibold text-slate-700">Criticité</th>
+                        <th class="p-2 lg:px-3 lg:py-2.5 text-left text-sm font-semibold text-slate-700">CVE</th>
+                        <th class="p-2 lg:px-3 lg:py-2.5 text-left text-sm font-semibold text-slate-700">Cible</th>
+                        <th class="p-2 lg:px-3 lg:py-2.5 text-left text-sm font-semibold text-slate-700">Documentation</th>
+                    </tr>
+                    {% for row in jsVulnerabilities.details %}
+                        <tr x-show="jsVulnerabilitiesOpen" x-cloak>
+                            <td>
+                            <span class="label {% if 'bg-warning' in row.severity.class %}bg-orange-500{% else %}{{ row.severity.class }}{% endif %} py-1">
+                                {{ row.severity.label|trans }}
+                            </span>
+                            </td>
+                            <td>
+                                <div class="whitespace-pre-line">{{ row.title }}</div>
+                                <div class="text-xs">#{{ row.cve }}</div>
+                            </td>
+                            <td>
+                                <div>
+                                    <a href="https://classic.yarnpkg.com/en/package/{{ row.package }}#v{{ row.version }}" target="_blank">{{ row.package }}</a></div>
+                                {% if row.dependent.parent != '' %}
+                                    <div class="text-xs" >
+                                        Dépendance de :
+                                        <a
+                                                href="https://classic.yarnpkg.com/en/package/{{ row.dependent.parent }}"
+                                                title="{{ row.dependent.chain }}"
+                                                target="_blank"
+                                        >
+                                            {{ row.dependent.parent }}
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                <div class="text-xs">Version courante affecté : {{ row.version }}</div>
+                                <div v-if="row.patched_versions" class="text-xs">Patché pour les versions :  {{ row.patched_versions }}</div>
+                            </td>
+                            <td><a target="_blank" href="{{ row.link }}">Voir le rapport</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="bg-white rounded-t-md">
+        <div class="px-6 py-4">
+            <div class="flex gap-2 items-center justify-between mb-4 !mb-0">
+                <div class="flex gap-x-2 items-center">
+                    <div>
+                        <div class="text-lg font-medium leading-6 text-gray-900">Détail des versions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <table class="table table-bordered border border-t-2">
+                <thead>
+                    <tr class="bg-slate-100">
+                        <th>Nom</th>
+                        <th>Version installée</th>
+                        <th>Dernière version</th>
+                        <th>Statut</th>
+                        <th>Documentation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in releases %}
+                    <tr>
+                        <td class="font-medium">{{ row.label }}</td>
+                        <td>{{ row.current }}</td>
+                        <td>{{ row.last }}</td>
+                        <td>
+                            {% if row.status == 'ok' %}
+                                <span class="label font-medium label-success">À jour</span>
+                            {% elseif row.status == 'minor' %}
+                                <div class="label font-medium bg-yellow-400 text-gray-900">Mise à jour mineure</div>
+                            {% elseif row.status == 'major' %}
+                                <div class="label font-medium bg-orange-500">Mise à jour majeure</div>
+                            {% elseif row.status == 'legacy' %}
+                                <div class="label font-medium bg-danger">Obsolète</div>
+                            {% elseif row.status == 'n_a' %}
+                                <div class="label font-medium bg-gray-100 !text-neutral-dark">N/A</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ row.releases_link }}">Voir les versions</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Règles de sécurités SGDBF</h3>
+    </div>
+    <div class="box-body">
+        <div class="sb-tailwind">
+            <div class="border border-l-4 border-t-0 border-r-0 border-b-0 border-gray-400 pl-4 italic text-gray-700 space-y-4">
+                <div>
+                    <p class="font-semibold not-italic">PTC16-4.1 | Patch Monitoring</p>
+                    <p>The Service Provider must implement a periodic monitoring (monthly minimum) on the status of security patch on software and
+                        technical components.</p>
+                </div>
+                <div>
+                    <p class="font-semibold not-italic">SCO03-1.1 | Software Obsolescence</p>
+                    <p>The Service Provider must manage and prevent obsolescence of all the software and technical components (e.g.: workstations,
+                        servers, network equipment, software, firmware,...) which contribute to the Service.</p>
+                </div>
+                <div>
+                    <p class="font-semibold not-italic">SCO03-1.2 | Software Obsolescence Review</p>
+                    <p>The Service Provider must at least on a yearly basis implement a periodic monitoring on software and technical components
+                        obsolescence.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+{% endblock %}
