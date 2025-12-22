@@ -1,5 +1,9 @@
 CHANGELOG
 ===================
+## v2.10.0 - (2025-12-22)
+### Added
+- `HealthCheckController` to check used versions on the project and if there are any CVE.
+
 ## v2.9.1 - (2025-07-29)
 ### Added
 - `show_history_field.html.twig` add support for HTML rendering in history titles

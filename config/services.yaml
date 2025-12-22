@@ -93,7 +93,15 @@ services:
       -   setProjectDir: [ "%kernel.project_dir%" ]
       -   setTwig: [ '@twig' ]
     tags: [ 'controller.service_arguments' ]
-
+  Smart\SonataBundle\Controller\Admin\Monitoring\HealthCheckController:
+    calls:
+      -   setContainer: [ '@service_container' ]
+      -   setCurrentVersions: [ {php: '%env(PHP_VERSION)%', node: '%env(NODE_VERSION)%', mysql: '%env(MYSQL_ADDON_VERSION)%'} ]
+      -   setProjectDir: [ '%kernel.project_dir%' ]
+      -   setSecurity: [ '@Symfony\Bundle\SecurityBundle\Security' ]
+      -   setTranslator: [ '@translator' ]
+      -   setTwig: [ '@twig' ]
+    tags: [ 'controller.service_arguments' ]
   # DataFixtures
   fixture.processor.password:
     class: Smart\SonataBundle\DataFixtures\Processor\UserProcessor

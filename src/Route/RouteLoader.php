@@ -82,6 +82,14 @@ final class RouteLoader extends Loader
             ], [], [], '', [], ['GET', 'POST'])
         );
 
+        // Routing Monitoring État de santé
+        $collection->add(
+            'smart_monitoring_health_check',
+            new Route('/monitoring/health-check', [
+                '_controller' => 'Smart\SonataBundle\Controller\Admin\Monitoring\HealthCheckController::index',
+            ])
+        );
+
         return $collection;
     }
 }
