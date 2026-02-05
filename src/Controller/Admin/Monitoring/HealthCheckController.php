@@ -43,6 +43,13 @@ class HealthCheckController extends AbstractController
                 continue;
             }
             $currentVersion = $this->currentVersions[$key];
+            // Normalized version to only keep minor for comparison (ex: 24.11.1 => 24.11)
+            if (str_contains($currentVersion, '.')) {
+                $explodedVersion = explode('.', $currentVersion);
+                if (count($explodedVersion) >= 2) {
+                    $currentVersion = $explodedVersion[0] . '.' . $explodedVersion[1];
+                }
+            }
             $releases[$key]['current'] = $currentVersion;
             $status = 'n_a';
             foreach ($data['releases'] as $release) {

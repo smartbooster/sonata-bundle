@@ -1,5 +1,10 @@
 CHANGELOG
 ===================
+## v2.10.1 - (2026-02-05)
+### Fixed
+- `HealthCheckController` Use minor version for status comparison instead of patch version + add missing target _blank in template
+- `main.scss` direct node_modules import path mention for bootstrap-sass
+
 ## v2.10.0 - (2025-12-22)
 ### Added
 - `HealthCheckController` to check used versions on the project and if there are any CVE.
