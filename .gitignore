@@ -30,3 +30,4 @@ yarn-error.log
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+/.php-cs-fixer.cache
