@@ -3,29 +3,63 @@ includes:
     - vendor/phpstan/phpstan-doctrine/rules.neon
     - vendor/phpstan/phpstan-symfony/extension.neon
     - vendor/phpstan/phpstan-symfony/rules.neon
+    - ./vendor/yamadashy/phpstan-friendly-formatter/extension.neon
+    - vendor/spaze/phpstan-disallowed-calls/extension.neon
 
 parameters:
+    disallowedFunctionCalls:
+        -
+            function: 'exec()'
+            message: 'for security reasons. Use Symfony Process component instead.'
+        -
+            function: 'eval()'
+            message: 'for security reasons.'
+        -
+            function: 'system()'
+            message: 'for security reasons.'
+        -
+            function: 'passthru()'
+            message: 'for security reasons.'
+        -
+            function: 'shell_exec()'
+            message: 'for security reasons.'
+        -
+            function: 'popen()'
+            message: 'is risky. Ensure you are handling the process handle correctly.'
+    friendly:
+        lineBefore: 0  # Number of lines to display before error line (default: 2)
+        lineAfter: 0   # Number of lines to display after error line (default: 2)
+    errorFormat: friendly
     reportUnmatchedIgnoredErrors: false
+    treatPhpDocTypesAsCertain: false
     symfony:
         containerXmlPath: var/cache/dev/Smart_SonataBundle_KernelDevDebugContainer.xml
     ignoreErrors:
-        # Ignore missing iterable value types for arrays
-        - '#return type has no value type specified in iterable type array#'
-        - '#has parameter .* with no value type specified in iterable type array#'
-        - '#Property .* type has no value type specified in iterable type array#'
+        # Ignore error by identifier
+        - identifier: doctrine.columnType
+        - identifier: doctrine.associationType
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
+        # Règles Niveau 8 à dépiler
+        - identifier: argument.type #10
+        - identifier: return.type #9
+        - identifier: trait.unused #4
+        - identifier: class.notFound #3
+        - identifier: function.impossibleType #1
+        # Règles Niveau 9 à dépiler
+        - identifier: offsetAccess.nonOffsetAccessible #28
+        - identifier: foreach.nonIterable #4
+        - identifier: offsetAccess.invalidOffset #2
+        - identifier: assign.propertyType #1
+        # Règles Niveau 10 à dépiler
+        - identifier: encapsedStringPart.nonString #4
+        - identifier: postInc.type #4
+        - identifier: binaryOp.invalid #2
+        - identifier: cast.string #1
 
-        # Ignore unused traits
-        - '#Trait .* is used zero times and is not analysed#'
-
-        # Ignore missing generic types specification
-        - '#does not specify its types: T#'
-
-        # Ignore doctrine too restrictive matching type
-        - '#type mapping mismatch: property can contain DateTime\|null but database expects DateTimeInterface#'
-        - '#type mapping mismatch: property can contain string\|null but database expects string#'
-
-        # https://accesto.com/blog/how-to-ensure-php-code-quality-static-analysis-using-phpstan-with-symfony/
-        # - '#Call to an undefined method Doctrine\\ORM\\EntityRepository<.+>::.+#'
-    # https://github.com/symfony/symfony/issues/36202#issuecomment-769226149
     bootstrapFiles:
         - vendor/bin/.phpunit/phpunit/vendor/autoload.php
+
+    # définit le répertoire temporaire où PHPStan stocke ses fichiers de cache et de travail pendant l'analyse.
+    # Par défaut: PHPStan utilise le répertoire temporaire système sys_get_temp_dir() . '/phpstan'
+    tmpDir: var/cache/phpstan

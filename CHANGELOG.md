@@ -1,5 +1,12 @@
 CHANGELOG
 ===================
+## v2.10.1 - (2026-02-05)
+### Fixed
+- `HealthCheckController` Use minor version for status comparison instead of patch version + add missing target _blank in template
+- `main.scss` direct node_modules import path mention for bootstrap-sass
+### Added
+- `.php-cs-fixer.dist.php` config + phpstan lvl 8, 9, 10 ignoreErrors to review
+
 ## v2.10.0 - (2025-12-22)
 ### Added
 - `HealthCheckController` to check used versions on the project and if there are any CVE.
