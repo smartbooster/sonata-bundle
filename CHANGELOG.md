@@ -1,5 +1,9 @@
 CHANGELOG
 ===================
+## v2.11.0 - (2026-02-25)
+### Added
+- Allow Symfony 7.4
+
 ## v2.10.1 - (2026-02-05)
 ### Fixed
 - `HealthCheckController` Use minor version for status comparison instead of patch version + add missing target _blank in template

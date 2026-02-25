@@ -31,3 +31,5 @@ yarn-error.log
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /.php-cs-fixer.cache
+/config/reference.php
+/tests/bootstrap.php
