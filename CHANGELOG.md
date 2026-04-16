@@ -1,6 +1,10 @@
 CHANGELOG
 ===================
 ## v2.12.0 - (2026-04-15)
+### Added
+- Allow orm v3
+- Add composer require `symfony/var-exporter` to fix orm v3 qualimetry
+
 ### Changed
 - `HealthCheckController` Use `MYSQL_VERSION` or `MYSQL_ADDON_VERSION` env variable for mysql version
 
