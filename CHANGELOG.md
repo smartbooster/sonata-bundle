@@ -4,6 +4,9 @@ CHANGELOG
 ### Changed
 - `HealthCheckController` Use `MYSQL_VERSION` or `MYSQL_ADDON_VERSION` env variable for mysql version
 
+### Fixed
+- `SecuritySubscriber` Use `$event->getRequest()->query->get()` instead of `$event->getRequest()->get(` to remove deprecated method
+
 ## v2.11.0 - (2026-02-25)
 ### Added
 - Allow Symfony 7.4

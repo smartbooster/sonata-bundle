@@ -66,7 +66,7 @@ class SecuritySubscriber implements EventSubscriberInterface
         }
 
         // Impersonnate user must not update last_login date
-        if ($event->getRequest()->get('switch_user') !== null) {
+        if ($event->getRequest()->query->get('switch_user') !== null) {
             return;
         }
 
