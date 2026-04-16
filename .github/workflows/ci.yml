@@ -17,6 +17,7 @@ jobs:
           '8.3',
           '8.4'
         ]
+        orm: ['2.19.*', '^3.0'] # must be working on both
     container:
       image: ghcr.io/${{ github.repository_owner }}/symfony-docker:php${{ matrix.php }}
       credentials:
@@ -33,6 +34,10 @@ jobs:
       # —— Composer 🧙‍️ —————————————————————————————————————————————————————————
       - name: Validate composer.json and composer.lock
         run: composer validate
+
+      # Dynamically update composer.json dependencies before running make install
+      - name: "Restrict Doctrine ORM version"
+        run: composer require "doctrine/orm:${{ matrix.orm }}" --no-update --no-interaction
 
       - name: Install
         run: make install
