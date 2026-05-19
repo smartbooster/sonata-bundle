@@ -1,5 +1,12 @@
 CHANGELOG
 ===================
+## v2.12.1 - (2026-05-19)
+### Removed
+- Removed redundant Composer dependencies duplicated from `smartbooster/core-bundle`
+
+### Fixed
+- Fixed `SmartSonataExtension::load` `$configs` parameter type hint to `array<array<mixed>>` to comply with `ExtensionInterface::load` signature
+
 ## v2.12.0 - (2026-04-15)
 ### Added
 - Allow orm v3

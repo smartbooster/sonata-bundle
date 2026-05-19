@@ -17,7 +17,7 @@ use Symfony\Component\Yaml\Yaml;
 class SmartSonataExtension extends Extension implements PrependExtensionInterface
 {
     /**
-     * @param array<object> $configs
+     * @param array<array<mixed>> $configs
      * @param ContainerBuilder $container
      *
      * @return void
