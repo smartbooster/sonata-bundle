@@ -15,6 +15,7 @@
         <div class="login-box-body">
             {% block smartsonata_box_header %}<h1 class="text-center">SMART SONATA</h1>{% endblock %}
             <form action="{{ security_login_check_url }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="form-group has-feedback">
                     <input type="text" name="_username" class="form-control" autocomplete="off" placeholder="{{ 'login.label_username'|trans({}, 'security') }}" required />
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>

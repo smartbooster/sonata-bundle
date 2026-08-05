@@ -1,5 +1,14 @@
 CHANGELOG
 ===================
+## v2.12.2 - (2026-08-05)
+### BC BREAK
+- The login form now submits a CSRF token. You must enable `enable_csrf: true` on the `form_login` of the admin firewall in your `security.yaml` config, otherwise authentication will fail.
+
+### Fixed
+- `templates/security/login.html.twig` Add missing CSRF token on login form to fix CWE-352
+- `templates/empty_layout.html.twig` Add missing `integrity`/`crossorigin` attributes on the Iconify CDN script to fix CWE-345
+- `templates/admin/documentation/markdown.html.twig` Pin `marked` CDN script to a fixed version and add `integrity`/`crossorigin` attributes to fix CWE-345
+
 ## v2.12.1 - (2026-05-19)
 ### Removed
 - Removed redundant Composer dependencies duplicated from `smartbooster/core-bundle`
