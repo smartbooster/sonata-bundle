@@ -1,5 +1,9 @@
 CHANGELOG
 ===================
+## v2.12.3 - (2026-09-18)
+### Fixed
+- `templates/standard_layout.html.twig` Add missing `integrity`/`crossorigin` attributes on the Iconify CDN script to fix CWE-345 / CWE-693
+
 ## v2.12.2 - (2026-08-05)
 ### BC BREAK
 - The login form now submits a CSRF token. You must enable `enable_csrf: true` on the `form_login` of the admin firewall in your `security.yaml` config, otherwise authentication will fail.

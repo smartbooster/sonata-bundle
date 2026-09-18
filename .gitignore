@@ -33,3 +33,5 @@ yarn-error.log
 /.php-cs-fixer.cache
 /config/reference.php
 /tests/bootstrap.php
+/dast_scan/
+/make/security.mk
