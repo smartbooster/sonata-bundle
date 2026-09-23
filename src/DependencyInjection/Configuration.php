@@ -2,6 +2,7 @@
 
 namespace Smart\SonataBundle\DependencyInjection;
 
+use Smart\SonataBundle\Controller\Admin\DocumentationController;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -31,6 +32,19 @@ class Configuration implements ConfigurationInterface
                     ->scalarPrototype()->end()
                 ->end()
                 ->append($this->getParametersNode())
+                ->arrayNode('documentation')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('process_twig')
+                            ->defaultValue(DocumentationController::DEFAULT_PROCESS_TWIG)
+                            ->info('Disables Twig processing in documentation Markdown files when set to false.')
+                        ->end()
+                        ->scalarNode('markdown_template')
+                            ->defaultValue(DocumentationController::DEFAULT_MARKDOWN_TEMPLATE)
+                            ->info('Template used to render Markdown documentation.')
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
