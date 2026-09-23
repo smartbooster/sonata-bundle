@@ -1,5 +1,15 @@
 CHANGELOG
 ===================
+## v2.13.0 - (2026-09-23)
+### Added
+- `smart_sonata.documentation` config
+  - `process_twig` option to disable Twig processing in documentation Markdown files (default: true)
+  - `markdown_template` option to override the template used to render Markdown documentation (default: `@SmartSonata/admin/documentation/markdown.html.twig`)
+- Add mermaid to documentation template
+
+### Changed
+- `DocumentationController` extract `renderEmailView` and `renderDocumentationView` methods + make properties `protected` instead of `private` to ease overriding
+
 ## v2.12.3 - (2026-09-18)
 ### Fixed
 - `templates/standard_layout.html.twig` Add missing `integrity`/`crossorigin` attributes on the Iconify CDN script to fix CWE-345 / CWE-693
