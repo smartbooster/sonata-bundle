@@ -2,6 +2,7 @@
 
 namespace Smart\SonataBundle\DependencyInjection;
 
+use Smart\SonataBundle\Controller\Admin\DocumentationController;
 use Smart\SonataBundle\Mailer\BaseMailer;
 use Smart\SonataBundle\Mailer\EmailProvider;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -43,6 +44,12 @@ class SmartSonataExtension extends Extension implements PrependExtensionInterfac
                 $parameterLoader->addMethodCall('addParameter', [$code, $data]);
             }
         }
+
+        /** @var array{process_twig: bool, markdown_template: string} $documentationConfig */        $documentationConfig = $config['documentation'];
+        $documentationController = $container->getDefinition(DocumentationController::class);
+
+        $documentationController->addMethodCall('setProcessTwig', [$documentationConfig['process_twig']]);
+        $documentationController->addMethodCall('setMarkdownTemplate', [$documentationConfig['markdown_template']]);
     }
 
     /**
