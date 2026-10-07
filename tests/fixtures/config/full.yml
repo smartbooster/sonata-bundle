@@ -14,3 +14,6 @@ smart_sonata:
             help:   "This parameter is used by the backend to set the duration of cache applied to the Homepage. Set the duration in second."
     sender:
         address: 'test@test.test'
+    documentation:
+        process_twig: false
+        markdown_template: '@Custom/documentation.html.twig'

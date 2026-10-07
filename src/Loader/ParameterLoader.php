@@ -65,7 +65,7 @@ class ParameterLoader
                 $this->entityManager->getConnection()->commit();
             }
         } catch (\Exception $e) {
-            if (false === $this->dryRun) { // @phpstan-ignore-line false positive, it can be true
+            if (false === $this->dryRun) {
                 $this->entityManager->getConnection()->rollBack();
             }
         }

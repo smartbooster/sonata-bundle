@@ -5,6 +5,7 @@ namespace Smart\SonataBundle\Controller\Admin;
 use Smart\CoreBundle\Utils\MarkdownUtils;
 use Smart\SonataBundle\Mailer\BaseMailer;
 use Smart\SonataBundle\Mailer\EmailProvider;
+use Smart\SonataBundle\Mailer\TemplatedEmail;
 use Smart\SonataBundle\Route\RouteLoader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
@@ -19,8 +20,13 @@ use function Symfony\Component\String\u;
 
 class DocumentationController extends AbstractController
 {
-    private string $projectDir;
-    private Environment $twig;
+    public const DEFAULT_PROCESS_TWIG = true;
+    public const DEFAULT_MARKDOWN_TEMPLATE = '@SmartSonata/admin/documentation/markdown.html.twig';
+
+    protected string $projectDir;
+    protected Environment $twig;
+    protected bool $processTwig = self::DEFAULT_PROCESS_TWIG;
+    protected string $markdownTemplate = self::DEFAULT_MARKDOWN_TEMPLATE;
 
     public function email(
         Request $request,
@@ -53,8 +59,16 @@ class DocumentationController extends AbstractController
             }
         }
 
-        return new Response($this->twig->render("@SmartSonata/admin/documentation/email.html.twig", [
-            'grouped_smart_emails' => $provider->getGroupedEmails(),
+        return $this->renderEmailView($provider->getGroupedEmails());
+    }
+
+    /**
+     * @param array<string, array<string, TemplatedEmail>> $groupedSmartEmails
+     */
+    protected function renderEmailView(array $groupedSmartEmails): Response
+    {
+        return new Response($this->twig->render('@SmartSonata/admin/documentation/email.html.twig', [
+            'grouped_smart_emails' => $groupedSmartEmails,
         ]));
     }
 
@@ -67,7 +81,6 @@ class DocumentationController extends AbstractController
 
         $markdownContent = null;
         $markdownNav = [];
-        $routeNamePrefix = RouteLoader::SMART_DOCUMENTATION_ROUTE_PREFIX;
         $directoryFinder = new Finder();
         foreach ($directoryFinder->directories()->in($this->projectDir . '/documentation')->sortByName(true) as $directory) {
             $directoryName = $directory->getFilename();
@@ -78,28 +91,74 @@ class DocumentationController extends AbstractController
                 $directoryPath = $directoryName;
             }
 
-            $mdFinder = new Finder();
-            $mdFinder->files()->in($this->projectDir . '/documentation/' . $directoryName)->name('*.md')->sortByName(true);
-            foreach ($mdFinder as $file) {
-                $filename = $file->getFilename();
-                $separator = strpos($filename, '-');
-                if ($separator !== false) {
-                    $filename = substr($filename, $separator + 1);
-                }
-                $filename = u($filename)->replace('.md', '')->snake()->toString();
-                $snakeDirectoryName = u($directoryPath)->snake()->toString();
-                $markdownNav[$snakeDirectoryName][$filename] = $routeNamePrefix . $snakeDirectoryName . '_' . $filename;
+            $content = $this->processDirectoryFiles(
+                $directoryName,
+                $directoryPath,
+                $directoryParam,
+                $filenameParam,
+                $request,
+                $markdownNav
+            );
 
-                if (str_ends_with($directoryName, $directoryParam) && $filename === $filenameParam) {
-                    $markdownContent = $this->transformMarkdown(
-                        $file->getContents(),
-                        $request->getSchemeAndHttpHost() . $request->getRequestUri()
-                    );
-                }
+            if ($content !== null) {
+                $markdownContent = $content;
             }
         }
 
-        return new Response($this->twig->render('@SmartSonata/admin/documentation/markdown.html.twig', [
+        return $this->renderDocumentationView($markdownContent, $markdownNav);
+    }
+
+    /**
+     * @param array<string, array<string, string>> $markdownNav
+     */
+    private function processDirectoryFiles(
+        string $directoryName,
+        string $directoryPath,
+        string $directoryParam,
+        string $filenameParam,
+        Request $request,
+        array &$markdownNav
+    ): ?string {
+        $markdownContent = null;
+        $routeNamePrefix = RouteLoader::SMART_DOCUMENTATION_ROUTE_PREFIX;
+
+        $mdFinder = new Finder();
+        $mdFinder->files()->in($this->projectDir . '/documentation/' . $directoryName)->name('*.md')->sortByName(true);
+
+        foreach ($mdFinder as $file) {
+            $filename = $file->getFilename();
+            $separator = strpos($filename, '-');
+            if ($separator !== false) {
+                $filename = substr($filename, $separator + 1);
+            }
+
+            $filename = u($filename)->replace('.md', '')->snake()->toString();
+            $snakeDirectoryName = u($directoryPath)->snake()->toString();
+            $markdownNav[$snakeDirectoryName][$filename] = $routeNamePrefix . $snakeDirectoryName . '_' . $filename;
+
+            if (str_ends_with($directoryName, $directoryParam) && $filename === $filenameParam) {
+                $rawContent = $file->getContents();
+
+                if ($this->processTwig) {
+                    $rawContent = $this->twig->createTemplate($rawContent)->render();
+                }
+
+                $markdownContent = $this->transformMarkdown(
+                    $rawContent,
+                    $request->getSchemeAndHttpHost() . $request->getRequestUri()
+                );
+            }
+        }
+
+        return $markdownContent;
+    }
+
+    /**
+     * @param array<string, array<string, string>> $markdownNav
+     */
+    protected function renderDocumentationView(?string $markdownContent, array $markdownNav): Response
+    {
+        return new Response($this->twig->render($this->markdownTemplate, [
             'markdown_content' => $markdownContent,
             'markdown_nav' => $markdownNav,
         ]));
@@ -113,6 +172,16 @@ class DocumentationController extends AbstractController
     public function setTwig(Environment $twig): void
     {
         $this->twig = $twig;
+    }
+
+    public function setProcessTwig(bool $processTwig): void
+    {
+        $this->processTwig = $processTwig;
+    }
+
+    public function setMarkdownTemplate(string $markdownTemplate): void
+    {
+        $this->markdownTemplate = $markdownTemplate;
     }
 
     private function transformMarkdown(string $content, string $baseUrl): string
