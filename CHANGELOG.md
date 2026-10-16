@@ -1,5 +1,9 @@
 CHANGELOG
 ===================
+## v2.14.0 - (2026-10-16)
+### Changed
+- `HealthCheckController::getJsVulnerabilities` switch front package manager to audit javacscript CVE from yarn to npm.
+
 ## v2.13.0 - (2026-09-23)
 ### Added
 - `smart_sonata.documentation` config

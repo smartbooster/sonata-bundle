@@ -11,6 +11,10 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
+/**
+ * @phpstan-type NpmAuditAdvisory array{title?: string, url?: string, severity?: string, range?: string}
+ * @phpstan-type NpmAuditVulnerability array{via?: list<string|NpmAuditAdvisory>, effects?: list<string>, nodes?: list<string>, isDirect?: bool}
+ */
 class HealthCheckController extends AbstractController
 {
     protected array $currentVersions = [];
@@ -137,7 +141,7 @@ class HealthCheckController extends AbstractController
 
     private function getJsVulnerabilities(): array
     {
-        $process = new Process(['yarn', 'audit', '--json']);
+        $process = new Process(['npm', 'audit', '--json']);
         $process->setWorkingDirectory($this->projectDir);
         $process->run();
 
@@ -147,6 +151,15 @@ class HealthCheckController extends AbstractController
         }
 
         try {
+            /** @var array{error?: array{summary?: string}, vulnerabilities?: array<string, NpmAuditVulnerability>} $auditOutput */
+            $auditOutput = json_decode($output, true);
+            if (isset($auditOutput['error'])) {
+                return ['error' => $auditOutput['error']['summary'] ?? $output];
+            }
+            if (!isset($auditOutput['vulnerabilities'])) {
+                return ['severityCount' => []];
+            }
+
             $severityCount = [
                 'critical' => 0,
                 'high' => 0,
@@ -157,24 +170,34 @@ class HealthCheckController extends AbstractController
             ];
             $vulnerabilities = [];
 
-            // Yarn audit --json retourne une ligne JSON par événement (auditAdvisory)
-            foreach (explode("\n", trim($output)) as $line) {
-                $data = json_decode($line, true);
-                if (isset($data['type']) && $data['type'] === 'auditAdvisory') {
-                    $advisory = $data['data']['advisory'];
+            // npm audit --json (auditReportVersion 2) groupe par package vulnérable : dans "via", les objets sont les
+            // advisories propres au package, les chaînes ne font que pointer vers un autre package vulnérable
+            foreach ($auditOutput['vulnerabilities'] as $packageName => $vulnerability) {
+                foreach ($vulnerability['via'] ?? [] as $advisory) {
+                    if (!is_array($advisory)) {
+                        continue;
+                    }
 
                     // Compter les CVE par sévérité
                     $severityValue = strtolower($advisory['severity'] ?? 'unknown');
+                    if (!isset($severityCount[$severityValue])) {
+                        $severityValue = 'unknown'; // ex: info
+                    }
                     $severityCount[$severityValue]++;
 
-                    $firstDependent = $advisory['findings'][0]['paths'][0] ?? null;
+                    $dependencyPath = $this->getNpmDependencyPath($auditOutput['vulnerabilities'], $packageName);
                     $vulnerabilities[] = [
-                        ...$this->getAdvisoryVulnerability($advisory, $advisory['module_name'], $severityValue),
-                        'dependent' => $firstDependent !== null ? [
-                            'parent' => substr($firstDependent, 0, (int) strpos($firstDependent, '>')),
-                            'chain' => substr($firstDependent, 0, (int) strrpos($firstDependent, '>')),
-                        ] : null,
-                        'patched_versions' => $advisory['patched_versions'] ?? null,
+                        ...$this->getAdvisoryVulnerability([
+                            ...$advisory,
+                            // npm ne fournit pas de CVE, on affiche l'identifiant GHSA de l'url de l'advisory
+                            'cve' => basename($advisory['url'] ?? '') ?: null,
+                            'findings' => [['version' => $this->getNpmInstalledVersion($vulnerability['nodes'][0] ?? null)]],
+                        ], $packageName, $severityValue),
+                        'dependent' => [
+                            'parent' => count($dependencyPath) > 1 ? $dependencyPath[0] : '',
+                            'chain' => implode('>', array_slice($dependencyPath, 0, -1)),
+                        ],
+                        'vulnerable_versions' => $advisory['range'] ?? null,
                     ];
                 }
             }
@@ -183,6 +206,44 @@ class HealthCheckController extends AbstractController
         } catch (\Throwable $e) {
             return ['error' => $e->getMessage()];
         }
+    }
+
+    /**
+     * Remonte les "effects" (packages qui dépendent du package vulnérable) jusqu'à une dépendance directe du projet
+     *
+     * @param array<string, NpmAuditVulnerability> $auditVulnerabilities
+     * @return list<string> chemin de la dépendance directe jusqu'au package vulnérable (ex: ['tailwindcss', 'chokidar', 'braces'])
+     */
+    private function getNpmDependencyPath(array $auditVulnerabilities, string $packageName): array
+    {
+        $queue = [[$packageName]];
+        $visited = [$packageName => true];
+        while (($path = array_shift($queue)) !== null) {
+            $current = $path[0];
+            if ($auditVulnerabilities[$current]['isDirect'] ?? false) {
+                return $path;
+            }
+            foreach ($auditVulnerabilities[$current]['effects'] ?? [] as $effect) {
+                if (!isset($visited[$effect])) {
+                    $visited[$effect] = true;
+                    $queue[] = [$effect, ...$path];
+                }
+            }
+        }
+
+        // Le parent direct n'est pas lui-même vulnérable donc absent du rapport npm audit
+        return [$packageName];
+    }
+
+    private function getNpmInstalledVersion(?string $nodePath): string
+    {
+        if ($nodePath === null || !is_file($this->projectDir . '/' . $nodePath . '/package.json')) {
+            return 'unknown';
+        }
+        /** @var array{version?: string} $package */
+        $package = json_decode((string) file_get_contents($this->projectDir . '/' . $nodePath . '/package.json'), true);
+
+        return $package['version'] ?? 'unknown';
     }
 
     private function getAdvisoryVulnerability(array $advisory, string $packageName, string $severityValue): array

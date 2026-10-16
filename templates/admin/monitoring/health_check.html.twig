@@ -192,12 +192,12 @@
                             </td>
                             <td>
                                 <div>
-                                    <a href="https://classic.yarnpkg.com/en/package/{{ row.package }}#v{{ row.version }}" target="_blank">{{ row.package }}</a></div>
+                                    <a href="https://www.npmjs.com/package/{{ row.package }}/v/{{ row.version }}" target="_blank">{{ row.package }}</a></div>
                                 {% if row.dependent.parent != '' %}
                                     <div class="text-xs" >
                                         Dépendance de :
                                         <a
-                                                href="https://classic.yarnpkg.com/en/package/{{ row.dependent.parent }}"
+                                                href="https://www.npmjs.com/package/{{ row.dependent.parent }}"
                                                 title="{{ row.dependent.chain }}"
                                                 target="_blank"
                                         >
@@ -206,7 +206,7 @@
                                     </div>
                                 {% endif %}
                                 <div class="text-xs">Version courante affecté : {{ row.version }}</div>
-                                <div v-if="row.patched_versions" class="text-xs">Patché pour les versions :  {{ row.patched_versions }}</div>
+                                {% if row.vulnerable_versions %}<div class="text-xs">Versions vulnérables : {{ row.vulnerable_versions }}</div>{% endif %}
                             </td>
                             <td><a target="_blank" href="{{ row.link }}">Voir le rapport</a></td>
                         </tr>
